@@ -3,14 +3,16 @@ package com.tta.boxchange.dao;
 import java.util.List;
 
 import com.tta.boxchange.entities.AVGVENTE;
+import com.tta.boxchange.entities.AverageVenteDevise;
 import com.tta.boxchange.response.BasicResponse;
 
 public interface AVGVENTEInterface {
 	List<AVGVENTE> findAll();
 	List<AVGVENTE> getbyId(int id);
-	//List<STB> getNewstb(String status);
 	BasicResponse save(AVGVENTE avgvente);
-//	BasicResponse update(AVGVENTE avgvente);
+	BasicResponse update(AVGVENTE ancienAvgvente);
 	List<AVGVENTE> modification(String codeDevise);
-	//BasicResponse delete(STB stb);
+	//verification d'existance
+	List<AVGVENTE> verification();
+	List<AverageVenteDevise> averageBydevise(String devise);
 }

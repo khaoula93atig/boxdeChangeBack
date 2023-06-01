@@ -34,7 +34,7 @@ import com.tta.boxchange.entities.BH;
 import com.tta.boxchange.entities.AMEN;
 import com.tta.boxchange.entities.BNA;
 import com.tta.boxchange.entities.UIB;
-import com.tta.boxchange.entities.VENTE;
+import com.tta.boxchange.entities.Vente;
 import com.tta.boxchange.entities.ATT;
 import com.tta.boxchange.entities.ATB;
 import com.tta.boxchange.entities.BTL;
@@ -59,7 +59,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -216,15 +218,6 @@ public class ScrapingController {
        // get page title
        String title = doc.title();
        System.out.println("title6 : " + title);
-      // System.out.println("title : " + title);
-
-  //  String description = doc.select("link[rel=icon]").get(0).attr("href");
-      //System.out.println(" description 1 : " + description);
-       //this will also fetch the description   
-      
-  //   Element meta = doc.select("meta[name=viewport]").first();
-    //   System.out.println(" description 2 :"  +meta.attr("content"));
-       
        
      
      Element AED = doc.select("td.text-uppercase").get(0);
@@ -387,12 +380,22 @@ public class ScrapingController {
       
        
        
-       VENTE v = new VENTE();
+       Vente v = new Vente();
        v.setData("biat", AchatDevise5,AchatDevise14, AchatDevise2,AchatDevise4,AchatDevise6,
        		AchatDevise12,AchatDevise1,  AchatDevise3, 
        		 AchatDevise7, AchatDevise8, AchatDevise9,"0",AchatDevise10,
        		AchatDevise11,  AchatDevise13,  AchatDevise0);
-       venteInterface.save(v);
+       //verfication 
+       List<Vente> verf = venteInterface.verification(v.getNomBanque());
+       
+       if(verf.isEmpty()) {
+    	   //ajout
+    	   venteInterface.save(v);
+       }
+       else  {
+    	   //update
+    	   venteInterface.updateVente(verf.get(0), v);
+       }
        return("ok");
       	}catch (Exception e) {
   			return("no"+e);
@@ -412,15 +415,7 @@ public class ScrapingController {
        // get page title
        String title = doc.title();
        System.out.println("title6 : " + title);
-      // System.out.println("title : " + title);
-
-  //  String description = doc.select("link[rel=icon]").get(0).attr("href");
-      //System.out.println(" description 1 : " + description);
-       //this will also fetch the description   
       
-  //   Element meta = doc.select("meta[name=viewport]").first();
-    //   System.out.println(" description 2 :"  +meta.attr("content"));
-       
        
      
      Element AED = doc.select("td.text-uppercase").get(0);
@@ -583,12 +578,22 @@ public class ScrapingController {
       
        
        
-       VENTE v = new VENTE();
+       Vente v = new Vente();
        v.setData("zitouna", AchatDevise5,AchatDevise14, AchatDevise2,AchatDevise4,AchatDevise6,
        		AchatDevise12,AchatDevise1,  AchatDevise3, 
        		 AchatDevise7, AchatDevise8, AchatDevise9,"0",AchatDevise10,
        		AchatDevise11,  AchatDevise13,  AchatDevise0);
-       venteInterface.save(v);
+     //verfication 
+       List<Vente> verf = venteInterface.verification(v.getNomBanque());
+       
+       if(verf.isEmpty()) {
+    	   //ajout
+    	   venteInterface.save(v);
+       }
+       else  {
+    	   //update
+    	   venteInterface.updateVente(verf.get(0), v);
+       }
        return("ok");
       	}catch (Exception e) {
   			return("no"+e);
@@ -609,14 +614,6 @@ public class ScrapingController {
        // get page title
        String title = doc.title();
        System.out.println("title6 : " + title);
-      // System.out.println("title : " + title);
-
-  //  String description = doc.select("link[rel=icon]").get(0).attr("href");
-      //System.out.println(" description 1 : " + description);
-       //this will also fetch the description   
-      
-  //   Element meta = doc.select("meta[name=viewport]").first();
-    //   System.out.println(" description 2 :"  +meta.attr("content"));
        
        
      
@@ -780,12 +777,22 @@ public class ScrapingController {
       
        
        
-       VENTE v = new VENTE();
+       Vente v = new Vente();
        v.setData("wifak", AchatDevise5,AchatDevise14, AchatDevise2,AchatDevise4,AchatDevise6,
        		AchatDevise12,AchatDevise1,  AchatDevise3, 
        		 AchatDevise7, AchatDevise8, AchatDevise9,"0",AchatDevise10,
        		AchatDevise11,  AchatDevise13,  AchatDevise0);
-       venteInterface.save(v);
+     //verfication 
+       List<Vente> verf = venteInterface.verification(v.getNomBanque());
+       
+       if(verf.isEmpty()) {
+    	   //ajout
+    	   venteInterface.save(v);
+       }
+       else  {
+    	   //update
+    	   venteInterface.updateVente(verf.get(0), v);
+       }
        return("ok");
       	}catch (Exception e) {
   			return("no"+e);
@@ -805,14 +812,6 @@ public class ScrapingController {
        // get page title
        String title = doc.title();
        System.out.println("title6 : " + title);
-      // System.out.println("title : " + title);
-
-  //  String description = doc.select("link[rel=icon]").get(0).attr("href");
-      //System.out.println(" description 1 : " + description);
-       //this will also fetch the description   
-      
-  //   Element meta = doc.select("meta[name=viewport]").first();
-    //   System.out.println(" description 2 :"  +meta.attr("content"));
        
        
      
@@ -976,12 +975,22 @@ public class ScrapingController {
       
        
        
-       VENTE v = new VENTE();
+       Vente v = new Vente();
        v.setData("al baraka", AchatDevise5,AchatDevise14, AchatDevise2,AchatDevise4,AchatDevise6,
        		AchatDevise12,AchatDevise1,  AchatDevise3, 
        		 AchatDevise7, AchatDevise8, AchatDevise9,"0","0",
        		"0",  "0",  AchatDevise0);
-       venteInterface.save(v);
+     //verfication 
+       List<Vente> verf = venteInterface.verification(v.getNomBanque());
+       
+       if(verf.isEmpty()) {
+    	   //ajout
+    	   venteInterface.save(v);
+       }
+       else  {
+    	   //update
+    	   venteInterface.updateVente(verf.get(0), v);
+       }
        return("ok");
       	}catch (Exception e) {
   			return("no"+e);
@@ -1001,14 +1010,6 @@ public class ScrapingController {
        // get page title
        String title = doc.title();
        System.out.println("title6 : " + title);
-      // System.out.println("title : " + title);
-
-  //  String description = doc.select("link[rel=icon]").get(0).attr("href");
-      //System.out.println(" description 1 : " + description);
-       //this will also fetch the description   
-      
-  //   Element meta = doc.select("meta[name=viewport]").first();
-    //   System.out.println(" description 2 :"  +meta.attr("content"));
        
        
      
@@ -1181,12 +1182,22 @@ public class ScrapingController {
      
        
        
-       VENTE v = new VENTE();
+       Vente v = new Vente();
        v.setData("bh", AchatDevise5,AchatDevise14, AchatDevise2,AchatDevise4,AchatDevise6,
        		AchatDevise12,AchatDevise1,  AchatDevise3, 
        		 AchatDevise7, AchatDevise8, AchatDevise9,AchatDevise10,
        		AchatDevise11,  AchatDevise13, AchatDevise16, AchatDevise0);
-       venteInterface.save(v);
+     //verfication 
+       List<Vente> verf = venteInterface.verification(v.getNomBanque());
+       
+       if(verf.isEmpty()) {
+    	   //ajout
+    	   venteInterface.save(v);
+       }
+       else  {
+    	   //update
+    	   venteInterface.updateVente(verf.get(0), v);
+       }
        return("ok");
       	}catch (Exception e) {
   			return("no"+e);
@@ -1207,14 +1218,6 @@ public class ScrapingController {
        // get page title
        String title = doc.title();
        System.out.println("title6 : " + title);
-      // System.out.println("title : " + title);
-
-  //  String description = doc.select("link[rel=icon]").get(0).attr("href");
-      //System.out.println(" description 1 : " + description);
-       //this will also fetch the description   
-      
-  //   Element meta = doc.select("meta[name=viewport]").first();
-    //   System.out.println(" description 2 :"  +meta.attr("content"));
        
        
      
@@ -1387,12 +1390,22 @@ public class ScrapingController {
      
        
        
-       VENTE v = new VENTE();
+       Vente v = new Vente();
        v.setData("qnb", AchatDevise5,AchatDevise14, AchatDevise2,AchatDevise4,AchatDevise6,
        		AchatDevise12,AchatDevise1,  AchatDevise3, 
        		 AchatDevise7, AchatDevise8, AchatDevise9,AchatDevise10,
        		AchatDevise11,  AchatDevise13, AchatDevise16, AchatDevise0);
-       venteInterface.save(v);
+     //verfication 
+       List<Vente> verf = venteInterface.verification(v.getNomBanque());
+       
+       if(verf.isEmpty()) {
+    	   //ajout
+    	   venteInterface.save(v);
+       }
+       else  {
+    	   //update
+    	   venteInterface.updateVente(verf.get(0), v);
+       }
        return("ok");
       	}catch (Exception e) {
   			return("no"+e);
@@ -1412,14 +1425,6 @@ public class ScrapingController {
        // get page title
        String title = doc.title();
        System.out.println("title6 : " + title);
-      // System.out.println("title : " + title);
-
-  //  String description = doc.select("link[rel=icon]").get(0).attr("href");
-      //System.out.println(" description 1 : " + description);
-       //this will also fetch the description   
-      
-  //   Element meta = doc.select("meta[name=viewport]").first();
-    //   System.out.println(" description 2 :"  +meta.attr("content"));
        
        
      
@@ -1592,12 +1597,22 @@ public class ScrapingController {
      
        
        
-       VENTE v = new VENTE();
+       Vente v = new Vente();
        v.setData("attijari", AchatDevise5,AchatDevise14, AchatDevise2,AchatDevise4,AchatDevise6,
        		AchatDevise12,AchatDevise1,  AchatDevise3, 
        		 AchatDevise7, AchatDevise8, AchatDevise9,AchatDevise10,
        		AchatDevise11,  AchatDevise13, AchatDevise16, AchatDevise0);
-       venteInterface.save(v);
+     //verfication 
+       List<Vente> verf = venteInterface.verification(v.getNomBanque());
+       
+       if(verf.isEmpty()) {
+    	   //ajout
+    	   venteInterface.save(v);
+       }
+       else  {
+    	   //update
+    	   venteInterface.updateVente(verf.get(0), v);
+       }
        return("ok");
       	}catch (Exception e) {
   			return("no"+e);
@@ -1617,14 +1632,6 @@ public class ScrapingController {
           // get page title
           String title = doc.title();
           System.out.println("title6 : " + title);
-         // System.out.println("title : " + title);
-
-     //  String description = doc.select("link[rel=icon]").get(0).attr("href");
-         //System.out.println(" description 1 : " + description);
-          //this will also fetch the description   
-         
-     //   Element meta = doc.select("meta[name=viewport]").first();
-       //   System.out.println(" description 2 :"  +meta.attr("content"));
           
           
         
@@ -1788,12 +1795,22 @@ public class ScrapingController {
          
           
           
-          VENTE v = new VENTE();
+          Vente v = new Vente();
           v.setData("amen", AchatDevise5,AchatDevise14, AchatDevise2,AchatDevise4,AchatDevise6,
           		AchatDevise12,AchatDevise1,  AchatDevise3, 
           		 AchatDevise7, AchatDevise8, AchatDevise9,"0",AchatDevise10,
           		AchatDevise11,  AchatDevise13,  AchatDevise0);
-          venteInterface.save(v);
+        //verfication 
+          List<Vente> verf = venteInterface.verification(v.getNomBanque());
+          
+          if(verf.isEmpty()) {
+       	   //ajout
+       	   venteInterface.save(v);
+          }
+          else  {
+       	   //update
+       	   venteInterface.updateVente(verf.get(0), v);
+          }
           return("ok");
          	}catch (Exception e) {
      			return("no"+e);
@@ -1813,14 +1830,6 @@ public class ScrapingController {
         // get page title
         String title = doc.title();
         System.out.println("title6 : " + title);
-       // System.out.println("title : " + title);
-
-   //  String description = doc.select("link[rel=icon]").get(0).attr("href");
-       //System.out.println(" description 1 : " + description);
-        //this will also fetch the description   
-       
-   //   Element meta = doc.select("meta[name=viewport]").first();
-     //   System.out.println(" description 2 :"  +meta.attr("content"));
         
         
       
@@ -1992,12 +2001,22 @@ public class ScrapingController {
         Element td51 = doc.select("td.text-center").get(77);
         String VenteDevise16 = td51.text();
         
-        VENTE v = new VENTE();
+        Vente v = new Vente();
         v.setData("uib", AchatDevise5,AchatDevise14, AchatDevise2,AchatDevise4,AchatDevise6,
         		AchatDevise12,AchatDevise1,  AchatDevise3, 
         		 AchatDevise7, AchatDevise8, AchatDevise9,AchatDevise10,
         		AchatDevise11,  AchatDevise13, AchatDevise16, AchatDevise0);
-        venteInterface.save(v);
+      //verfication 
+        List<Vente> verf = venteInterface.verification(v.getNomBanque());
+        
+        if(verf.isEmpty()) {
+     	   //ajout
+     	   venteInterface.save(v);
+        }
+        else  {
+     	   //update
+     	   venteInterface.updateVente(verf.get(0), v);
+        }
         return("ok");
        	}catch (Exception e) {
    			return("no"+e);
@@ -2014,14 +2033,6 @@ public class ScrapingController {
         // get page title
         String title = doc.title();
         System.out.println("title6 : " + title);
-       // System.out.println("title : " + title);
-
-   //  String description = doc.select("link[rel=icon]").get(0).attr("href");
-       //System.out.println(" description 1 : " + description);
-        //this will also fetch the description   
-       
-   //   Element meta = doc.select("meta[name=viewport]").first();
-     //   System.out.println(" description 2 :"  +meta.attr("content"));
         
         
       
@@ -2267,15 +2278,6 @@ public class ScrapingController {
         // get page title
         String title = doc.title();
         System.out.println("title6 : " + title);
-       // System.out.println("title : " + title);
-
-   //  String description = doc.select("link[rel=icon]").get(0).attr("href");
-       //System.out.println(" description 1 : " + description);
-        //this will also fetch the description   
-       
-   //   Element meta = doc.select("meta[name=viewport]").first();
-     //   System.out.println(" description 2 :"  +meta.attr("content"));
-        
         
       
       Element AED = doc.select("td.text-uppercase").get(0);
@@ -2290,7 +2292,6 @@ public class ScrapingController {
         Element td0 = doc.select("td.text-center").get(2);
         String VenteDevise0 = td0.text();
         System.out.println("vente0 : " + VenteDevise0);
-       // System.out.println("title4 : " + VenteDevise0);
         
         Element CNY = doc.select("td.text-uppercase").get(1);
         String nomdevise5 = CNY.text();
@@ -2438,12 +2439,22 @@ public class ScrapingController {
 
         
         
-        VENTE v = new VENTE();
+        Vente v = new Vente();
         v.setData("atb", AchatDevise5,AchatDevise14, AchatDevise2,AchatDevise4,AchatDevise6,
         		AchatDevise12,AchatDevise1,  AchatDevise3, 
         		 AchatDevise7, AchatDevise8, AchatDevise9,AchatDevise10,
         		AchatDevise11,  AchatDevise13, "0", AchatDevise0);
-        venteInterface.save(v);
+      //verfication 
+        List<Vente> verf = venteInterface.verification(v.getNomBanque());
+        
+        if(verf.isEmpty()) {
+     	   //ajout
+     	   venteInterface.save(v);
+        }
+        else  {
+     	   //update
+     	   venteInterface.updateVente(verf.get(0), v);
+        }
         return("ok");
        	}catch (Exception e) {
    			return("no"+e);
@@ -2463,14 +2474,6 @@ public class ScrapingController {
         // get page title
         String title = doc.title();
         System.out.println("title6 : " + title);
-       // System.out.println("title : " + title);
-
-   //  String description = doc.select("link[rel=icon]").get(0).attr("href");
-       //System.out.println(" description 1 : " + description);
-        //this will also fetch the description   
-       
-   //   Element meta = doc.select("meta[name=viewport]").first();
-     //   System.out.println(" description 2 :"  +meta.attr("content"));
         
         
       
@@ -2634,12 +2637,22 @@ public class ScrapingController {
 
         
         
-        VENTE v = new VENTE();
+        Vente v = new Vente();
         v.setData("tsb", AchatDevise5,AchatDevise14, AchatDevise2,AchatDevise4,AchatDevise6,
         		AchatDevise12,AchatDevise1,  AchatDevise3, 
         		 AchatDevise7, AchatDevise8, AchatDevise9,AchatDevise10,
         		AchatDevise11,  AchatDevise13, "0", AchatDevise0);
-        venteInterface.save(v);
+      //verfication 
+        List<Vente> verf = venteInterface.verification(v.getNomBanque());
+        
+        if(verf.isEmpty()) {
+     	   //ajout
+     	   venteInterface.save(v);
+        }
+        else  {
+     	   //update
+     	   venteInterface.updateVente(verf.get(0), v);
+        }
         return("ok");
        	}catch (Exception e) {
    			return("no"+e);
@@ -2659,16 +2672,7 @@ public class ScrapingController {
         // get page title
         String title = doc.title();
         System.out.println("title6 : " + title);
-       // System.out.println("title : " + title);
-
-   //  String description = doc.select("link[rel=icon]").get(0).attr("href");
-       //System.out.println(" description 1 : " + description);
-        //this will also fetch the description   
        
-   //   Element meta = doc.select("meta[name=viewport]").first();
-     //   System.out.println(" description 2 :"  +meta.attr("content"));
-        
-        
       
       Element AED = doc.select("td.text-uppercase").get(0);
       String nomdevise0 = AED.text();
@@ -2827,22 +2831,22 @@ public class ScrapingController {
         Element td27 = doc.select("td.text-center").get(72);
         String VenteDevise13 = td27.text();
       
-
-        
-       
-          
-           // arr1[1].display();
-      //  Syst
-      //  System.out.println(title);
-      //  System.out.println(tdContent);
-      //  List<STB> stbs=new ArrayList<>();
-      //  stbs.add({1,nomdevise0,UniteDevise15,VenteDevise15,AchatDevise15,DateDevise15});
-            VENTE v = new VENTE();
+            Vente v = new Vente();
             v.setData("btl", AchatDevise5,AchatDevise14, AchatDevise2,AchatDevise4,AchatDevise6,
             		AchatDevise12,AchatDevise1,  AchatDevise3, 
            		 AchatDevise7, AchatDevise8, AchatDevise9,AchatDevise10,
            		AchatDevise11,  AchatDevise13, "0", AchatDevise0);
-            venteInterface.save(v);
+          //verfication 
+            List<Vente> verf = venteInterface.verification(v.getNomBanque());
+            
+            if(verf.isEmpty()) {
+         	   //ajout
+         	   venteInterface.save(v);
+            }
+            else  {
+         	   //update
+         	   venteInterface.updateVente(verf.get(0), v);
+            }
             return("ok");
            	}catch (Exception e) {
        			return("no"+e);
@@ -2861,14 +2865,6 @@ public class ScrapingController {
         // get page title
         String title = doc.title();
         System.out.println("title6 : " + title);
-       // System.out.println("title : " + title);
-
-   //  String description = doc.select("link[rel=icon]").get(0).attr("href");
-       //System.out.println(" description 1 : " + description);
-        //this will also fetch the description   
-       
-   //   Element meta = doc.select("meta[name=viewport]").first();
-     //   System.out.println(" description 2 :"  +meta.attr("content"));
         
         
       
@@ -3041,12 +3037,22 @@ public class ScrapingController {
       
         
         
-        VENTE v = new VENTE();
+        Vente v = new Vente();
         v.setData("stb", AchatDevise5,AchatDevise14, AchatDevise2,AchatDevise4,AchatDevise6,
         		AchatDevise12,AchatDevise1,  AchatDevise3, 
         		 AchatDevise7, AchatDevise8, AchatDevise9,AchatDevise10,
         		AchatDevise11,  AchatDevise13, AchatDevise16, AchatDevise0);
-        venteInterface.save(v);
+      //verfication 
+        List<Vente> verf = venteInterface.verification(v.getNomBanque());
+        
+        if(verf.isEmpty()) {
+     	   //ajout
+     	   venteInterface.save(v);
+        }
+        else  {
+     	   //update
+     	   venteInterface.updateVente(verf.get(0), v);
+        }
         return("ok");
        	}catch (Exception e) {
    			return("no"+e);
@@ -3066,14 +3072,6 @@ public class ScrapingController {
         // get page title
         String title = doc.title();
         System.out.println("title6 : " + title);
-       // System.out.println("title : " + title);
-
-   //  String description = doc.select("link[rel=icon]").get(0).attr("href");
-       //System.out.println(" description 1 : " + description);
-        //this will also fetch the description   
-       
-   //   Element meta = doc.select("meta[name=viewport]").first();
-     //   System.out.println(" description 2 :"  +meta.attr("content"));
         
         
       
@@ -3089,7 +3087,7 @@ public class ScrapingController {
         Element td0 = doc.select("td.text-center").get(2);
         String VenteDevise0 = td0.text();
         System.out.println("vente0 : " + VenteDevise0);
-       // System.out.println("title4 : " + VenteDevise0);
+       
         
         Element CNY = doc.select("td.text-uppercase").get(1);
         String nomdevise5 = CNY.text();
@@ -3131,119 +3129,23 @@ public class ScrapingController {
         String AchatDevise4 = td8.text();
         Element td9 = doc.select("td.text-center").get(22);
         String VenteDevise4 = td9.text();
-      //  System.out.println("vente255 : " + VenteDevise4);
-        /*
-        Element JPY = doc.select("td.text-uppercase").get(4);
-        String nomdevise6 = JPY.text();
-        System.out.println("vente255 : " + nomdevise6);
-        Element UniteJPY = doc.select("td.font-weight-bold").get(10);
-        String UniteDevise6 = UniteJPY.text();
-        Element td12 = doc.select("td.font-weight-bold").get(11);
-        String AchatDevise6 = td12.text();
-        Element td13 = doc.select("td.text-center").get(27);
-        String VenteDevise6 = td13.text();
-        
-        Element EUR = doc.select("td.text-uppercase").get(6);
-        String nomdevise12 = EUR.text();
-        Element UniteEUR = doc.select("td.font-weight-bold").get(12);
-        String UniteDevise12 = UniteEUR.text();
-        Element td24 = doc.select("td.font-weight-bold").get(13);
-        String AchatDevise12 = td24.text();
-        Element td25 = doc.select("td.text-center").get(32);
-        String VenteDevise12 = td25.text();
-  
-     
-        Element CAD = doc.select("td.text-uppercase").get(7);
-        String nomdevise1 = CAD.text();
-        Element UniteCAD = doc.select("td.font-weight-bold").get(14);
-        String UniteDevise1 = UniteCAD.text();
-        Element td2 = doc.select("td.font-weight-bold").get(15);
-        String AchatDevise1 = td2.text();
-        Element td3 = doc.select("td.text-center").get(37);
-        String VenteDevise1 = td3.text();
-       
-      
-      
-      
-        Element ggg = doc.select("td.text-uppercase").get(8);
-        String nomdevise3 = ggg.text();
-        Element Uniteggg = doc.select("td.font-weight-bold").get(16);
-        String UniteDevise3 = Uniteggg.text();
-        Element td6 = doc.select("td.font-weight-bold").get(17);
-        String AchatDevise3 = td6.text();
-        Element td7 = doc.select("td.text-center").get(42);
-        String VenteDevise3 = td7.text();
-      
-        
-      
-        
-      
-      
-        Element KWD = doc.select("td.text-uppercase").get(9);
-        String nomdevise7 = KWD.text();
-        Element UniteKWD = doc.select("td.font-weight-bold").get(18);
-        String UniteDevise7 = UniteKWD.text();
-        Element td14 = doc.select("td.font-weight-bold").get(19);
-        String AchatDevise7 = td14.text();
-        Element td15 = doc.select("td.text-center").get(47);
-        String VenteDevise7 = td15.text();
-      
-        Element NOK = doc.select("td.text-uppercase").get(10);
-        String nomdevise8 = NOK.text();
-        Element UniteNOK = doc.select("td.font-weight-bold").get(20);
-        String UniteDevise8 = UniteNOK.text();
-        Element td16 = doc.select("td.font-weight-bold").get(21);
-        String AchatDevise8 = td16.text();
-        Element td17 = doc.select("td.text-center").get(52);
-        String VenteDevise8 = td17.text();
-      
-        Element QAR = doc.select("td.text-uppercase").get(11);
-        String nomdevise9 = QAR.text();
-        Element UniteQAR = doc.select("td.font-weight-bold").get(22);
-        String UniteDevise9 = UniteQAR.text();
-        Element td18 = doc.select("td.font-weight-bold").get(23);
-        String AchatDevise9 = td18.text();
-        Element td19 = doc.select("td.text-center").get(57);
-        String VenteDevise9 = td19.text();
-      
-        Element SEK = doc.select("td.text-uppercase").get(12);
-        String nomdevise10 = SEK.text();
-        Element UniteSEK = doc.select("td.font-weight-bold").get(24);
-        String UniteDevise10 = UniteSEK.text();
-        Element td20 = doc.select("td.font-weight-bold").get(25);
-        String AchatDevise10 = td20.text();
-        Element td21 = doc.select("td.text-center").get(62);
-        String VenteDevise10 = td21.text();
-      
-        Element CHF = doc.select("td.text-uppercase").get(12);
-        String nomdevise11 = CHF.text();
-        Element UniteCHF = doc.select("td.font-weight-bold").get(26);
-        String UniteDevise11 = UniteCHF.text();
-        Element td22 = doc.select("td.font-weight-bold").get(27);
-        String AchatDevise11 = td22.text();
-        Element td23 = doc.select("td.text-center").get(67);
-        String VenteDevise11 = td23.text();
-
-       
-      
-        Element BHD = doc.select("td.text-uppercase").get(14);
-        String nomdevise13 = BHD.text();
-        Element UniteBHD = doc.select("td.font-weight-bold").get(28);
-        String UniteDevise13 = UniteBHD.text();
-        System.out.println("unite 5 : " + UniteDevise13);
-        Element td26 = doc.select("td.font-weight-bold").get(29);
-        String AchatDevise13 = td26.text();
-        Element td27 = doc.select("td.text-center").get(72);
-        String VenteDevise13 = td27.text();
-      */
-
         
         
-        VENTE v = new VENTE();
+        Vente v = new Vente();
         v.setData("bte", "0", "0", AchatDevise0, "0", AchatDevise5,
         		"0", "0", AchatDevise14, "0",AchatDevise2,
         		AchatDevise4, "0", "0", "0","0", "0");
-        venteInterface.save(v);
+      //verfication 
+        List<Vente> verf = venteInterface.verification(v.getNomBanque());
+        
+        if(verf.isEmpty()) {
+     	   //ajout
+     	   venteInterface.save(v);
+        }
+        else  {
+     	   //update
+     	   venteInterface.updateVente(verf.get(0), v);
+        }
         return("ok");
        	}catch (Exception e) {
    			return("no"+e);
@@ -3264,16 +3166,7 @@ public class ScrapingController {
         // get page title
         String title = doc.title();
         System.out.println("title6 : " + title);
-       // System.out.println("title : " + title);
-
-   //  String description = doc.select("link[rel=icon]").get(0).attr("href");
-       //System.out.println(" description 1 : " + description);
-        //this will also fetch the description   
        
-   //   Element meta = doc.select("meta[name=viewport]").first();
-     //   System.out.println(" description 2 :"  +meta.attr("content"));
-        
-        
       
       Element AED = doc.select("td.text-uppercase").get(0);
       String nomdevise0 = AED.text();
@@ -3419,28 +3312,24 @@ public class ScrapingController {
         String AchatDevise11 = td22.text();
         Element td23 = doc.select("td.text-center").get(67);
         String VenteDevise11 = td23.text();
-
-       /*
-      
-        Element BHD = doc.select("td.text-uppercase").get(14);
-        String nomdevise13 = BHD.text();
-        Element UniteBHD = doc.select("td.font-weight-bold").get(28);
-        String UniteDevise13 = UniteBHD.text();
-        System.out.println("unite 5 : " + UniteDevise13);
-        Element td26 = doc.select("td.font-weight-bold").get(29);
-        String AchatDevise13 = td26.text();
-        Element td27 = doc.select("td.text-center").get(72);
-        String VenteDevise13 = td27.text();
-      */
-
         
         
-        VENTE v = new VENTE();
+        Vente v = new Vente();
         v.setData("btk", AchatDevise5,AchatDevise14, AchatDevise2,AchatDevise4,AchatDevise6,
            		AchatDevise12,AchatDevise1,  AchatDevise3, 
            		 AchatDevise7, AchatDevise8, AchatDevise9,"0",AchatDevise10,
            		AchatDevise11,  "0",  AchatDevise0);
-        venteInterface.save(v);
+      //verfication 
+        List<Vente> verf = venteInterface.verification(v.getNomBanque());
+        
+        if(verf.isEmpty()) {
+     	   //ajout
+     	   venteInterface.save(v);
+        }
+        else  {
+     	   //update
+     	   venteInterface.updateVente(verf.get(0), v);
+        }
         return("ok");
        	}catch (Exception e) {
    			return("no"+e);
@@ -3463,15 +3352,6 @@ public class ScrapingController {
        // get page title
        String title = doc.title();
        System.out.println("title6 : " + title);
-      // System.out.println("title : " + title);
-
-  //  String description = doc.select("link[rel=icon]").get(0).attr("href");
-      //System.out.println(" description 1 : " + description);
-       //this will also fetch the description   
-      
-  //   Element meta = doc.select("meta[name=viewport]").first();
-    //   System.out.println(" description 2 :"  +meta.attr("content"));
-       
        
      
      Element AED = doc.select("td.text-uppercase").get(0);
@@ -3643,12 +3523,22 @@ public class ScrapingController {
      
        
        
-       VENTE v = new VENTE();
+       Vente v = new Vente();
        v.setData("bt", AchatDevise5,AchatDevise14, AchatDevise2,AchatDevise4,AchatDevise6,
        		AchatDevise12,AchatDevise1,  AchatDevise3, 
        		 AchatDevise7, AchatDevise8, AchatDevise9,AchatDevise10,
        		AchatDevise11,  AchatDevise13, AchatDevise16, AchatDevise0);
-       venteInterface.save(v);
+     //verfication 
+       List<Vente> verf = venteInterface.verification(v.getNomBanque());
+       
+       if(verf.isEmpty()) {
+    	   //ajout
+    	   venteInterface.save(v);
+       }
+       else  {
+    	   //update
+    	   venteInterface.updateVente(verf.get(0), v);
+       }
        return("ok");
       	}catch (Exception e) {
   			return("no"+e);
@@ -3668,14 +3558,6 @@ public class ScrapingController {
        // get page title
        String title = doc.title();
        System.out.println("title6 : " + title);
-      // System.out.println("title : " + title);
-
-  //  String description = doc.select("link[rel=icon]").get(0).attr("href");
-      //System.out.println(" description 1 : " + description);
-       //this will also fetch the description   
-      
-  //   Element meta = doc.select("meta[name=viewport]").first();
-    //   System.out.println(" description 2 :"  +meta.attr("content"));
        
        
      
@@ -3691,7 +3573,6 @@ public class ScrapingController {
        Element td0 = doc.select("td.text-center").get(2);
        String VenteDevise0 = td0.text();
        System.out.println("vente0 : " + VenteDevise0);
-      // System.out.println("title4 : " + VenteDevise0);
        
        Element CNY = doc.select("td.text-uppercase").get(1);
        String nomdevise5 = CNY.text();
@@ -3848,12 +3729,22 @@ public class ScrapingController {
      
        
        
-       VENTE v = new VENTE();
+       Vente v = new Vente();
        v.setData("bna", AchatDevise5,AchatDevise14, AchatDevise2,AchatDevise4,AchatDevise6,
        		AchatDevise12,AchatDevise1,  AchatDevise3, 
        		 AchatDevise7, AchatDevise8, AchatDevise9,AchatDevise10,
        		AchatDevise11,  AchatDevise13, AchatDevise16, AchatDevise0);
-       venteInterface.save(v);
+     //verfication 
+       List<Vente> verf = venteInterface.verification(v.getNomBanque());
+       
+       if(verf.isEmpty()) {
+    	   //ajout
+    	   venteInterface.save(v);
+       }
+       else  {
+    	   //update
+    	   venteInterface.updateVente(verf.get(0), v);
+       }
        return("ok");
       	}catch (Exception e) {
   			return("no"+e);
@@ -3865,7 +3756,7 @@ public class ScrapingController {
    }
     
     
-    @GetMapping("/scrapeVENTE")
+    /*@GetMapping("/scrapeVENTE")
     public AMEN[] scrapeWebsiteVENTE() throws IOException {
     	 // need http protocol
     	Document doc;
@@ -3874,15 +3765,6 @@ public class ScrapingController {
         // get page title
         String title = doc.title();
         System.out.println("title6 : " + title);
-       // System.out.println("title : " + title);
-
-   //  String description = doc.select("link[rel=icon]").get(0).attr("href");
-       //System.out.println(" description 1 : " + description);
-        //this will also fetch the description   
-       
-   //   Element meta = doc.select("meta[name=viewport]").first();
-     //   System.out.println(" description 2 :"  +meta.attr("content"));
-        
         
       
       Element AED = doc.select("td.text-uppercase").get(0);
@@ -3897,7 +3779,6 @@ public class ScrapingController {
         Element td0 = doc.select("td.text-center").get(2);
         String VenteDevise0 = td0.text();
         System.out.println("vente0 : " + VenteDevise0);
-       // System.out.println("title4 : " + VenteDevise0);
         
         Element CNY = doc.select("td.text-uppercase").get(1);
         String nomdevise5 = CNY.text();
@@ -4047,11 +3928,8 @@ public class ScrapingController {
         
       AMEN[] arr1;
         
-        // Allocating memory for 2 objects
-        // of type student
         arr1 = new AMEN[15];
  
-        // Creating actual student objects
           arr1[0] = new AMEN();
           arr1[5] = new AMEN();
           arr1[14] = new AMEN();
@@ -4071,7 +3949,6 @@ public class ScrapingController {
           arr1[11] = new AMEN();
          
           arr1[13] = new AMEN();
-         // arr1[15].setData(nomdevise15,UniteDevise15,VenteDevise15,AchatDevise15);
       
           arr1[0].setData(nomdevise0,VenteDevise0,UniteDevise0,AchatDevise0);
           arr1[5].setData( nomdevise5,VenteDevise5,UniteDevise5,AchatDevise5);
@@ -4101,12 +3978,6 @@ public class ScrapingController {
             System.out.println(
                     "ligne 2: ");
             arr1[0].display();
-           // arr1[1].display();
-      //  Syst
-      //  System.out.println(title);
-      //  System.out.println(tdContent);
-      //  List<STB> stbs=new ArrayList<>();
-      //  stbs.add({1,nomdevise0,UniteDevise15,VenteDevise15,AchatDevise15,DateDevise15});
             for(AMEN a : arr1) {
             	List<AMEN> exists=amenInterface.modification(a.getCodeDevise());
             	if (exists.isEmpty()) {
@@ -4124,7 +3995,7 @@ public class ScrapingController {
     
    
         
-    }
+    }*/
     
     
     
@@ -4151,27 +4022,27 @@ public class ScrapingController {
 		}
 		
 	 @GetMapping("/getALLVente")
-	    public List<VENTE> getAllVente() {
+	    public List<Vente> getAllVente() {
 		 return venteInterface.findAll();
 	 }
 	 
 	 @GetMapping("/getVenteMAX/{currency}")
-	    public VENTE getVENTEMAX(@PathVariable String currency) {
+	    public Vente getVENTEMAX(@PathVariable String currency) {
 		 return venteInterface.findMAX(currency);
 	 }
 	 
 	 @GetMapping("/getVenteMIN/{currency}")
-	    public VENTE getVENTEMIN(@PathVariable String currency) {
+	    public Vente getVENTEMIN(@PathVariable String currency) {
 		 return venteInterface.findMIN(currency);
 	 }
 	 
 	 @GetMapping("/getVenteMAX/{currency}/{date}")
-	    public VENTE getVENTEMAXDATE(@PathVariable String currency, @PathVariable String date) {
+	    public Vente getVENTEMAXDATE(@PathVariable String currency, @PathVariable String date) {
 		 return venteInterface.findMAX(currency, date);
 	 }
 	 
 	 @GetMapping("/getVenteMIN/{currency}/{date}")
-	    public VENTE getVENTEMINDATE(@PathVariable String currency, @PathVariable String date) {
+	    public Vente getVENTEMINDATE(@PathVariable String currency, @PathVariable String date) {
 		 return venteInterface.findMIN(currency, date);
 	 }
 	 @GetMapping("/getAveragevente")

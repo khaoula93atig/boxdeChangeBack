@@ -5,11 +5,13 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.tta.boxchange.entities.VENTE;
+import com.tta.boxchange.entities.Vente;
 
-public interface VenteRepositoryDataJPA extends JpaRepository<VENTE, Integer> {
+
+
+public interface VenteRepositoryDataJPA extends JpaRepository<Vente, Integer> {
 	
-	@Query(value = "FROM VENTE", nativeQuery = false)
-	List<VENTE> findAllLatest();
+	/*@Query(value = "FROM vente", nativeQuery = false)
+	List<Vente> findAllLatest();*/
 	
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tta.boxchange.entities.Enchere;
+import com.tta.boxchange.entities.Notification;
 import com.tta.boxchange.entities.Proposition;
 import com.tta.boxchange.entities.User;
 import com.tta.boxchange.repositories.EnchRepository;
@@ -37,6 +38,9 @@ public class PropositionController {
 	
 	@Autowired
 	EnchRepository enchereRepository;
+	
+	@Autowired
+	NotificationController notificationController;
 
     /**
      * Get all the employees
@@ -78,24 +82,33 @@ public class PropositionController {
 
    
     @PostMapping("/add")
-    public ResponseEntity<Proposition> newEmployee(@RequestBody Proposition employee) {
-    	/*User u = new User();
-    	u.setId(1L);
-    	employee.setUser(u);*/
+    public ResponseEntity<Proposition> addProposition(@RequestBody Proposition proposition) {
     	try {
-    		Optional<User> u = userRepository.findById(employee.getUser().getId());
-    		if(u!=null)
-    			employee.setUser(new User(u.orElseThrow().getId()));
-    		Optional<Enchere> e = enchereRepository.findById(employee.getEnchere().getIdEnchere());
-    		if(e!=null)
-    			employee.setEnchere(/*new Enchere(e.orElseThrow().getIdEnchere())*/e.orElseThrow());
-    		System.out.println("ench selectionné = "+e.orElseThrow());
-    		System.out.println("add propos"+employee);
-    		System.out.println("ench : "+employee.getEnchere().getIdEnchere()+"user = "+employee.getUser().getId()+"taux "+employee.getTaux_soumission());
+    		Proposition newPropostion = new Proposition();
+    		Optional<User> u = userRepository.findById(proposition.getUser().getId());
+    		if(u!=null) {
+    			proposition.setUser(new User(u.orElseThrow().getId()));
+    		Optional<Enchere> enchere = enchereRepository.findById(proposition.getEnchere().getIdEnchere());
+    		if(enchere!=null) {
+    			proposition.setEnchere(enchere.orElseThrow());
+    		System.out.println("ench selectionné = "+enchere.orElseThrow());
+    		System.out.println("add propos"+proposition);
+    		System.out.println("ench : "+proposition.getEnchere().getIdEnchere()+"user = "+proposition.getUser().getId()+"taux "+proposition.getTaux_soumission());
 
-    		Proposition newEmployee = propositionRepository
-                    .saveAndFlush(employee);
-            return new ResponseEntity<>(newEmployee, HttpStatus.OK);
+    		newPropostion = propositionRepository.saveAndFlush(proposition);
+    		
+    		Notification notification  = new Notification( );
+    		notification.setChannel(proposition.getEnchere().getUser().getId().toString());
+    		notification.setSender( u.orElseThrow().getUsername());
+    		notification.setTitre(proposition.getEnchere().getReferenceEnchere());
+    		notification.setContent(proposition.getEnchere().getDevise());
+    		notification.setType("proposition");
+    		
+    		notificationController.handleNotif(notification);
+           
+    		}
+    		}
+    		 return new ResponseEntity<>(newPropostion, HttpStatus.OK);
     	}
     	catch(Exception e) {
         	System.out.println("exception  : "+e);     
@@ -103,7 +116,6 @@ public class PropositionController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 
     	}
-     //   return new ResponseEntity<>(new Proposition() , HttpStatus.OK);
 
     	
     }

@@ -1,4 +1,5 @@
 package com.tta.boxchange.entities;
+import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -7,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 @Entity
-public class VENTE {
+public class Vente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idVENTE;
@@ -31,8 +32,6 @@ public class VENTE {
 	private String deviseCNY;
 	private Date datedevise;
 	
-	 @ManyToOne
-	  private AVERAGEVENTE average;
 	
 	public void setData( String nomBanque,String deviseCAD,String deviseDKK,String deviseUSD,String deviseGBP,String deviseJPY,String deviseNOK,
 			String deviseSEK,String deviseCHF,String deviseKWD,String deviseAED,String deviseEUR,String deviseLYD,String deviseBHD,
@@ -62,82 +61,6 @@ public class VENTE {
     }
 
 
-
-
-
-
-
-
-
-
-	public AVERAGEVENTE getAverage() {
-		return average;
-	}
-
-
-
-
-
-
-	public void setAverage(AVERAGEVENTE average) {
-		this.average = average;
-	}
-
-
-
-
-
-
-
-
-
-
-
-	@Override
-	public String toString() {
-		return "VENTE [idVENTE=" + idVENTE + ", nomBanque=" + nomBanque + ", deviseSAR=" + deviseSAR + ", deviseCAD="
-				+ deviseCAD + ", deviseDKK=" + deviseDKK + ", deviseUSD=" + deviseUSD + ", deviseGBP=" + deviseGBP
-				+ ", deviseJPY=" + deviseJPY + ", deviseNOK=" + deviseNOK + ", deviseSEK=" + deviseSEK + ", deviseCHF="
-				+ deviseCHF + ", deviseKWD=" + deviseKWD + ", deviseAED=" + deviseAED + ", deviseEUR=" + deviseEUR
-				+ ", deviseLYD=" + deviseLYD + ", deviseBHD=" + deviseBHD + ", deviseQAR=" + deviseQAR + ", deviseCNY="
-				+ deviseCNY + ", datedevise=" + datedevise + ", average=" + average + "]";
-	}
-
-
-
-
-
-
-
-
-
-
-	public String getDeviseSAR() {
-		return deviseSAR;
-	}
-
-
-
-
-
-
-
-
-
-
-	public void setDeviseSAR(String deviseSAR) {
-		this.deviseSAR = deviseSAR;
-	}
-
-
-
-
-
-
-
-
-
-
 	public int getIdVENTE() {
 		return idVENTE;
 	}
@@ -153,14 +76,19 @@ public class VENTE {
 	}
 
 
-
-
 	public void setNomBanque(String nomBanque) {
 		this.nomBanque = nomBanque;
 	}
 
 
+	public String getDeviseSAR() {
+		return deviseSAR;
+	}
 
+
+	public void setDeviseSAR(String deviseSAR) {
+		this.deviseSAR = deviseSAR;
+	}
 
 
 	public String getDeviseCAD() {
@@ -321,24 +249,20 @@ public class VENTE {
 	public void setDatedevise(Date datedevise) {
 		this.datedevise = datedevise;
 	}
- 
-    // display() method to display
-    // the student data
-   /* public void display()
-    {
-        System.out.println("My VENTE: " + idBIAT + " "
-                           
-                           + codeDevise +uniteDevise+ achatdevise +ventedevise+datedevise);
-        System.out.println();
-    }
-	
-*/
 
 
+	@Override
+	public String toString() {
+		return "Vente [idVENTE=" + idVENTE + ", nomBanque=" + nomBanque + ", deviseSAR=" + deviseSAR + ", deviseCAD="
+				+ deviseCAD + ", deviseDKK=" + deviseDKK + ", deviseUSD=" + deviseUSD + ", deviseGBP=" + deviseGBP
+				+ ", deviseJPY=" + deviseJPY + ", deviseNOK=" + deviseNOK + ", deviseSEK=" + deviseSEK + ", deviseCHF="
+				+ deviseCHF + ", deviseKWD=" + deviseKWD + ", deviseAED=" + deviseAED + ", deviseEUR=" + deviseEUR
+				+ ", deviseLYD=" + deviseLYD + ", deviseBHD=" + deviseBHD + ", deviseQAR=" + deviseQAR + ", deviseCNY="
+				+ deviseCNY + ", datedevise=" + datedevise + "]";
+	}
 	
 	
 
-	
 
 
 }

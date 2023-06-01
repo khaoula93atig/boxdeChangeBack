@@ -2,6 +2,7 @@ package com.tta.boxchange.job;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -23,11 +24,14 @@ import com.tta.boxchange.dao.BTEInterface;
 import com.tta.boxchange.dao.BTInterface;
 import com.tta.boxchange.dao.BTKInterface;
 import com.tta.boxchange.dao.BTLInterface;
+import com.tta.boxchange.dao.MaxMinVenteInterface;
 import com.tta.boxchange.dao.STBInterface;
 import com.tta.boxchange.dao.UIBInterface;
 import com.tta.boxchange.dao.VENTEInterface;
 import com.tta.boxchange.entities.ATT;
-import com.tta.boxchange.entities.VENTE;
+import com.tta.boxchange.entities.AVGVENTE;
+import com.tta.boxchange.entities.MaxMinVente;
+import com.tta.boxchange.entities.Vente;
 import com.tta.boxchange.services.ScrapingService;
 
 @Component
@@ -39,7 +43,22 @@ public class ScrappingTask {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	@Scheduled(cron = "0 01 12 * * *")
+	@Autowired
+	AVGVENTEInterface avgVenteInterface;
+	
+	@Autowired
+	MaxMinVenteInterface maxminInterface;
+	
+	@Scheduled(cron = "0 0 0 * * *")
+	   public void viderVente() {
+		
+		System.out.println("test");
+		
+		jdbcTemplate.update("DELETE FROM public.vente;");
+		
+	}
+	
+	@Scheduled(cron = "0 0/30 * * * *")
 	   public void cronJobSch() {
 		System.err.print("begin scrapping");
 		try {
@@ -63,27 +82,30 @@ public class ScrappingTask {
 		} catch(IOException ex) {
 	
 		}
-		jdbcTemplate.execute("INSERT INTO averagefiras (deviseSAR, deviseCAD, deviseDKK, deviseUSD, deviseGBP, deviseJPY, deviseNOK, deviseSEK, deviseCHF, deviseKWD, deviseAED, deviseEUR, deviseLYD, deviseBHD, deviseQAR, deviseCNY, datedevise)\r\n"
-				+ "SELECT\r\n"
-				+ "CAST(AVG(NULLIF(\"deviseSAR\"::numeric, 0)) AS numeric(10,4)),\r\n"
-				+ "CAST(AVG(NULLIF(\"deviseCAD\"::numeric, 0)) AS numeric(10,4)),\r\n"
-				+ "CAST(AVG(NULLIF(\"deviseDKK\"::numeric, 0)) AS numeric(10,4)),\r\n"
-				+ "CAST(AVG(NULLIF(\"deviseUSD\"::numeric, 0)) AS numeric(10,4)),\r\n"
-				+ "CAST(AVG(NULLIF(\"deviseGBP\"::numeric, 0)) AS numeric(10,4)),\r\n"
-				+ "CAST(AVG(NULLIF(\"deviseJPY\"::numeric, 0)) AS numeric(10,4)),\r\n"
-				+ "CAST(AVG(NULLIF(\"deviseNOK\"::numeric, 0)) AS numeric(10,4)),\r\n"
-				+ "CAST(AVG(NULLIF(\"deviseSEK\"::numeric, 0)) AS numeric(10,4)),\r\n"
-				+ "CAST(AVG(NULLIF(\"deviseCHF\"::numeric, 0)) AS numeric(10,4)),\r\n"
-				+ "CAST(AVG(NULLIF(\"deviseKWD\"::numeric, 0)) AS numeric(10,4)),\r\n"
-				+ "CAST(AVG(NULLIF(\"deviseAED\"::numeric, 0)) AS numeric(10,4)),\r\n"
-				+ "CAST(AVG(NULLIF(\"deviseEUR\"::numeric, 0)) AS numeric(10,4)),\r\n"
-				+ "CAST(AVG(NULLIF(\"deviseLYD\"::numeric, 0)) AS numeric(10,4)),\r\n"
-				+ "CAST(AVG(NULLIF(\"deviseBHD\"::numeric, 0)) AS numeric(10,4)),\r\n"
-				+ "CAST(AVG(NULLIF(\"deviseQAR\"::numeric, 0)) AS numeric(10,4)),\r\n"
-				+ "CAST(AVG(NULLIF(\"deviseCNY\"::numeric, 0)) AS numeric(10,4)),\r\n"
-				+ "'" + LocalDate.now() + "'\r\n"
-				+ "FROM public.\"VENTE\";");
+		
+		//calcul avrage
+		AVGVENTE avg = new AVGVENTE();
+		List<AVGVENTE> avgList = avgVenteInterface.verification();
+		if(avgList.isEmpty()==true) {
+			avgVenteInterface.save(avg);
+		}
+		else {
+			avgVenteInterface.update(avgList.get(0));
+		}
+		
+		//min max job
+		MaxMinVente maxMin= new MaxMinVente();
+		List<MaxMinVente> maxList=maxminInterface.verif();
+		if(maxList.isEmpty()==true) {
+			maxminInterface.save(maxMin);
+		}
+		else {
+			maxminInterface.update(maxList.get(0));
+		}
+		
 		System.err.print("end scrapping");
 	   }
-
+	
+	
+	
 }

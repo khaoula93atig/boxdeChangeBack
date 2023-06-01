@@ -110,7 +110,7 @@ public class ScrapingService {
     	ChartDto chart = new ChartDto();
     	avgList.forEach(avg -> {
     		chart.labels.add(avg.getDatedevise().toString());
-    		SAR.data.add(avg.getDevisesar());
+    		/*SAR.data.add(avg.getDevisesar());
     		CAD.data.add(Double.parseDouble(avg.getDevisecad()));
     		DKK.data.add(Double.parseDouble(avg.getDevisedkk()));
     		USD.data.add(Double.parseDouble(avg.getDeviseusd()));
@@ -125,7 +125,7 @@ public class ScrapingService {
     		LYD.data.add(Double.parseDouble(avg.getDeviselyd()));
     		BHD.data.add(Double.parseDouble(avg.getDevisebhd()));
     		QAR.data.add(Double.parseDouble(avg.getDeviseqar()));
-    		CNY.data.add(Double.parseDouble(avg.getDevisecny()));    		
+    		CNY.data.add(Double.parseDouble(avg.getDevisecny()));    	*/	
     	});
     	chart.datasets.add(SAR);
     	chart.datasets.add(CAD);

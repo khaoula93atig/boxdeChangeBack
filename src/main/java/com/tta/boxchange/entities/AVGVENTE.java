@@ -11,295 +11,145 @@ public class AVGVENTE {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String nombanque;
-	private double devisesar;
-	private String devisecad;
-	private String devisedkk;
-	private String deviseusd;
-	private String devisegbp;
-	private String devisejpy;
-	private String devisenok;
-	private String devisesek;
-	private String devisechf;
-	private String devisekwd;
-	private String deviseaed;
-	private String deviseeur;
+	private float devisesar;
+	private float devisecad;
+	private float devisedkk;
+	private float deviseusd;
+	private float devisegbp;
+	private float devisejpy;
+	private float devisenok;
+	private float devisesek;
+	private float devisechf;
+	private float devisekwd;
+	private float deviseaed;
+	private float deviseeur;
 	
-	private String deviselyd;
-	private String devisebhd;
-	private String deviseqar;
-	private String devisecny;
+	private float deviselyd;
+	private float devisebhd;
+	private float deviseqar;
+	private float devisecny;
 	private Date datedevise;
-	
-
-	
-	public void setData( String nomBanque,String deviseCAD,String deviseDKK,String deviseUSD,String deviseGBP,String deviseJPY,String deviseNOK,
-			String deviseSEK,String deviseCHF,String deviseKWD,String deviseAED,String deviseEUR,String deviseLYD,String deviseBHD,
-			String deviseQAR,String deviseCNY,Double deviseSAR)
-    {
-        this.id = id;
-        this.nombanque = nombanque;
-       
-       this.devisecad = devisecad;
-        this.devisedkk = devisedkk;
-        this.deviseusd = deviseusd;
-        this.devisegbp = devisegbp;
-        this.devisejpy = devisejpy;
-        this.devisenok = devisenok;
-        this.devisesek = devisesek;
-        this.devisechf = devisechf;
-        this.devisekwd = devisekwd;
-        this.deviseaed = deviseaed;
-        this.deviseaed = deviseaed;
-        this.deviselyd = deviselyd;
-        this.devisebhd = devisebhd;
-        this.deviseqar = deviseqar;
-        this.devisecny = devisecny;
-        this.devisesar = devisesar;
-       // this.datedevise = datedevise
-        ;
-    }
-
-
-
-	@Override
-	public String toString() {
-		return "AVGVENTE [id=" + id + ", nombanque=" + nombanque + ", devisesar=" + devisesar + ", devisecad="
-				+ devisecad + ", devisedkk=" + devisedkk + ", deviseusd=" + deviseusd + ", devisegbp=" + devisegbp
-				+ ", devisejpy=" + devisejpy + ", devisenok=" + devisenok + ", devisesek=" + devisesek + ", devisechf="
-				+ devisechf + ", devisekwd=" + devisekwd + ", deviseaed=" + deviseaed + ", deviseeur=" + deviseeur
-				+ ", deviselyd=" + deviselyd + ", devisebhd=" + devisebhd + ", deviseqar=" + deviseqar + ", devisecny="
-				+ devisecny + ", datedevise=" + datedevise + "]";
-	}
-
-
-
 	public int getId() {
 		return id;
 	}
-
-
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
-
-
-	public String getNombanque() {
-		return nombanque;
-	}
-
-
-
-	public void setNombanque(String nombanque) {
-		this.nombanque = nombanque;
-	}
-
-
-
-	public double getDevisesar() {
+	public float getDevisesar() {
 		return devisesar;
 	}
-
-
-
-	public void setDevisesar(double devisesar) {
+	public void setDevisesar(float devisesar) {
 		this.devisesar = devisesar;
 	}
-
-
-
-	public String getDevisecad() {
+	public float getDevisecad() {
 		return devisecad;
 	}
-
-
-
-	public void setDevisecad(String devisecad) {
+	public void setDevisecad(float devisecad) {
 		this.devisecad = devisecad;
 	}
-
-
-
-	public String getDevisedkk() {
+	public float getDevisedkk() {
 		return devisedkk;
 	}
-
-
-
-	public void setDevisedkk(String devisedkk) {
+	public void setDevisedkk(float devisedkk) {
 		this.devisedkk = devisedkk;
 	}
-
-
-
-	public String getDeviseusd() {
+	public float getDeviseusd() {
 		return deviseusd;
 	}
-
-
-
-	public void setDeviseusd(String deviseusd) {
+	public void setDeviseusd(float deviseusd) {
 		this.deviseusd = deviseusd;
 	}
-
-
-
-	public String getDevisegbp() {
+	public float getDevisegbp() {
 		return devisegbp;
 	}
-
-
-
-	public void setDevisegbp(String devisegbp) {
+	public void setDevisegbp(float devisegbp) {
 		this.devisegbp = devisegbp;
 	}
-
-
-
-	public String getDevisejpy() {
+	public float getDevisejpy() {
 		return devisejpy;
 	}
-
-
-
-	public void setDevisejpy(String devisejpy) {
+	public void setDevisejpy(float devisejpy) {
 		this.devisejpy = devisejpy;
 	}
-
-
-
-	public String getDevisenok() {
+	public float getDevisenok() {
 		return devisenok;
 	}
-
-
-
-	public void setDevisenok(String devisenok) {
+	public void setDevisenok(float devisenok) {
 		this.devisenok = devisenok;
 	}
-
-
-
-	public String getDevisesek() {
+	public float getDevisesek() {
 		return devisesek;
 	}
-
-
-
-	public void setDevisesek(String devisesek) {
+	public void setDevisesek(float devisesek) {
 		this.devisesek = devisesek;
 	}
-
-
-
-	public String getDevisechf() {
+	public float getDevisechf() {
 		return devisechf;
 	}
-
-
-
-	public void setDevisechf(String devisechf) {
+	public void setDevisechf(float devisechf) {
 		this.devisechf = devisechf;
 	}
-
-
-
-	public String getDevisekwd() {
+	public float getDevisekwd() {
 		return devisekwd;
 	}
-
-
-
-	public void setDevisekwd(String devisekwd) {
+	public void setDevisekwd(float devisekwd) {
 		this.devisekwd = devisekwd;
 	}
-
-
-
-	public String getDeviseaed() {
+	public float getDeviseaed() {
 		return deviseaed;
 	}
-
-
-
-	public void setDeviseaed(String deviseaed) {
+	public void setDeviseaed(float deviseaed) {
 		this.deviseaed = deviseaed;
 	}
-
-
-
-	public String getDeviseeur() {
+	public float getDeviseeur() {
 		return deviseeur;
 	}
-
-
-
-	public void setDeviseeur(String deviseeur) {
+	public void setDeviseeur(float deviseeur) {
 		this.deviseeur = deviseeur;
 	}
-
-
-
-	public String getDeviselyd() {
+	public float getDeviselyd() {
 		return deviselyd;
 	}
-
-
-
-	public void setDeviselyd(String deviselyd) {
+	public void setDeviselyd(float deviselyd) {
 		this.deviselyd = deviselyd;
 	}
-
-
-
-	public String getDevisebhd() {
+	public float getDevisebhd() {
 		return devisebhd;
 	}
-
-
-
-	public void setDevisebhd(String devisebhd) {
+	public void setDevisebhd(float devisebhd) {
 		this.devisebhd = devisebhd;
 	}
-
-
-
-	public String getDeviseqar() {
+	public float getDeviseqar() {
 		return deviseqar;
 	}
-
-
-
-	public void setDeviseqar(String deviseqar) {
+	public void setDeviseqar(float deviseqar) {
 		this.deviseqar = deviseqar;
 	}
-
-
-
-	public String getDevisecny() {
+	public float getDevisecny() {
 		return devisecny;
 	}
-
-
-
-	public void setDevisecny(String devisecny) {
+	public void setDevisecny(float devisecny) {
 		this.devisecny = devisecny;
 	}
-
-
-
 	public Date getDatedevise() {
 		return datedevise;
 	}
-
-
-
 	public void setDatedevise(Date datedevise) {
 		this.datedevise = datedevise;
 	}
+	@Override
+	public String toString() {
+		return "AVGVENTE [id=" + id + ", devisesar=" + devisesar + ", devisecad=" + devisecad + ", devisedkk="
+				+ devisedkk + ", deviseusd=" + deviseusd + ", devisegbp=" + devisegbp + ", devisejpy=" + devisejpy
+				+ ", devisenok=" + devisenok + ", devisesek=" + devisesek + ", devisechf=" + devisechf + ", devisekwd="
+				+ devisekwd + ", deviseaed=" + deviseaed + ", deviseeur=" + deviseeur + ", deviselyd=" + deviselyd
+				+ ", devisebhd=" + devisebhd + ", deviseqar=" + deviseqar + ", devisecny=" + devisecny + ", datedevise="
+				+ datedevise + "]";
+	}
+	
 
+	
+	
 
 
 

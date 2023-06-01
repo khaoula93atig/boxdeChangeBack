@@ -37,8 +37,16 @@ public class Notification {
     private Date readDate;
 
     private int count;
+    
+    private String type;
 
-    public int getCount() {
+    public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public int getCount() {
         return count;
     }
     public void setCount(int count) {
@@ -93,7 +101,7 @@ public class Notification {
 	public String toString() {
 		return "Notification [id=" + id + ", channel=" + channel + ", sender=" + sender + ", titre=" + titre
 				+ ", content=" + content + ", timestamp=" + timestamp + ", readDate=" + readDate + ", count=" + count
-				+ "]";
+				+ ", type=" + type + "]";
 	}
     
     

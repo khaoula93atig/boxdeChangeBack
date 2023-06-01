@@ -5,21 +5,21 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.tta.boxchange.entities.VENTE;
-import com.tta.boxchange.entities.VENTE;
+import com.tta.boxchange.entities.Vente;
 
 
-public class VENTERowMapper implements RowMapper<VENTE> {
+
+public class VENTERowMapper implements RowMapper<Vente> {
 
 	@Override
-	public VENTE mapRow(ResultSet rs, int arg1) throws SQLException {
+	public Vente mapRow(ResultSet rs, int arg1) throws SQLException {
 
 		
 		
 
-		VENTE vente = new VENTE();
+		Vente vente = new Vente();
 		vente.setIdVENTE(rs.getInt("idVENTE"));
-		vente.setNomBanque(rs.getString("nomBanque"));
+		vente.setNomBanque(rs.getString("nom_banque"));
 		vente.setDeviseSAR(rs.getString("deviseSAR"));
 		vente.setDeviseCAD(rs.getString("deviseCAD"));
 	

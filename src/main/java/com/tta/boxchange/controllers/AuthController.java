@@ -1,4 +1,7 @@
 package com.tta.boxchange.controllers;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -9,6 +12,7 @@ import javax.validation.Valid;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -161,7 +165,7 @@ public class AuthController {
     }
 
     user.setRoles(roles);*/
-    Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
+    Role modRole = roleRepository.findByName(ERole.ROLE_ENCHERE)
             .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
         roles.add(modRole);
     userRepository.save(user);
@@ -201,6 +205,23 @@ public class AuthController {
   public List<User> getAllUser() {
 	  return userRepository.findAll();
   }
+  
+  @GetMapping("/getByRole/{userRole}")
+  public List<User> getByRole(@PathVariable ERole userRole, Pageable pageable) {
+	  List<User> users = new ArrayList<>();
+	  Optional<Role> roleOptional = roleRepository.findByName(userRole);
+	  if (roleOptional.isPresent()) {
+		    Role adminRole = roleOptional.get();
+		    users = userRepository.findByRolesIn(Collections.singleton(adminRole), pageable);
+		} else {
+			users=new ArrayList<>();
+		}
+	  return users;
+	 
+  }
+
+
+
 
   
 

@@ -1,5 +1,9 @@
 package com.tta.boxchange.repositories;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -8,8 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
 import com.tta.boxchange.dao.VENTEInterface;
-import com.tta.boxchange.entities.VENTE;
-
+import com.tta.boxchange.entities.Vente;
 //import com.tta.boxchange.entities.Notifications;
 //import com.tta.boxchange.entities.RendezVous;
 import com.tta.boxchange.mappers.VENTERowMapper;
@@ -25,7 +28,7 @@ public class VENTERepository implements VENTEInterface {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public List<VENTE> findAll() {
+	public List<Vente> findAll() {
 		// TODO Auto-generated method stub
 		return jdbcTemplate.query("SELECT v1.*\r\n"
 				+ "FROM public.\"VENTE\" v1\r\n"
@@ -40,7 +43,7 @@ public class VENTERepository implements VENTEInterface {
 
 
 	@Override
-	public VENTE findMAX(String currency) {
+	public Vente findMAX(String currency) {
 		
 		String columntochange = "devise" + currency;
 		return jdbcTemplate.query("SELECT * FROM public.\"VENTE\" WHERE CAST(\"" + columntochange + "\" AS float) = " +
@@ -49,7 +52,7 @@ public class VENTERepository implements VENTEInterface {
 	}
 	
 	@Override
-	public VENTE findMIN(String currency) {
+	public Vente findMIN(String currency) {
 		
 		String columntochange = "devise" + currency;
 		return jdbcTemplate.query("SELECT * FROM public.\"VENTE\" WHERE CAST(\"" + columntochange + "\" AS float) = " +
@@ -59,7 +62,7 @@ public class VENTERepository implements VENTEInterface {
 	
 
 	@Override
-	public VENTE findMAX(String currency, String date) {
+	public Vente findMAX(String currency, String date) {
 		
 		String columntochange = "devise" + currency;
 		return jdbcTemplate.query("SELECT *\n" +
@@ -74,7 +77,7 @@ public class VENTERepository implements VENTEInterface {
 	}
 	
 	@Override
-	public VENTE findMIN(String currency, String date) {
+	public Vente findMIN(String currency, String date) {
 		
 		String columntochange = "devise" + currency;
 		return jdbcTemplate.query("SELECT *\n" +
@@ -88,22 +91,22 @@ public class VENTERepository implements VENTEInterface {
 	               "LIMIT 1;", new VENTERowMapper()).get(0);
 	}
 	@Override
-	public BasicResponse save(VENTE vente) {
+	public BasicResponse save(Vente vente) {
 		try {
-
-		//	System.out.println("stb " + stb.toString());
-			vente.setDatedevise(new Date());
-			//stb.setIdSTB(UUID.randomUUID().toString().replace("-", ""));
+			
+			Date dateDevise = new Date();
+			vente.setDatedevise(dateDevise);
 		
 			jdbcTemplate.update(
-					"INSERT INTO public.\"VENTE\"(\r\n"
-					+ "	\"deviseCAD\", \"deviseDKK\", \"deviseUSD\", \"deviseGBP\", \"deviseJPY\", \"deviseNOK\", \"deviseSEK\", \"deviseCHF\", \"deviseKWD\", \"deviseAED\", \"deviseEUR\", \"deviseLYD\", \"deviseBHD\", datedevise, \"nomBanque\", \"deviseQAR\", \"deviseCNY\", \"deviseSAR\")\r\n"
-					+ "	VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
-					vente.getDeviseCAD(),vente.getDeviseDKK(),vente.getDeviseUSD(),vente.getDeviseGBP(),
-					vente.getDeviseJPY(),vente.getDeviseNOK(),vente.getDeviseSEK(),vente.getDeviseCHF(),vente.getDeviseKWD(),
-					vente.getDeviseAED(),vente.getDeviseEUR(),vente.getDeviseLYD(),vente.getDeviseBHD(),
-					vente.getDatedevise(),vente.getNomBanque(),
-					vente.getDeviseQAR(),vente.getDeviseCNY(),vente.getDeviseSAR()
+					"INSERT INTO public.vente(\r\n"
+					+ "	datedevise, deviseaed, devisebhd, devisecad, devisechf, devisecny,"
+					+ " devisedkk, deviseeur, devisegbp, devisejpy, devisekwd, deviselyd,"
+					+ " devisenok, deviseqar, devisesar, devisesek, deviseusd, nom_banque)\r\n"
+					+ "	VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
+					vente.getDatedevise(),vente.getDeviseAED(),vente.getDeviseBHD(),vente.getDeviseCAD(),vente.getDeviseCHF(),vente.getDeviseCNY(),
+					vente.getDeviseDKK(),vente.getDeviseEUR(),vente.getDeviseGBP(),vente.getDeviseJPY(),vente.getDeviseKWD(),vente.getDeviseLYD(),
+					vente.getDeviseNOK(),vente.getDeviseQAR(),vente.getDeviseSAR(),vente.getDeviseSEK(),vente.getDeviseUSD(),
+					vente.getNomBanque()
 					);
 
 			return new BasicResponse("Un ajout dans vente a été effectué", HttpStatus.OK);
@@ -120,15 +123,13 @@ public class VENTERepository implements VENTEInterface {
 	}
 
 	@Override
-	public BasicResponse update(VENTE vente) {
+	public BasicResponse update(Vente vente) {
 		System.out.println(vente);
 		try {
-			List<VENTE> toUpdate = this.getbyId(vente.getIdVENTE());
+			List<Vente> toUpdate = this.getbyId(vente.getIdVENTE());
 			System.out.println(toUpdate);
 			if (!toUpdate.isEmpty()) {
 				System.out.println("VENTE  update " + vente.toString());
-				// rendezVous.setCreationDate(new Date());
-				// rendezVous.setIdRdv(UUID.randomUUID().toString().replace("-", ""));
 				jdbcTemplate.update("UPDATE public.\"VENTE\"\r\n"
 						+ "	SET \"codeDevise\"=?, \"uniteDevise\"=?, achatdevise=?, ventedevise=?, datedevise=?\r\n"
 						+ "	WHERE \"VENTE\"=?;", vente.getDeviseSAR(),vente.getDeviseCAD(),vente.getDeviseDKK(),vente.getDeviseUSD(),vente.getDeviseGBP(),
@@ -155,7 +156,7 @@ public class VENTERepository implements VENTEInterface {
 
 
 	@Override
-	public List<VENTE> getbyId(int id) {
+	public List<Vente> getbyId(int id) {
 		return jdbcTemplate.query("SELECT *\r\n"
 				+ "	FROM public.\"VENTE\"\r\n"
 				+ "	where \"idVENTE\"=?;", new Object[] { id },
@@ -163,11 +164,74 @@ public class VENTERepository implements VENTEInterface {
 	}
 
 	@Override
-	public List<VENTE> modification(String nomBanque) {
+	public List<Vente> modification(String nomBanque) {
 		return jdbcTemplate.query("SELECT *\r\n"
 				+ "	FROM public.\"VENTE\"\r\n"
 				+ "	where \"codeDevise\" =? and datedevise=CURRENT_DATE;", new Object[] { nomBanque },
 				new VENTERowMapper());
+	}
+
+
+	@Override
+	public List<Vente> findLasts() {
+		return jdbcTemplate.query("SELECT * FROM public.vente\r\n"
+				+ "	WHERE nom_banque in ('amen','zitouna','btl','btk','bte',\r\n"
+				+ "						 'bh','biat','tsb','wifak','qnb',\r\n"
+				+ "						 'attijari','al baraka' ,'uib','stb','atb',\r\n"
+				+ "						 'bt','bna')\r\n"
+				+ "	order by datedevise desc\r\n"
+				+ "	limit 17;",
+				new VENTERowMapper());
+	}
+
+
+	@Override
+	public Float maxVenteCeJour(String devise) {
+		devise = "devise"+devise;
+		String req="SELECT max("+ devise +") FROM public.vente WHERE datedevise::DATE = NOW()::DATE;";
+		String max= jdbcTemplate.queryForObject(req, String.class);
+		Float maxValue = new Float(max);
+		return maxValue;
+	}
+
+
+	@Override
+	public Float minVenteCeJour(String devise) {
+		devise = "devise"+devise;
+		String req="SELECT min("+ devise + ")as min FROM (select "+ devise +" from public.vente\r\n"
+				+ "	WHERE datedevise::DATE = NOW()::DATE and "+ devise +" <> '0') as test;";
+		String min= jdbcTemplate.queryForObject(req, String.class);
+		Float minValue = new Float(min);
+		return minValue;
+	}
+
+
+	
+
+	@Override
+	public List<Vente> verification(String Bank) {
+		String req="select * from vente where datedevise::Date = NOW()::Date and nom_banque= ?;";
+		return jdbcTemplate.query(req,new Object[] { Bank },new VENTERowMapper());
+		
+	}
+
+
+	@Override
+	public BasicResponse updateVente(Vente ancienneVente, Vente nouveauVente) {
+		try {
+			String req = "UPDATE public.vente\r\n"
+					+ "	SET deviseaed=?, devisebhd=?, devisecad=?, devisechf=?, devisecny=?,"
+					+ " devisedkk=?, deviseeur=?, devisegbp=?, devisejpy=?, devisekwd=?, deviselyd=?,"
+					+ " devisenok=?, deviseqar=?, devisesar=?, devisesek=?, deviseusd=?\r\n"
+					+ "	WHERE idvente=?";
+			jdbcTemplate.update(req,nouveauVente.getDeviseAED(),nouveauVente.getDeviseBHD(),nouveauVente.getDeviseCAD(),nouveauVente.getDeviseCHF(),nouveauVente.getDeviseCNY(),
+					nouveauVente.getDeviseDKK(),nouveauVente.getDeviseEUR(),nouveauVente.getDeviseGBP(),nouveauVente.getDeviseJPY(),nouveauVente.getDeviseKWD(),nouveauVente.getDeviseLYD(),
+					nouveauVente.getDeviseNOK(),nouveauVente.getDeviseQAR(),nouveauVente.getDeviseSAR(),nouveauVente.getDeviseSEK(),nouveauVente.getDeviseUSD(),ancienneVente.getIdVENTE());
+			
+			return new BasicResponse("La modification effectuée avec succes", HttpStatus.OK);
+		}catch (Exception e) {
+			return new BasicResponse("Erreur", HttpStatus.OK);
+		}
 	}
 
 

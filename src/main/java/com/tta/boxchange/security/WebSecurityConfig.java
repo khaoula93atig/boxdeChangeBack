@@ -91,6 +91,8 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
         .antMatchers("/enchere/**").permitAll()
         .antMatchers("/proposition/**").permitAll()
         .antMatchers("/socket/**").permitAll()
+        .antMatchers("/socket/notif/**").permitAll()
+        .antMatchers("/messages/**").permitAll()
         
 
         .anyRequest().authenticated();

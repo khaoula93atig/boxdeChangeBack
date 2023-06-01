@@ -19,30 +19,29 @@ public class AVGVENTERowMapper implements RowMapper<AVGVENTE> {
 
 		AVGVENTE avgvente = new AVGVENTE();
 		avgvente.setId(rs.getInt("id"));
-		avgvente.setNombanque(rs.getString("nombanque"));
-		avgvente.setDevisesar(rs.getDouble("devisesar"));
-		avgvente.setDevisecad(rs.getString("devisecad"));
+		avgvente.setDevisesar(rs.getFloat("devisesar"));
+		avgvente.setDevisecad(rs.getFloat("devisecad"));
 	
-		avgvente.setDevisedkk(rs.getString("devisedkk"));
-		avgvente.setDeviseusd(rs.getString("deviseusd"));
+		avgvente.setDevisedkk(rs.getFloat("devisedkk"));
+		avgvente.setDeviseusd(rs.getFloat("deviseusd"));
 		
-		avgvente.setDevisegbp(rs.getString("devisegbp"));
-		avgvente.setDevisejpy(rs.getString("devisejpy"));
+		avgvente.setDevisegbp(rs.getFloat("devisegbp"));
+		avgvente.setDevisejpy(rs.getFloat("devisejpy"));
 		
-		avgvente.setDevisenok(rs.getString("devisenok"));
-		avgvente.setDevisesek(rs.getString("devisesek"));
+		avgvente.setDevisenok(rs.getFloat("devisenok"));
+		avgvente.setDevisesek(rs.getFloat("devisesek"));
 		
-		avgvente.setDevisechf(rs.getString("devisechf"));
-		avgvente.setDevisekwd(rs.getString("deviseKWD"));
+		avgvente.setDevisechf(rs.getFloat("devisechf"));
+		avgvente.setDevisekwd(rs.getFloat("deviseKWD"));
 		
-		avgvente.setDeviseaed(rs.getString("deviseaed"));
-		avgvente.setDeviseeur(rs.getString("deviseeur"));
+		avgvente.setDeviseaed(rs.getFloat("deviseaed"));
+		avgvente.setDeviseeur(rs.getFloat("deviseeur"));
 		
-		avgvente.setDeviselyd(rs.getString("deviselyd"));
-		avgvente.setDevisebhd(rs.getString("devisebhd"));
+		avgvente.setDeviselyd(rs.getFloat("deviselyd"));
+		avgvente.setDevisebhd(rs.getFloat("devisebhd"));
 		
-		avgvente.setDeviseqar(rs.getString("deviseqar"));
-		avgvente.setDevisecny(rs.getString("devisecny"));
+		avgvente.setDeviseqar(rs.getFloat("deviseqar"));
+		avgvente.setDevisecny(rs.getFloat("devisecny"));
 		
 		
 		
