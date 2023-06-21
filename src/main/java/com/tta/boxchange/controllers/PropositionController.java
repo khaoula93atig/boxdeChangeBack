@@ -1,11 +1,13 @@
 package com.tta.boxchange.controllers;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tta.boxchange.dao.PropositionInterface;
 import com.tta.boxchange.entities.Enchere;
 import com.tta.boxchange.entities.Notification;
 import com.tta.boxchange.entities.Proposition;
@@ -24,10 +27,12 @@ import com.tta.boxchange.repositories.EnchRepository;
 import com.tta.boxchange.repositories.EnchereRepository;
 import com.tta.boxchange.repositories.PropositionRepository;
 import com.tta.boxchange.repositories.UserRepository;
+import com.tta.boxchange.response.BasicResponse;
 
 @CrossOrigin("*") // open for all ports
 @RestController
 @RequestMapping("/proposition")
+@Controller
 
 public class PropositionController {
 	@Autowired
@@ -41,6 +46,9 @@ public class PropositionController {
 	
 	@Autowired
 	NotificationController notificationController;
+	
+	@Autowired
+	PropositionInterface propositionInterface;
 
     /**
      * Get all the employees
@@ -120,26 +128,23 @@ public class PropositionController {
     	
     }
 
-    /**
-     * Update Employee record by using it's id
-     *
-     * @param id
-     * @param employee
-     * @return
-     */
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Proposition> updateEmployee(@PathVariable("id") long id, @RequestBody Proposition employee) {
+    
+    @PutMapping("/update")
+    public BasicResponse updateEmployee( @RequestBody Proposition proposition) {
+    	
+    	
+    	
+    	Notification notification  = new Notification( );
+		notification.setChannel(proposition.getEnchere().getUser().getId().toString());
+		notification.setSender( proposition.getUser().getUsername());
+		notification.setTitre(proposition.getEnchere().getReferenceEnchere());
+		notification.setContent(proposition.getEnchere().getDevise());
+		notification.setType("proposition");
+		
+		notificationController.handleNotif(notification);
+		return propositionInterface.modifierProposition(proposition);
 
-        //check if employee exist in database
-    	Proposition empObj = getEmpRec(id);
-
-        if (empObj != null) {
-            //empObj.setName(employee.getName());
-            //empObj.setRole(employee.getRole());
-            return new ResponseEntity<>(propositionRepository.save(empObj), HttpStatus.OK);
-        }
-
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        
     }
 
     /**
@@ -215,4 +220,19 @@ public class PropositionController {
         }
 
     }
+    
+    
+    //get proposition by enchere and user
+    @GetMapping("/getByUserAndEnchere/{user}/{enchere}")
+    public List<Proposition> getPropositionByUserAndEnchere(@PathVariable("user") Long user, @PathVariable("enchere") String enchere) {
+    	return propositionInterface.getPropositionByUserAndEnchere(user, enchere);
+    }
+    
+  //get proposition of bank
+    @GetMapping("/getOfBank/{user}/{enchere}")
+    public List<Proposition> getPropositionofBank(@PathVariable("user") Long user, @PathVariable("enchere") String enchere) {
+    	return propositionInterface.getPropositionOfBank(user, enchere);
+    }
+    
+    
 }

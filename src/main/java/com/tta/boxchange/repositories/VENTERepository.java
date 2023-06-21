@@ -175,12 +175,11 @@ public class VENTERepository implements VENTEInterface {
 	@Override
 	public List<Vente> findLasts() {
 		return jdbcTemplate.query("SELECT * FROM public.vente\r\n"
-				+ "	WHERE nom_banque in ('amen','zitouna','btl','btk','bte',\r\n"
-				+ "						 'bh','biat','tsb','wifak','qnb',\r\n"
-				+ "						 'attijari','al baraka' ,'uib','stb','atb',\r\n"
-				+ "						 'bt','bna')\r\n"
-				+ "	order by datedevise desc\r\n"
-				+ "	limit 17;",
+				+ "				WHERE nom_banque in ('amen','zitouna','btl','btk','bte',\r\n"
+				+ "									 'bh','biat','tsb','wifak','qnb',\r\n"
+				+ "									 'attijari','al baraka' ,'uib','stb','atb',\r\n"
+				+ "									 'bt','bna') and datedevise::DATE = NOW()::DATE\r\n"
+				+ "					order by datedevise desc;",
 				new VENTERowMapper());
 	}
 

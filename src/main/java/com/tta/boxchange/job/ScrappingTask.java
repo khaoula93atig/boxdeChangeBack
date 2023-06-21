@@ -54,31 +54,32 @@ public class ScrappingTask {
 		
 		System.out.println("test");
 		
-		jdbcTemplate.update("DELETE FROM public.vente;");
+		jdbcTemplate.update("DELETE FROM public.vente where datedevise::DATE != NOW()::DATE;");
 		
 	}
 	
-	@Scheduled(cron = "0 0/30 * * * *")
+	@Scheduled(fixedRate = 1800000) // Exécution toutes les 30 minute
 	   public void cronJobSch() {
 		System.err.print("begin scrapping");
 		try {
-		controller.scrapeWebsiteBIAT();
-		controller.scrapeWebsiteATB();
-		controller.scrapeWebsiteBH();
-		controller.scrapeWebsiteAmen();
-		controller.scrapeWebsiteBNA();
-		controller.scrapeWebsiteBT();
-		controller.scrapeWebsiteBTE();
-		controller.scrapeWebsiteBTK();
-		controller.scrapeWebsiteBTL();
-		controller.scrapeWebsiteSTB();
-		controller.scrapeWebsiteUIB();
-		controller.scrapeWebsiteATTIJARI();
-		controller.scrapeWebsiteQNB();
-		controller.scrapeWebsiteZITOUNA();
-		controller.scrapeWebsiteWIFAK();
-		controller.scrapeWebsiteBaraka();
-		controller.scrapeWebsiteTSB();
+			jdbcTemplate.update("DELETE FROM public.vente where datedevise::DATE != NOW()::DATE;");	
+			controller.scrapeWebsiteBIAT();
+			controller.scrapeWebsiteATB();
+			controller.scrapeWebsiteBH();
+			controller.scrapeWebsiteAmen();
+			controller.scrapeWebsiteBNA();
+			controller.scrapeWebsiteBT();
+			controller.scrapeWebsiteBTE();
+			controller.scrapeWebsiteBTK();
+			controller.scrapeWebsiteBTL();
+			controller.scrapeWebsiteSTB();
+			controller.scrapeWebsiteUIB();
+			controller.scrapeWebsiteATTIJARI();
+			controller.scrapeWebsiteQNB();
+			controller.scrapeWebsiteZITOUNA();
+			controller.scrapeWebsiteWIFAK();
+			controller.scrapeWebsiteBaraka();
+			controller.scrapeWebsiteTSB();
 		} catch(IOException ex) {
 	
 		}

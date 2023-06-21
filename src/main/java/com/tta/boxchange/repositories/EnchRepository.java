@@ -9,4 +9,8 @@ import com.tta.boxchange.entities.Enchere;
 public interface EnchRepository extends JpaRepository<Enchere, String> {
 
 	List<Enchere> findAllByUser_Id(Long id);
+
+	List<Enchere> findAllByOrderByDateDebutDesc();
+
+	List<Enchere> findAllByOrderByHeureFinDesc();
 }

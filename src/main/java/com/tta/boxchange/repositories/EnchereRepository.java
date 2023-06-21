@@ -23,7 +23,7 @@ public class EnchereRepository implements EnchereInterface {
 	@Override
 	public List<Enchere> findAll() {
 		// TODO Auto-generated method stub
-		return jdbcTemplate.query("select * from  enchere;", new EnchereRowMapper());
+		return jdbcTemplate.query("SELECT * FROM public.enchere order by date_debut desc;", new EnchereRowMapper());
 
 	}
 	public List<Enchere> findAllNull() {
@@ -80,6 +80,11 @@ public class EnchereRepository implements EnchereInterface {
 		return jdbcTemplate.queryForObject("SELECT count(*)\r\n"
 				+ "	FROM public.enchere\r\n"
 				+ "	where id_user=?;",new Object[] {userId},Long.class);
+	}
+	@Override
+	public List<Enchere> getByUser(Long userId) {
+		String req ="select * from enchere where id_user=? order by date DESC ;";
+		return jdbcTemplate.query(req, new Object[] {userId}, new EnchereRowMapper());
 	}
 
 	

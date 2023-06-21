@@ -59,7 +59,7 @@ public class EnchereController {
 	@GetMapping
 	public List<Enchere> findAll() {
 
-		return enchereInterface.findAll();
+		return enchereRepository.findAllByOrderByHeureFinDesc();
 	}
 	@GetMapping("/null")
 	public List<Enchere> findAllNull() {
@@ -135,6 +135,12 @@ public class EnchereController {
 		//update enchere 
 		return enchereInterface.update(enchere);
 	}
+	
+	@GetMapping("/getbyUser/{id}")
+	public List<Enchere> getEncherByUser(@PathVariable("id") Long id){
+		return enchereInterface.getByUser(id);
+	}
+	
 	
 
 }

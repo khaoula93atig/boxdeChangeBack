@@ -1,12 +1,19 @@
 package com.tta.boxchange.entities;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 public class Proposition {
@@ -14,6 +21,7 @@ public class Proposition {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idProposition;
+	
 	@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="idEnchere", nullable=false/*,insertable = false,, updatable = false*/)
 	private Enchere enchere;
@@ -23,11 +31,14 @@ public class Proposition {
 	private User user;
 	
 	private double taux_soumission;
+	
+	@CreationTimestamp
+    private Date dateCreation;
 
 	@Override
 	public String toString() {
-		return "Proposition [id=" + idProposition + ", enchere=" + enchere + ", user=" + user + ", taux_soumission="
-				+ taux_soumission + "]";
+		return "Proposition [idProposition=" + idProposition + ", enchere=" + enchere + ", user=" + user
+				+ ", taux_soumission=" + taux_soumission + ", dateCreation=" + dateCreation + "]";
 	}
 
 	
@@ -67,5 +78,18 @@ public class Proposition {
 	public void setTaux_soumission(double taux_soumission) {
 		this.taux_soumission = taux_soumission;
 	}
+
+
+
+	public Date getDateCreation() {
+		return dateCreation;
+	}
+
+
+
+	public void setDateCreation(Date dateCreation) {
+		this.dateCreation = dateCreation;
+	}
+	
 	
 }

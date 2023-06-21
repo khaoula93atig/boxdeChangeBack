@@ -17,4 +17,5 @@ public interface EnchereInterface {
 	BasicResponse update(Enchere enchere);
 	BasicResponse delete(Enchere enchere);
 	Long countEnchere(Long userId);
+	List<Enchere> getByUser(Long userId);
 }
