@@ -33,5 +33,10 @@ public class AvgVenteController {
 	public List<AverageVenteDevise> getByDevise(@PathVariable ("devise") String devise){
 		return avgventeRepository.averageBydevise(devise);
 	}
+	
+	@GetMapping("/getAvgDaily")
+	public List<AVGVENTE> getAvgDaily(){
+		return avgventeRepository.verification();
+	}
 
 }

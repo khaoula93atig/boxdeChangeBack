@@ -12,32 +12,33 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tta.boxchange.dao.BoxInterface;
+import com.tta.boxchange.dao.BankInterface;
+import com.tta.boxchange.entities.Bank;
 import com.tta.boxchange.entities.Box;
 import com.tta.boxchange.response.BasicResponse;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/box")
-public class BoxController {
+@RequestMapping("/bank")
+public class BankController {
+	
 	@Autowired
-	BoxInterface boxInterface;
-
+	BankInterface bankInterface;
+	
 	@GetMapping
-	public List<Box> findAll() {
+	public List<Bank> findAll() {
 
-		return boxInterface.getAll();
+		return bankInterface.getAll();
 	}
 
 	@PostMapping("/save")
-	public BasicResponse save(@RequestBody Box box) {
-		return boxInterface.AddBox(box);
+	public BasicResponse save(@RequestBody Bank bank) {
+		return bankInterface.AddBank(bank);
 	}
 
-	@PutMapping("/update/{idbox}")
-	public BasicResponse update(@PathVariable("idbox") String idBox,@RequestBody Box box) {
-		return boxInterface.UpdateBox(idBox,box);
+	@PutMapping("/update/{idbank}")
+	public BasicResponse update(@PathVariable("idbank") String idBank,@RequestBody Bank bank) {
+		return bankInterface.UpdateBank(idBank,bank);
 	}
-	
 
 }

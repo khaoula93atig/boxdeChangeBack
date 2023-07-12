@@ -1,11 +1,11 @@
 package com.tta.boxchange.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.tta.boxchange.entities.Box;
 import org.springframework.stereotype.Repository;
 
+import com.tta.boxchange.entities.Bank;
+
 @Repository
-public interface BoxRepository extends JpaRepository<Box,String>{
-	
+public interface BankRepository extends JpaRepository<Bank,String> {
+
 }

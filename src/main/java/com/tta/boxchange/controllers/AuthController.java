@@ -108,7 +108,7 @@ public class AuthController {
       Role userRole = roleRepository.findByName(ERole.ROLE_USER)
           .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
       roles.add(userRole);
-    } else {
+    } else {*/
       strRoles.forEach(role -> {
         switch (role) {
         case "admin":
@@ -117,19 +117,21 @@ public class AuthController {
           roles.add(adminRole);
 
           break;
-        case "mod":
-          Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
+        case "box":
+          Role modRole = roleRepository.findByName(ERole.ROLE_ENCHERE)
               .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
           roles.add(modRole);
 
           break;
-        default:
-          Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-              .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-          roles.add(userRole);
+        case "bank":
+            Role bankRole = roleRepository.findByName(ERole.ROLE_BANK)
+                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+            roles.add(bankRole);
+
+            break;
         }
       });
-    }*/
+    
     /*ERole = ERole.valueOf(signUpRequest.getRole().toString());
     Role userRole = roleRepository.findByName(ERole.valueOf((signUpRequest.getRole().toString()) )
     		;*/
@@ -163,11 +165,12 @@ public class AuthController {
     	
     	}
     }
-
-    user.setRoles(roles);*/
-    Role modRole = roleRepository.findByName(ERole.ROLE_ENCHERE)
+*/
+    user.setRoles(roles);
+    /*Role modRole = roleRepository.findByName(ERole.ROLE_ENCHERE)
             .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-        roles.add(modRole);
+        roles.add(modRole);*/
+        System.out.println(user.toString());
     userRepository.save(user);
 
     return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
