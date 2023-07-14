@@ -1,5 +1,6 @@
 package com.tta.boxchange.repositories;
 
+import com.tta.boxchange.entities.Bank;
 import com.tta.boxchange.entities.Proposition;
 import com.tta.boxchange.entities.User;
 
@@ -26,7 +27,7 @@ public interface PropositionRepository extends JpaRepository<Proposition, Long> 
 
 	List<Proposition> findAllByUser_IdAndEnchere_IdEnchere(Long user, String enchere);
 
-	List<Proposition> findAllByUser_BanqueAndEnchere_IdEnchere(String banque, String enchere);
+	List<Proposition> findAllByUser_Bank_IdBankAndEnchere_IdEnchere(Bank bank, String enchere);
 	
 
 	

@@ -18,15 +18,6 @@ public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  private String banque;
-  public String getBanque() {
-	return banque;
-}
-
-public void setBanque(String banque) {
-	this.banque = banque;
-}
-
 @NotBlank
   @Size(max = 20)
   private String username;
@@ -39,6 +30,16 @@ public void setBanque(String banque) {
   @NotBlank
   @Size(max = 120)
   private String password;
+  
+  @ManyToOne
+  private Box box;
+  
+  @ManyToOne
+  private Bank bank;
+  
+  private String nom;
+  private String prenom;
+  private String telephone;
 
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(  name = "user_roles", 
@@ -104,4 +105,48 @@ public void setBanque(String banque) {
   public void setRoles(Set<Role> roles) {
     this.roles = roles;
   }
+
+public Box getBox() {
+	return box;
+}
+
+public void setBox(Box box) {
+	this.box = box;
+}
+
+public String getNom() {
+	return nom;
+}
+
+public void setNom(String nom) {
+	this.nom = nom;
+}
+
+public String getPrenom() {
+	return prenom;
+}
+
+public void setPrenom(String prenom) {
+	this.prenom = prenom;
+}
+
+public String getTelephone() {
+	return telephone;
+}
+
+public void setTelephone(String telephone) {
+	this.telephone = telephone;
+}
+
+public Bank getBank() {
+	return bank;
+}
+
+public void setBank(Bank bank) {
+	this.bank = bank;
+}
+
+
+  
+  
 }
