@@ -41,7 +41,7 @@ public class PropositionService implements PropositionInterface {
 	public List<Proposition> getPropositionOfBank(Long user, String enchere) {
 		// TODO Auto-generated method stub
 		User userProposition=userRepository.findById(user).get();
-		List<Proposition> prop = propositionRepository.findAllByUser_Bank_IdBankAndEnchere_IdEnchere(userProposition.getBank(),enchere);
+		List<Proposition> prop = propositionRepository.findAllByUser_BankAndEnchere_IdEnchere(userProposition.getBank(),enchere);
 		System.out.println(prop);
 		return prop;
 	}

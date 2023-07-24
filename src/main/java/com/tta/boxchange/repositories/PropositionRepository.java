@@ -28,6 +28,8 @@ public interface PropositionRepository extends JpaRepository<Proposition, Long> 
 	List<Proposition> findAllByUser_IdAndEnchere_IdEnchere(Long user, String enchere);
 
 	List<Proposition> findAllByUser_Bank_IdBankAndEnchere_IdEnchere(Bank bank, String enchere);
+
+	List<Proposition> findAllByUser_BankAndEnchere_IdEnchere(Bank bank, String enchere);
 	
 
 	

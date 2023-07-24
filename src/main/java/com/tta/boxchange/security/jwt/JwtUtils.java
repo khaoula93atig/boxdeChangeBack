@@ -1,6 +1,7 @@
 package com.tta.boxchange.security.jwt;
 
 import java.util.Date;
+import java.util.function.Function;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,8 +34,8 @@ public class JwtUtils {
         .compact();
   }
 
-  public String getUserNameFromJwtToken(String token) {
-    return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
+  public String getUserNameFromJwtToken(String authToken) {
+    return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken).getBody().getSubject();
   }
 
   public boolean validateJwtToken(String authToken) {
@@ -55,4 +56,40 @@ public class JwtUtils {
 
     return false;
   }
+  
+  public String generateTokenBylogin (String login){
+      
+		return Jwts.builder()
+				.setSubject(login)
+				.setExpiration(new Date(System.currentTimeMillis() +1000*120 ))
+				.signWith(SignatureAlgorithm.HS512, jwtSecret )
+				.compact();
+	   
+ }
+  
+	//retrieve username from jwt token
+	  public String getUsernameFromToken(String authToken) {
+	      return getClaimFromToken(authToken, Claims::getSubject);
+	  }
+	  
+	  public <T> T getClaimFromToken(String authToken, Function<Claims, T> claimsResolver) {
+	      final Claims claims = getAllClaimsFromToken(authToken);
+	      return claimsResolver.apply(claims);
+	  }
+	  
+	//for retrieveing any information from token we will need the secret key
+	  private Claims getAllClaimsFromToken(String authToken) {
+	      return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken).getBody();
+	  }
+	  
+	//retrieve expiration date from jwt token
+	    public Date getExpirationDateFromToken(String authToken) {
+	        return getClaimFromToken(authToken, Claims::getExpiration);
+	    }
+	    
+	  //check if the token has expired
+	    public Boolean isTokenExpired(String authToken) {
+	        final Date expiration = getExpirationDateFromToken(authToken);
+	        return expiration.before(new Date());
+	    }
 }

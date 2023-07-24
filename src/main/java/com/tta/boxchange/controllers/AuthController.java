@@ -28,6 +28,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tta.boxchange.dao.UserService;
+import com.tta.boxchange.dto.RestPassword;
 import com.tta.boxchange.entities.ERole;
 import com.tta.boxchange.entities.Proposition;
 import com.tta.boxchange.entities.Role;
@@ -41,6 +43,7 @@ import com.tta.boxchange.repositories.RoleRepository;
 import com.tta.boxchange.repositories.UserRepository;
 import com.tta.boxchange.security.jwt.JwtUtils;
 import com.tta.boxchange.security.services.UserDetailsImpl;
+import com.tta.boxchange.services.MailService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -57,9 +60,12 @@ public class AuthController {
 
   @Autowired
   PasswordEncoder encoder;
+  @Autowired
+	MailService mailservice ;
 
   @Autowired
   JwtUtils jwtUtils;
+  
 
   @PostMapping("/signin")
   public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -136,7 +142,7 @@ strRoles.add(roleuser);
     user.setRoles(roles);
         System.out.println(user.toString());
     userRepository.save(user);
-
+    mailservice.EnvoyerEmailAjout(user);
     return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
   }
   
@@ -188,7 +194,26 @@ strRoles.add(roleuser);
 	  return users;
 	 
   }
+  
+  @PostMapping("/resetPassword")
+  public void resetPassword(@RequestBody RestPassword resetPassword) {
+      String token = resetPassword.getToken();
+      if (Boolean.FALSE.equals(jwtUtils.isTokenExpired(token))) {
+          String email = jwtUtils.getUsernameFromToken(token);
+          mailservice.resetPassword(resetPassword, email);
+      } else throw new RuntimeException("Token expired");
 
+  }
+
+  @PostMapping("/mpoublier")
+	public String MPoublier(@RequestBody String email) {
+	  System.out.println(email);
+	  System.out.println(userRepository.existsByEmail(email));
+	  User user =userRepository.getByEmail(email);
+		mailservice.EnvoyerEmail(user);
+		return null;
+		
+	}
 
 
 
