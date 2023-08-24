@@ -7,6 +7,7 @@ import com.tta.boxchange.dao.BHInterface;
 import com.tta.boxchange.dao.AMENInterface;
 import com.tta.boxchange.dao.UIBInterface;
 import com.tta.boxchange.dao.AVGVENTEInterface;
+import com.tta.boxchange.dao.AchatInterface;
 import com.tta.boxchange.dao.VENTEInterface;
 import com.tta.boxchange.dto.ChartDto;
 import com.tta.boxchange.dao.ATTInterface;
@@ -39,6 +40,7 @@ import com.tta.boxchange.entities.ATT;
 import com.tta.boxchange.entities.ATB;
 import com.tta.boxchange.entities.BTL;
 import com.tta.boxchange.entities.AVGVENTE;
+import com.tta.boxchange.entities.Achat;
 import com.tta.boxchange.entities.BTK;
 import com.tta.boxchange.entities.BTE;
 import com.tta.boxchange.entities.BT;
@@ -99,6 +101,8 @@ public class ScrapingController {
 	AVGVENTEInterface avgventeInterface;
 	@Autowired
 	VENTEInterface venteInterface;
+	@Autowired
+	AchatInterface achatInterface;
 	@Autowired
 	ScrapingService scrapingService;
 	
@@ -224,96 +228,96 @@ public class ScrapingController {
      String nomdevise0 = AED.text();
      System.out.println("title 0 : " + nomdevise0);
        Element UniteSAR = doc.select("td.font-weight-bold").get(0);
-       String UniteDevise0 = UniteSAR.text();
-       System.out.println("unite 0 : " + UniteDevise0);
+       String achatDevise0 = UniteSAR.text();
+       System.out.println("achat 0 : " + achatDevise0);
        Element td1 = doc.select("td.font-weight-bold").get(1);
-       String AchatDevise0 = td1.text();
-       System.out.println("achat 0 : " + AchatDevise0);
+       String venteDevise0 = td1.text();
+       System.out.println("vente 0 : " + venteDevise0);
        Element td0 = doc.select("td.text-center").get(2);
-       String VenteDevise0 = td0.text();
-       System.out.println("vente0 : " + VenteDevise0);
+       String uniteDevise0 = td0.text();
+       System.out.println("unite0 : " + uniteDevise0);
       // System.out.println("title4 : " + VenteDevise0);
        
        Element CNY = doc.select("td.text-uppercase").get(1);
        String nomdevise5 = CNY.text();
        System.out.println("title : " + nomdevise5);
        Element UniteCNY = doc.select("td.font-weight-bold").get(2);
-       String UniteDevise5 = UniteCNY.text();
-       System.out.println("unite 1 : " + UniteDevise5);
+       String achatDevise5 = UniteCNY.text();
+       System.out.println("unite 1 : " + achatDevise5);
        Element td10 = doc.select("td.font-weight-bold").get(3);
-       String AchatDevise5 = td10.text();
-       System.out.println("achat 1 : " + AchatDevise5);
+       String venteDevise5 = td10.text();
+       System.out.println("achat 1 : " + venteDevise5);
        Element td11 = doc.select("td.text-center").get(7);
-       String VenteDevise5 = td11.text();
-       System.out.println("vente2 : " + VenteDevise5);
+       String uniteDevise5 = td11.text();
+       System.out.println("vente2 : " + uniteDevise5);
        
        Element GBP = doc.select("td.text-uppercase").get(2);
        String nomdevise14 = GBP.text();
-       Element UniteGBP = doc.select("td.font-weight-bold").get(4);
-       String UniteDevise14 = UniteGBP.text();
+       Element achatGBP = doc.select("td.font-weight-bold").get(4);
+       String achatDevise14 = achatGBP.text();
       
        Element td28 = doc.select("td.font-weight-bold").get(5);
-       String AchatDevise14 = td28.text();
+       String venteDevise14 = td28.text();
        Element td29 = doc.select("td.text-center").get(12);
-       String VenteDevise14 = td29.text();
+       String uniteDevise14 = td29.text();
        
        Element DKK = doc.select("td.text-uppercase").get(3);
        String nomdevise2 = DKK.text();
-       Element UniteDKK = doc.select("td.font-weight-bold").get(6);
-       String UniteDevise2 = UniteDKK.text();
+       Element achatDKK = doc.select("td.font-weight-bold").get(6);
+       String achatDevise2 = achatDKK.text();
        Element td4 = doc.select("td.font-weight-bold").get(7);
-       String AchatDevise2 = td4.text();
+       String venteDevise2 = td4.text();
        Element td5 = doc.select("td.text-center").get(17);
-       String VenteDevise2 = td5.text();
+       String uniteDevise2 = td5.text();
 
        Element USD = doc.select("td.text-uppercase").get(4);
        String nomdevise4 = USD.text();
-       Element UniteUSD = doc.select("td.font-weight-bold").get(8);
-       String UniteDevise4 = UniteUSD.text();
+       Element achatUSD = doc.select("td.font-weight-bold").get(8);
+       String achatDevise4 = achatUSD.text();
        Element td8 = doc.select("td.font-weight-bold").get(9);
-       String AchatDevise4 = td8.text();
+       String venteDevise4 = td8.text();
        Element td9 = doc.select("td.text-center").get(22);
-       String VenteDevise4 = td9.text();
+       String uniteDevise4 = td9.text();
        
        Element JPY = doc.select("td.text-uppercase").get(5);
        String nomdevise6 = JPY.text();
-       Element UniteJPY = doc.select("td.font-weight-bold").get(10);
-       String UniteDevise6 = UniteJPY.text();
+       Element achatJPY = doc.select("td.font-weight-bold").get(10);
+       String achatDevise6 = achatJPY.text();
        Element td12 = doc.select("td.font-weight-bold").get(11);
-       String AchatDevise6 = td12.text();
+       String venteDevise6 = td12.text();
        Element td13 = doc.select("td.text-center").get(27);
-       String VenteDevise6 = td13.text();
+       String uniteDevise6 = td13.text();
        
        Element EUR = doc.select("td.text-uppercase").get(6);
        String nomdevise12 = EUR.text();
-       Element UniteEUR = doc.select("td.font-weight-bold").get(12);
-       String UniteDevise12 = UniteEUR.text();
+       Element achatEUR = doc.select("td.font-weight-bold").get(12);
+       String achatDevise12 = achatEUR.text();
        Element td24 = doc.select("td.font-weight-bold").get(13);
-       String AchatDevise12 = td24.text();
+       String venteDevise12 = td24.text();
        Element td25 = doc.select("td.text-center").get(32);
-       String VenteDevise12 = td25.text();
+       String uniteDevise12 = td25.text();
  
     
        Element CAD = doc.select("td.text-uppercase").get(7);
        String nomdevise1 = CAD.text();
-       Element UniteCAD = doc.select("td.font-weight-bold").get(14);
-       String UniteDevise1 = UniteCAD.text();
+       Element achatCAD = doc.select("td.font-weight-bold").get(14);
+       String achatDevise1 = achatCAD.text();
        Element td2 = doc.select("td.font-weight-bold").get(15);
-       String AchatDevise1 = td2.text();
+       String venteDevise1 = td2.text();
        Element td3 = doc.select("td.text-center").get(37);
-       String VenteDevise1 = td3.text();
+       String uniteDevise1 = td3.text();
       
      
      
      
        Element ggg = doc.select("td.text-uppercase").get(8);
        String nomdevise3 = ggg.text();
-       Element Uniteggg = doc.select("td.font-weight-bold").get(16);
-       String UniteDevise3 = Uniteggg.text();
+       Element achatggg = doc.select("td.font-weight-bold").get(16);
+       String achatDevise3 = achatggg.text();
        Element td6 = doc.select("td.font-weight-bold").get(17);
-       String AchatDevise3 = td6.text();
+       String venteDevise3 = td6.text();
        Element td7 = doc.select("td.text-center").get(42);
-       String VenteDevise3 = td7.text();
+       String uniteDevise3 = td7.text();
      
        
      
@@ -322,69 +326,86 @@ public class ScrapingController {
      
        Element KWD = doc.select("td.text-uppercase").get(9);
        String nomdevise7 = KWD.text();
-       Element UniteKWD = doc.select("td.font-weight-bold").get(18);
-       String UniteDevise7 = UniteKWD.text();
+       Element achatKWD = doc.select("td.font-weight-bold").get(18);
+       String achatDevise7 = achatKWD.text();
        Element td14 = doc.select("td.font-weight-bold").get(19);
-       String AchatDevise7 = td14.text();
+       String venteDevise7 = td14.text();
        Element td15 = doc.select("td.text-center").get(47);
-       String VenteDevise7 = td15.text();
+       String uniteDevise7 = td15.text();
      
        Element NOK = doc.select("td.text-uppercase").get(10);
        String nomdevise8 = NOK.text();
-       Element UniteNOK = doc.select("td.font-weight-bold").get(20);
-       String UniteDevise8 = UniteNOK.text();
+       Element achatNOK = doc.select("td.font-weight-bold").get(20);
+       String achatDevise8 = achatNOK.text();
        Element td16 = doc.select("td.font-weight-bold").get(21);
-       String AchatDevise8 = td16.text();
+       String venteDevise8 = td16.text();
        Element td17 = doc.select("td.text-center").get(52);
-       String VenteDevise8 = td17.text();
+       String uniteDevise8 = td17.text();
      
        Element QAR = doc.select("td.text-uppercase").get(11);
        String nomdevise9 = QAR.text();
-       Element UniteQAR = doc.select("td.font-weight-bold").get(22);
-       String UniteDevise9 = UniteQAR.text();
+       Element achatQAR = doc.select("td.font-weight-bold").get(22);
+       String achatDevise9 = achatQAR.text();
        Element td18 = doc.select("td.font-weight-bold").get(23);
-       String AchatDevise9 = td18.text();
+       String venteDevise9 = td18.text();
        Element td19 = doc.select("td.text-center").get(57);
-       String VenteDevise9 = td19.text();
+       String uniteDevise9 = td19.text();
      
        Element SEK = doc.select("td.text-uppercase").get(12);
        String nomdevise10 = SEK.text();
-       Element UniteSEK = doc.select("td.font-weight-bold").get(24);
-       String UniteDevise10 = UniteSEK.text();
+       Element achatSEK = doc.select("td.font-weight-bold").get(24);
+       String achatDevise10 = achatSEK.text();
        Element td20 = doc.select("td.font-weight-bold").get(25);
-       String AchatDevise10 = td20.text();
+       String venteDevise10 = td20.text();
        Element td21 = doc.select("td.text-center").get(62);
-       String VenteDevise10 = td21.text();
+       String uniteDevise10 = td21.text();
      
        Element CHF = doc.select("td.text-uppercase").get(13);
        String nomdevise11 = CHF.text();
-       Element UniteCHF = doc.select("td.font-weight-bold").get(26);
-       String UniteDevise11 = UniteCHF.text();
+       Element achatCHF = doc.select("td.font-weight-bold").get(26);
+       String achatDevise11 = achatCHF.text();
        Element td22 = doc.select("td.font-weight-bold").get(27);
-       String AchatDevise11 = td22.text();
+       String venteDevise11 = td22.text();
        Element td23 = doc.select("td.text-center").get(67);
-       String VenteDevise11 = td23.text();
+       String uniteDevise11 = td23.text();
 
       
      
        Element BHD = doc.select("td.text-uppercase").get(14);
        String nomdevise13 = BHD.text();
-       Element UniteBHD = doc.select("td.font-weight-bold").get(28);
-       String UniteDevise13 = UniteBHD.text();
-       System.out.println("unite 5 : " + UniteDevise13);
+       Element achatBHD = doc.select("td.font-weight-bold").get(28);
+       String achatDevise13 = achatBHD.text();
+       System.out.println("unite 5 : " + achatDevise13);
        Element td26 = doc.select("td.font-weight-bold").get(29);
-       String AchatDevise13 = td26.text();
+       String venteDevise13 = td26.text();
        Element td27 = doc.select("td.text-center").get(72);
-       String VenteDevise13 = td27.text();
+       String uniteDevise13 = td27.text();
      
       
        
+
+       Achat achat = new Achat();
+       achat.setData("biat", achatDevise5,achatDevise14, achatDevise2,achatDevise4,achatDevise6,
+    		   achatDevise12,achatDevise1,  achatDevise3, 
+    		   achatDevise7, achatDevise8, achatDevise9,"0",achatDevise10,
+    		   achatDevise11,  achatDevise13,  achatDevise0);
+     //verfication 
+       List<Achat> verfAchat = achatInterface.verification(achat.getNomBanque());
+       
+       if(verfAchat.isEmpty()) {
+    	   //ajout
+    	   achatInterface.save(achat);
+       }
+       else  {
+    	   //update
+    	   achatInterface.updateAchat(verfAchat.get(0), achat);
+       }
        
        Vente v = new Vente();
-       v.setData("biat", AchatDevise5,AchatDevise14, AchatDevise2,AchatDevise4,AchatDevise6,
-       		AchatDevise12,AchatDevise1,  AchatDevise3, 
-       		 AchatDevise7, AchatDevise8, AchatDevise9,"0",AchatDevise10,
-       		AchatDevise11,  AchatDevise13,  AchatDevise0);
+       v.setData("biat", venteDevise5,venteDevise14, venteDevise2,venteDevise4,venteDevise6,
+    		   venteDevise12,venteDevise1,  venteDevise3, 
+    		   venteDevise7,venteDevise8, venteDevise9,"0",venteDevise10,
+    		   venteDevise11,  venteDevise13,  venteDevise0);
        //verfication 
        List<Vente> verf = venteInterface.verification(v.getNomBanque());
        
@@ -397,6 +418,10 @@ public class ScrapingController {
     	   venteInterface.updateVente(verf.get(0), v);
        }
        return("ok");
+       
+       
+     
+       
       	}catch (Exception e) {
   			return("no"+e);
   		}
@@ -418,183 +443,201 @@ public class ScrapingController {
       
        
      
-     Element AED = doc.select("td.text-uppercase").get(0);
-     String nomdevise0 = AED.text();
-     System.out.println("title 0 : " + nomdevise0);
-       Element UniteSAR = doc.select("td.font-weight-bold").get(0);
-       String UniteDevise0 = UniteSAR.text();
-       System.out.println("unite 0 : " + UniteDevise0);
-       Element td1 = doc.select("td.font-weight-bold").get(1);
-       String AchatDevise0 = td1.text();
-       System.out.println("achat 0 : " + AchatDevise0);
-       Element td0 = doc.select("td.text-center").get(2);
-       String VenteDevise0 = td0.text();
-       System.out.println("vente0 : " + VenteDevise0);
-      // System.out.println("title4 : " + VenteDevise0);
-       
-       Element CNY = doc.select("td.text-uppercase").get(1);
-       String nomdevise5 = CNY.text();
-       System.out.println("title : " + nomdevise5);
-       Element UniteCNY = doc.select("td.font-weight-bold").get(2);
-       String UniteDevise5 = UniteCNY.text();
-       System.out.println("unite 1 : " + UniteDevise5);
-       Element td10 = doc.select("td.font-weight-bold").get(3);
-       String AchatDevise5 = td10.text();
-       System.out.println("achat 1 : " + AchatDevise5);
-       Element td11 = doc.select("td.text-center").get(7);
-       String VenteDevise5 = td11.text();
-       System.out.println("vente2 : " + VenteDevise5);
-       
-       Element GBP = doc.select("td.text-uppercase").get(2);
-       String nomdevise14 = GBP.text();
-       Element UniteGBP = doc.select("td.font-weight-bold").get(4);
-       String UniteDevise14 = UniteGBP.text();
-      
-       Element td28 = doc.select("td.font-weight-bold").get(5);
-       String AchatDevise14 = td28.text();
-       Element td29 = doc.select("td.text-center").get(12);
-       String VenteDevise14 = td29.text();
-       
-       Element DKK = doc.select("td.text-uppercase").get(3);
-       String nomdevise2 = DKK.text();
-       Element UniteDKK = doc.select("td.font-weight-bold").get(6);
-       String UniteDevise2 = UniteDKK.text();
-       Element td4 = doc.select("td.font-weight-bold").get(7);
-       String AchatDevise2 = td4.text();
-       Element td5 = doc.select("td.text-center").get(17);
-       String VenteDevise2 = td5.text();
+       Element AED = doc.select("td.text-uppercase").get(0);
+       String nomdevise0 = AED.text();
+       System.out.println("title 0 : " + nomdevise0);
+         Element UniteSAR = doc.select("td.font-weight-bold").get(0);
+         String achatDevise0 = UniteSAR.text();
+         System.out.println("achat 0 : " + achatDevise0);
+         Element td1 = doc.select("td.font-weight-bold").get(1);
+         String venteDevise0 = td1.text();
+         System.out.println("vente 0 : " + venteDevise0);
+         Element td0 = doc.select("td.text-center").get(2);
+         String uniteDevise0 = td0.text();
+         System.out.println("unite0 : " + uniteDevise0);
+        // System.out.println("title4 : " + VenteDevise0);
+         
+         Element CNY = doc.select("td.text-uppercase").get(1);
+         String nomdevise5 = CNY.text();
+         System.out.println("title : " + nomdevise5);
+         Element UniteCNY = doc.select("td.font-weight-bold").get(2);
+         String achatDevise5 = UniteCNY.text();
+         System.out.println("unite 1 : " + achatDevise5);
+         Element td10 = doc.select("td.font-weight-bold").get(3);
+         String venteDevise5 = td10.text();
+         System.out.println("achat 1 : " + venteDevise5);
+         Element td11 = doc.select("td.text-center").get(7);
+         String uniteDevise5 = td11.text();
+         System.out.println("vente2 : " + uniteDevise5);
+         
+         Element GBP = doc.select("td.text-uppercase").get(2);
+         String nomdevise14 = GBP.text();
+         Element achatGBP = doc.select("td.font-weight-bold").get(4);
+         String achatDevise14 = achatGBP.text();
+        
+         Element td28 = doc.select("td.font-weight-bold").get(5);
+         String venteDevise14 = td28.text();
+         Element td29 = doc.select("td.text-center").get(12);
+         String uniteDevise14 = td29.text();
+         
+         Element DKK = doc.select("td.text-uppercase").get(3);
+         String nomdevise2 = DKK.text();
+         Element achatDKK = doc.select("td.font-weight-bold").get(6);
+         String achatDevise2 = achatDKK.text();
+         Element td4 = doc.select("td.font-weight-bold").get(7);
+         String venteDevise2 = td4.text();
+         Element td5 = doc.select("td.text-center").get(17);
+         String uniteDevise2 = td5.text();
 
-       Element USD = doc.select("td.text-uppercase").get(4);
-       String nomdevise4 = USD.text();
-       Element UniteUSD = doc.select("td.font-weight-bold").get(8);
-       String UniteDevise4 = UniteUSD.text();
-       Element td8 = doc.select("td.font-weight-bold").get(9);
-       String AchatDevise4 = td8.text();
-       Element td9 = doc.select("td.text-center").get(22);
-       String VenteDevise4 = td9.text();
-       
-       Element JPY = doc.select("td.text-uppercase").get(5);
-       String nomdevise6 = JPY.text();
-       Element UniteJPY = doc.select("td.font-weight-bold").get(10);
-       String UniteDevise6 = UniteJPY.text();
-       Element td12 = doc.select("td.font-weight-bold").get(11);
-       String AchatDevise6 = td12.text();
-       Element td13 = doc.select("td.text-center").get(27);
-       String VenteDevise6 = td13.text();
-       
-       Element EUR = doc.select("td.text-uppercase").get(6);
-       String nomdevise12 = EUR.text();
-       Element UniteEUR = doc.select("td.font-weight-bold").get(12);
-       String UniteDevise12 = UniteEUR.text();
-       Element td24 = doc.select("td.font-weight-bold").get(13);
-       String AchatDevise12 = td24.text();
-       Element td25 = doc.select("td.text-center").get(32);
-       String VenteDevise12 = td25.text();
- 
-    
-       Element CAD = doc.select("td.text-uppercase").get(7);
-       String nomdevise1 = CAD.text();
-       Element UniteCAD = doc.select("td.font-weight-bold").get(14);
-       String UniteDevise1 = UniteCAD.text();
-       Element td2 = doc.select("td.font-weight-bold").get(15);
-       String AchatDevise1 = td2.text();
-       Element td3 = doc.select("td.text-center").get(37);
-       String VenteDevise1 = td3.text();
+         Element USD = doc.select("td.text-uppercase").get(4);
+         String nomdevise4 = USD.text();
+         Element achatUSD = doc.select("td.font-weight-bold").get(8);
+         String achatDevise4 = achatUSD.text();
+         Element td8 = doc.select("td.font-weight-bold").get(9);
+         String venteDevise4 = td8.text();
+         Element td9 = doc.select("td.text-center").get(22);
+         String uniteDevise4 = td9.text();
+         
+         Element JPY = doc.select("td.text-uppercase").get(5);
+         String nomdevise6 = JPY.text();
+         Element achatJPY = doc.select("td.font-weight-bold").get(10);
+         String achatDevise6 = achatJPY.text();
+         Element td12 = doc.select("td.font-weight-bold").get(11);
+         String venteDevise6 = td12.text();
+         Element td13 = doc.select("td.text-center").get(27);
+         String uniteDevise6 = td13.text();
+         
+         Element EUR = doc.select("td.text-uppercase").get(6);
+         String nomdevise12 = EUR.text();
+         Element achatEUR = doc.select("td.font-weight-bold").get(12);
+         String achatDevise12 = achatEUR.text();
+         Element td24 = doc.select("td.font-weight-bold").get(13);
+         String venteDevise12 = td24.text();
+         Element td25 = doc.select("td.text-center").get(32);
+         String uniteDevise12 = td25.text();
+   
       
-     
-     
-     
-       Element ggg = doc.select("td.text-uppercase").get(8);
-       String nomdevise3 = ggg.text();
-       Element Uniteggg = doc.select("td.font-weight-bold").get(16);
-       String UniteDevise3 = Uniteggg.text();
-       Element td6 = doc.select("td.font-weight-bold").get(17);
-       String AchatDevise3 = td6.text();
-       Element td7 = doc.select("td.text-center").get(42);
-       String VenteDevise3 = td7.text();
-     
+         Element CAD = doc.select("td.text-uppercase").get(7);
+         String nomdevise1 = CAD.text();
+         Element achatCAD = doc.select("td.font-weight-bold").get(14);
+         String achatDevise1 = achatCAD.text();
+         Element td2 = doc.select("td.font-weight-bold").get(15);
+         String venteDevise1 = td2.text();
+         Element td3 = doc.select("td.text-center").get(37);
+         String uniteDevise1 = td3.text();
+        
        
-     
        
-     
-     
-       Element KWD = doc.select("td.text-uppercase").get(9);
-       String nomdevise7 = KWD.text();
-       Element UniteKWD = doc.select("td.font-weight-bold").get(18);
-       String UniteDevise7 = UniteKWD.text();
-       Element td14 = doc.select("td.font-weight-bold").get(19);
-       String AchatDevise7 = td14.text();
-       Element td15 = doc.select("td.text-center").get(47);
-       String VenteDevise7 = td15.text();
-     
-       Element NOK = doc.select("td.text-uppercase").get(10);
-       String nomdevise8 = NOK.text();
-       Element UniteNOK = doc.select("td.font-weight-bold").get(20);
-       String UniteDevise8 = UniteNOK.text();
-       Element td16 = doc.select("td.font-weight-bold").get(21);
-       String AchatDevise8 = td16.text();
-       Element td17 = doc.select("td.text-center").get(52);
-       String VenteDevise8 = td17.text();
-     
-       Element QAR = doc.select("td.text-uppercase").get(11);
-       String nomdevise9 = QAR.text();
-       Element UniteQAR = doc.select("td.font-weight-bold").get(22);
-       String UniteDevise9 = UniteQAR.text();
-       Element td18 = doc.select("td.font-weight-bold").get(23);
-       String AchatDevise9 = td18.text();
-       Element td19 = doc.select("td.text-center").get(57);
-       String VenteDevise9 = td19.text();
-     
-       Element SEK = doc.select("td.text-uppercase").get(12);
-       String nomdevise10 = SEK.text();
-       Element UniteSEK = doc.select("td.font-weight-bold").get(24);
-       String UniteDevise10 = UniteSEK.text();
-       Element td20 = doc.select("td.font-weight-bold").get(25);
-       String AchatDevise10 = td20.text();
-       Element td21 = doc.select("td.text-center").get(62);
-       String VenteDevise10 = td21.text();
-     
-       Element CHF = doc.select("td.text-uppercase").get(13);
-       String nomdevise11 = CHF.text();
-       Element UniteCHF = doc.select("td.font-weight-bold").get(26);
-       String UniteDevise11 = UniteCHF.text();
-       Element td22 = doc.select("td.font-weight-bold").get(27);
-       String AchatDevise11 = td22.text();
-       Element td23 = doc.select("td.text-center").get(67);
-       String VenteDevise11 = td23.text();
+       
+         Element ggg = doc.select("td.text-uppercase").get(8);
+         String nomdevise3 = ggg.text();
+         Element achatggg = doc.select("td.font-weight-bold").get(16);
+         String achatDevise3 = achatggg.text();
+         Element td6 = doc.select("td.font-weight-bold").get(17);
+         String venteDevise3 = td6.text();
+         Element td7 = doc.select("td.text-center").get(42);
+         String uniteDevise3 = td7.text();
+       
+         
+       
+         
+       
+       
+         Element KWD = doc.select("td.text-uppercase").get(9);
+         String nomdevise7 = KWD.text();
+         Element achatKWD = doc.select("td.font-weight-bold").get(18);
+         String achatDevise7 = achatKWD.text();
+         Element td14 = doc.select("td.font-weight-bold").get(19);
+         String venteDevise7 = td14.text();
+         Element td15 = doc.select("td.text-center").get(47);
+         String uniteDevise7 = td15.text();
+       
+         Element NOK = doc.select("td.text-uppercase").get(10);
+         String nomdevise8 = NOK.text();
+         Element achatNOK = doc.select("td.font-weight-bold").get(20);
+         String achatDevise8 = achatNOK.text();
+         Element td16 = doc.select("td.font-weight-bold").get(21);
+         String venteDevise8 = td16.text();
+         Element td17 = doc.select("td.text-center").get(52);
+         String uniteDevise8 = td17.text();
+       
+         Element QAR = doc.select("td.text-uppercase").get(11);
+         String nomdevise9 = QAR.text();
+         Element achatQAR = doc.select("td.font-weight-bold").get(22);
+         String achatDevise9 = achatQAR.text();
+         Element td18 = doc.select("td.font-weight-bold").get(23);
+         String venteDevise9 = td18.text();
+         Element td19 = doc.select("td.text-center").get(57);
+         String uniteDevise9 = td19.text();
+       
+         Element SEK = doc.select("td.text-uppercase").get(12);
+         String nomdevise10 = SEK.text();
+         Element achatSEK = doc.select("td.font-weight-bold").get(24);
+         String achatDevise10 = achatSEK.text();
+         Element td20 = doc.select("td.font-weight-bold").get(25);
+         String venteDevise10 = td20.text();
+         Element td21 = doc.select("td.text-center").get(62);
+         String uniteDevise10 = td21.text();
+       
+         Element CHF = doc.select("td.text-uppercase").get(13);
+         String nomdevise11 = CHF.text();
+         Element achatCHF = doc.select("td.font-weight-bold").get(26);
+         String achatDevise11 = achatCHF.text();
+         Element td22 = doc.select("td.font-weight-bold").get(27);
+         String venteDevise11 = td22.text();
+         Element td23 = doc.select("td.text-center").get(67);
+         String uniteDevise11 = td23.text();
 
-      
-     
-       Element BHD = doc.select("td.text-uppercase").get(14);
-       String nomdevise13 = BHD.text();
-       Element UniteBHD = doc.select("td.font-weight-bold").get(28);
-       String UniteDevise13 = UniteBHD.text();
-       System.out.println("unite 5 : " + UniteDevise13);
-       Element td26 = doc.select("td.font-weight-bold").get(29);
-       String AchatDevise13 = td26.text();
-       Element td27 = doc.select("td.text-center").get(72);
-       String VenteDevise13 = td27.text();
-     
-      
+        
        
+         Element BHD = doc.select("td.text-uppercase").get(14);
+         String nomdevise13 = BHD.text();
+         Element achatBHD = doc.select("td.font-weight-bold").get(28);
+         String achatDevise13 = achatBHD.text();
+         System.out.println("unite 5 : " + achatDevise13);
+         Element td26 = doc.select("td.font-weight-bold").get(29);
+         String venteDevise13 = td26.text();
+         Element td27 = doc.select("td.text-center").get(72);
+         String uniteDevise13 = td27.text();
        
-       Vente v = new Vente();
-       v.setData("zitouna", AchatDevise5,AchatDevise14, AchatDevise2,AchatDevise4,AchatDevise6,
-       		AchatDevise12,AchatDevise1,  AchatDevise3, 
-       		 AchatDevise7, AchatDevise8, AchatDevise9,"0",AchatDevise10,
-       		AchatDevise11,  AchatDevise13,  AchatDevise0);
-     //verfication 
-       List<Vente> verf = venteInterface.verification(v.getNomBanque());
+        
+         
+
+         Achat achat = new Achat();
+         achat.setData("zitouna", achatDevise5,achatDevise14, achatDevise2,achatDevise4,achatDevise6,
+      		   achatDevise12,achatDevise1,  achatDevise3, 
+      		   achatDevise7, achatDevise8, achatDevise9,"0",achatDevise10,
+      		   achatDevise11,  achatDevise13,  achatDevise0);
+       //verfication 
+         List<Achat> verfAchat = achatInterface.verification(achat.getNomBanque());
+         
+         if(verfAchat.isEmpty()) {
+      	   //ajout
+      	   achatInterface.save(achat);
+         }
+         else  {
+      	   //update
+      	   achatInterface.updateAchat(verfAchat.get(0), achat);
+         }
+         
+         Vente v = new Vente();
+         v.setData("zitouna", venteDevise5,venteDevise14, venteDevise2,venteDevise4,venteDevise6,
+      		   venteDevise12,venteDevise1,  venteDevise3, 
+      		   venteDevise7,venteDevise8, venteDevise9,"0",venteDevise10,
+      		   venteDevise11,  venteDevise13,  venteDevise0);
+         //verfication 
+         List<Vente> verf = venteInterface.verification(v.getNomBanque());
+         
+         if(verf.isEmpty()) {
+      	   //ajout
+      	   venteInterface.save(v);
+         }
+         else  {
+      	   //update
+      	   venteInterface.updateVente(verf.get(0), v);
+         }
        
-       if(verf.isEmpty()) {
-    	   //ajout
-    	   venteInterface.save(v);
-       }
-       else  {
-    	   //update
-    	   venteInterface.updateVente(verf.get(0), v);
-       }
-       return("ok");
+              return("ok");
       	}catch (Exception e) {
   			return("no"+e);
   		}
@@ -617,182 +660,200 @@ public class ScrapingController {
        
        
      
-     Element AED = doc.select("td.text-uppercase").get(0);
-     String nomdevise0 = AED.text();
-     System.out.println("title 0 : " + nomdevise0);
-       Element UniteSAR = doc.select("td.font-weight-bold").get(0);
-       String UniteDevise0 = UniteSAR.text();
-       System.out.println("unite 0 : " + UniteDevise0);
-       Element td1 = doc.select("td.font-weight-bold").get(1);
-       String AchatDevise0 = td1.text();
-       System.out.println("achat 0 : " + AchatDevise0);
-       Element td0 = doc.select("td.text-center").get(2);
-       String VenteDevise0 = td0.text();
-       System.out.println("vente0 : " + VenteDevise0);
-      // System.out.println("title4 : " + VenteDevise0);
-       
-       Element CNY = doc.select("td.text-uppercase").get(1);
-       String nomdevise5 = CNY.text();
-       System.out.println("title : " + nomdevise5);
-       Element UniteCNY = doc.select("td.font-weight-bold").get(2);
-       String UniteDevise5 = UniteCNY.text();
-       System.out.println("unite 1 : " + UniteDevise5);
-       Element td10 = doc.select("td.font-weight-bold").get(3);
-       String AchatDevise5 = td10.text();
-       System.out.println("achat 1 : " + AchatDevise5);
-       Element td11 = doc.select("td.text-center").get(7);
-       String VenteDevise5 = td11.text();
-       System.out.println("vente2 : " + VenteDevise5);
-       
-       Element GBP = doc.select("td.text-uppercase").get(2);
-       String nomdevise14 = GBP.text();
-       Element UniteGBP = doc.select("td.font-weight-bold").get(4);
-       String UniteDevise14 = UniteGBP.text();
-      
-       Element td28 = doc.select("td.font-weight-bold").get(5);
-       String AchatDevise14 = td28.text();
-       Element td29 = doc.select("td.text-center").get(12);
-       String VenteDevise14 = td29.text();
-       
-       Element DKK = doc.select("td.text-uppercase").get(3);
-       String nomdevise2 = DKK.text();
-       Element UniteDKK = doc.select("td.font-weight-bold").get(6);
-       String UniteDevise2 = UniteDKK.text();
-       Element td4 = doc.select("td.font-weight-bold").get(7);
-       String AchatDevise2 = td4.text();
-       Element td5 = doc.select("td.text-center").get(17);
-       String VenteDevise2 = td5.text();
+       Element AED = doc.select("td.text-uppercase").get(0);
+       String nomdevise0 = AED.text();
+       System.out.println("title 0 : " + nomdevise0);
+         Element UniteSAR = doc.select("td.font-weight-bold").get(0);
+         String achatDevise0 = UniteSAR.text();
+         System.out.println("achat 0 : " + achatDevise0);
+         Element td1 = doc.select("td.font-weight-bold").get(1);
+         String venteDevise0 = td1.text();
+         System.out.println("vente 0 : " + venteDevise0);
+         Element td0 = doc.select("td.text-center").get(2);
+         String uniteDevise0 = td0.text();
+         System.out.println("unite0 : " + uniteDevise0);
+        // System.out.println("title4 : " + VenteDevise0);
+         
+         Element CNY = doc.select("td.text-uppercase").get(1);
+         String nomdevise5 = CNY.text();
+         System.out.println("title : " + nomdevise5);
+         Element UniteCNY = doc.select("td.font-weight-bold").get(2);
+         String achatDevise5 = UniteCNY.text();
+         System.out.println("unite 1 : " + achatDevise5);
+         Element td10 = doc.select("td.font-weight-bold").get(3);
+         String venteDevise5 = td10.text();
+         System.out.println("achat 1 : " + venteDevise5);
+         Element td11 = doc.select("td.text-center").get(7);
+         String uniteDevise5 = td11.text();
+         System.out.println("vente2 : " + uniteDevise5);
+         
+         Element GBP = doc.select("td.text-uppercase").get(2);
+         String nomdevise14 = GBP.text();
+         Element achatGBP = doc.select("td.font-weight-bold").get(4);
+         String achatDevise14 = achatGBP.text();
+        
+         Element td28 = doc.select("td.font-weight-bold").get(5);
+         String venteDevise14 = td28.text();
+         Element td29 = doc.select("td.text-center").get(12);
+         String uniteDevise14 = td29.text();
+         
+         Element DKK = doc.select("td.text-uppercase").get(3);
+         String nomdevise2 = DKK.text();
+         Element achatDKK = doc.select("td.font-weight-bold").get(6);
+         String achatDevise2 = achatDKK.text();
+         Element td4 = doc.select("td.font-weight-bold").get(7);
+         String venteDevise2 = td4.text();
+         Element td5 = doc.select("td.text-center").get(17);
+         String uniteDevise2 = td5.text();
 
-       Element USD = doc.select("td.text-uppercase").get(4);
-       String nomdevise4 = USD.text();
-       Element UniteUSD = doc.select("td.font-weight-bold").get(8);
-       String UniteDevise4 = UniteUSD.text();
-       Element td8 = doc.select("td.font-weight-bold").get(9);
-       String AchatDevise4 = td8.text();
-       Element td9 = doc.select("td.text-center").get(22);
-       String VenteDevise4 = td9.text();
-       
-       Element JPY = doc.select("td.text-uppercase").get(5);
-       String nomdevise6 = JPY.text();
-       Element UniteJPY = doc.select("td.font-weight-bold").get(10);
-       String UniteDevise6 = UniteJPY.text();
-       Element td12 = doc.select("td.font-weight-bold").get(11);
-       String AchatDevise6 = td12.text();
-       Element td13 = doc.select("td.text-center").get(27);
-       String VenteDevise6 = td13.text();
-       
-       Element EUR = doc.select("td.text-uppercase").get(6);
-       String nomdevise12 = EUR.text();
-       Element UniteEUR = doc.select("td.font-weight-bold").get(12);
-       String UniteDevise12 = UniteEUR.text();
-       Element td24 = doc.select("td.font-weight-bold").get(13);
-       String AchatDevise12 = td24.text();
-       Element td25 = doc.select("td.text-center").get(32);
-       String VenteDevise12 = td25.text();
- 
-    
-       Element CAD = doc.select("td.text-uppercase").get(7);
-       String nomdevise1 = CAD.text();
-       Element UniteCAD = doc.select("td.font-weight-bold").get(14);
-       String UniteDevise1 = UniteCAD.text();
-       Element td2 = doc.select("td.font-weight-bold").get(15);
-       String AchatDevise1 = td2.text();
-       Element td3 = doc.select("td.text-center").get(37);
-       String VenteDevise1 = td3.text();
+         Element USD = doc.select("td.text-uppercase").get(4);
+         String nomdevise4 = USD.text();
+         Element achatUSD = doc.select("td.font-weight-bold").get(8);
+         String achatDevise4 = achatUSD.text();
+         Element td8 = doc.select("td.font-weight-bold").get(9);
+         String venteDevise4 = td8.text();
+         Element td9 = doc.select("td.text-center").get(22);
+         String uniteDevise4 = td9.text();
+         
+         Element JPY = doc.select("td.text-uppercase").get(5);
+         String nomdevise6 = JPY.text();
+         Element achatJPY = doc.select("td.font-weight-bold").get(10);
+         String achatDevise6 = achatJPY.text();
+         Element td12 = doc.select("td.font-weight-bold").get(11);
+         String venteDevise6 = td12.text();
+         Element td13 = doc.select("td.text-center").get(27);
+         String uniteDevise6 = td13.text();
+         
+         Element EUR = doc.select("td.text-uppercase").get(6);
+         String nomdevise12 = EUR.text();
+         Element achatEUR = doc.select("td.font-weight-bold").get(12);
+         String achatDevise12 = achatEUR.text();
+         Element td24 = doc.select("td.font-weight-bold").get(13);
+         String venteDevise12 = td24.text();
+         Element td25 = doc.select("td.text-center").get(32);
+         String uniteDevise12 = td25.text();
+   
       
-     
-     
-     
-       Element ggg = doc.select("td.text-uppercase").get(8);
-       String nomdevise3 = ggg.text();
-       Element Uniteggg = doc.select("td.font-weight-bold").get(16);
-       String UniteDevise3 = Uniteggg.text();
-       Element td6 = doc.select("td.font-weight-bold").get(17);
-       String AchatDevise3 = td6.text();
-       Element td7 = doc.select("td.text-center").get(42);
-       String VenteDevise3 = td7.text();
-     
+         Element CAD = doc.select("td.text-uppercase").get(7);
+         String nomdevise1 = CAD.text();
+         Element achatCAD = doc.select("td.font-weight-bold").get(14);
+         String achatDevise1 = achatCAD.text();
+         Element td2 = doc.select("td.font-weight-bold").get(15);
+         String venteDevise1 = td2.text();
+         Element td3 = doc.select("td.text-center").get(37);
+         String uniteDevise1 = td3.text();
+        
        
-     
        
-     
-     
-       Element KWD = doc.select("td.text-uppercase").get(9);
-       String nomdevise7 = KWD.text();
-       Element UniteKWD = doc.select("td.font-weight-bold").get(18);
-       String UniteDevise7 = UniteKWD.text();
-       Element td14 = doc.select("td.font-weight-bold").get(19);
-       String AchatDevise7 = td14.text();
-       Element td15 = doc.select("td.text-center").get(47);
-       String VenteDevise7 = td15.text();
-     
-       Element NOK = doc.select("td.text-uppercase").get(10);
-       String nomdevise8 = NOK.text();
-       Element UniteNOK = doc.select("td.font-weight-bold").get(20);
-       String UniteDevise8 = UniteNOK.text();
-       Element td16 = doc.select("td.font-weight-bold").get(21);
-       String AchatDevise8 = td16.text();
-       Element td17 = doc.select("td.text-center").get(52);
-       String VenteDevise8 = td17.text();
-     
-       Element QAR = doc.select("td.text-uppercase").get(11);
-       String nomdevise9 = QAR.text();
-       Element UniteQAR = doc.select("td.font-weight-bold").get(22);
-       String UniteDevise9 = UniteQAR.text();
-       Element td18 = doc.select("td.font-weight-bold").get(23);
-       String AchatDevise9 = td18.text();
-       Element td19 = doc.select("td.text-center").get(57);
-       String VenteDevise9 = td19.text();
-     
-       Element SEK = doc.select("td.text-uppercase").get(12);
-       String nomdevise10 = SEK.text();
-       Element UniteSEK = doc.select("td.font-weight-bold").get(24);
-       String UniteDevise10 = UniteSEK.text();
-       Element td20 = doc.select("td.font-weight-bold").get(25);
-       String AchatDevise10 = td20.text();
-       Element td21 = doc.select("td.text-center").get(62);
-       String VenteDevise10 = td21.text();
-     
-       Element CHF = doc.select("td.text-uppercase").get(13);
-       String nomdevise11 = CHF.text();
-       Element UniteCHF = doc.select("td.font-weight-bold").get(26);
-       String UniteDevise11 = UniteCHF.text();
-       Element td22 = doc.select("td.font-weight-bold").get(27);
-       String AchatDevise11 = td22.text();
-       Element td23 = doc.select("td.text-center").get(67);
-       String VenteDevise11 = td23.text();
+       
+         Element ggg = doc.select("td.text-uppercase").get(8);
+         String nomdevise3 = ggg.text();
+         Element achatggg = doc.select("td.font-weight-bold").get(16);
+         String achatDevise3 = achatggg.text();
+         Element td6 = doc.select("td.font-weight-bold").get(17);
+         String venteDevise3 = td6.text();
+         Element td7 = doc.select("td.text-center").get(42);
+         String uniteDevise3 = td7.text();
+       
+         
+       
+         
+       
+       
+         Element KWD = doc.select("td.text-uppercase").get(9);
+         String nomdevise7 = KWD.text();
+         Element achatKWD = doc.select("td.font-weight-bold").get(18);
+         String achatDevise7 = achatKWD.text();
+         Element td14 = doc.select("td.font-weight-bold").get(19);
+         String venteDevise7 = td14.text();
+         Element td15 = doc.select("td.text-center").get(47);
+         String uniteDevise7 = td15.text();
+       
+         Element NOK = doc.select("td.text-uppercase").get(10);
+         String nomdevise8 = NOK.text();
+         Element achatNOK = doc.select("td.font-weight-bold").get(20);
+         String achatDevise8 = achatNOK.text();
+         Element td16 = doc.select("td.font-weight-bold").get(21);
+         String venteDevise8 = td16.text();
+         Element td17 = doc.select("td.text-center").get(52);
+         String uniteDevise8 = td17.text();
+       
+         Element QAR = doc.select("td.text-uppercase").get(11);
+         String nomdevise9 = QAR.text();
+         Element achatQAR = doc.select("td.font-weight-bold").get(22);
+         String achatDevise9 = achatQAR.text();
+         Element td18 = doc.select("td.font-weight-bold").get(23);
+         String venteDevise9 = td18.text();
+         Element td19 = doc.select("td.text-center").get(57);
+         String uniteDevise9 = td19.text();
+       
+         Element SEK = doc.select("td.text-uppercase").get(12);
+         String nomdevise10 = SEK.text();
+         Element achatSEK = doc.select("td.font-weight-bold").get(24);
+         String achatDevise10 = achatSEK.text();
+         Element td20 = doc.select("td.font-weight-bold").get(25);
+         String venteDevise10 = td20.text();
+         Element td21 = doc.select("td.text-center").get(62);
+         String uniteDevise10 = td21.text();
+       
+         Element CHF = doc.select("td.text-uppercase").get(13);
+         String nomdevise11 = CHF.text();
+         Element achatCHF = doc.select("td.font-weight-bold").get(26);
+         String achatDevise11 = achatCHF.text();
+         Element td22 = doc.select("td.font-weight-bold").get(27);
+         String venteDevise11 = td22.text();
+         Element td23 = doc.select("td.text-center").get(67);
+         String uniteDevise11 = td23.text();
 
-      
-     
-       Element BHD = doc.select("td.text-uppercase").get(14);
-       String nomdevise13 = BHD.text();
-       Element UniteBHD = doc.select("td.font-weight-bold").get(28);
-       String UniteDevise13 = UniteBHD.text();
-       System.out.println("unite 5 : " + UniteDevise13);
-       Element td26 = doc.select("td.font-weight-bold").get(29);
-       String AchatDevise13 = td26.text();
-       Element td27 = doc.select("td.text-center").get(72);
-       String VenteDevise13 = td27.text();
-     
-      
+        
        
+         Element BHD = doc.select("td.text-uppercase").get(14);
+         String nomdevise13 = BHD.text();
+         Element achatBHD = doc.select("td.font-weight-bold").get(28);
+         String achatDevise13 = achatBHD.text();
+         System.out.println("unite 5 : " + achatDevise13);
+         Element td26 = doc.select("td.font-weight-bold").get(29);
+         String venteDevise13 = td26.text();
+         Element td27 = doc.select("td.text-center").get(72);
+         String uniteDevise13 = td27.text();
        
-       Vente v = new Vente();
-       v.setData("wifak", AchatDevise5,AchatDevise14, AchatDevise2,AchatDevise4,AchatDevise6,
-       		AchatDevise12,AchatDevise1,  AchatDevise3, 
-       		 AchatDevise7, AchatDevise8, AchatDevise9,"0",AchatDevise10,
-       		AchatDevise11,  AchatDevise13,  AchatDevise0);
-     //verfication 
-       List<Vente> verf = venteInterface.verification(v.getNomBanque());
+        
+         
+
+         Achat achat = new Achat();
+         achat.setData("wifak", achatDevise5,achatDevise14, achatDevise2,achatDevise4,achatDevise6,
+      		   achatDevise12,achatDevise1,  achatDevise3, 
+      		   achatDevise7, achatDevise8, achatDevise9,"0",achatDevise10,
+      		   achatDevise11,  achatDevise13,  achatDevise0);
+       //verfication 
+         List<Achat> verfAchat = achatInterface.verification(achat.getNomBanque());
+         
+         if(verfAchat.isEmpty()) {
+      	   //ajout
+      	   achatInterface.save(achat);
+         }
+         else  {
+      	   //update
+      	   achatInterface.updateAchat(verfAchat.get(0), achat);
+         }
+         
+         Vente v = new Vente();
+         v.setData("wifak", venteDevise5,venteDevise14, venteDevise2,venteDevise4,venteDevise6,
+      		   venteDevise12,venteDevise1,  venteDevise3, 
+      		   venteDevise7,venteDevise8, venteDevise9,"0",venteDevise10,
+      		   venteDevise11,  venteDevise13,  venteDevise0);
+         //verfication 
+         List<Vente> verf = venteInterface.verification(v.getNomBanque());
+         
+         if(verf.isEmpty()) {
+      	   //ajout
+      	   venteInterface.save(v);
+         }
+         else  {
+      	   //update
+      	   venteInterface.updateVente(verf.get(0), v);
+         }
        
-       if(verf.isEmpty()) {
-    	   //ajout
-    	   venteInterface.save(v);
-       }
-       else  {
-    	   //update
-    	   venteInterface.updateVente(verf.get(0), v);
-       }
        return("ok");
       	}catch (Exception e) {
   			return("no"+e);
@@ -807,7 +868,7 @@ public class ScrapingController {
    	 // need http protocol
    	try {
    	Document doc;
-       doc = Jsoup.connect("https://www.dinartunisien.com/fr/banque/wifak-bank").get();
+       doc = Jsoup.connect("https://www.dinartunisien.com/fr/banque/al-baraka").get();
       
        // get page title
        String title = doc.title();
@@ -818,97 +879,97 @@ public class ScrapingController {
      Element AED = doc.select("td.text-uppercase").get(0);
      String nomdevise0 = AED.text();
      System.out.println("title 0 : " + nomdevise0);
-       Element UniteSAR = doc.select("td.font-weight-bold").get(0);
-       String UniteDevise0 = UniteSAR.text();
-       System.out.println("unite 0 : " + UniteDevise0);
+       Element achatSAR = doc.select("td.font-weight-bold").get(0);
+       String achatDevise0 = achatSAR.text();
+       System.out.println("achat 0 : " + achatDevise0);
        Element td1 = doc.select("td.font-weight-bold").get(1);
-       String AchatDevise0 = td1.text();
-       System.out.println("achat 0 : " + AchatDevise0);
+       String venteDevise0 = td1.text();
+       System.out.println("vente 0 : " + venteDevise0);
        Element td0 = doc.select("td.text-center").get(2);
-       String VenteDevise0 = td0.text();
-       System.out.println("vente0 : " + VenteDevise0);
+       String uniteDevise0 = td0.text();
+       System.out.println("unite0 : " + uniteDevise0);
       // System.out.println("title4 : " + VenteDevise0);
        
        Element CNY = doc.select("td.text-uppercase").get(1);
        String nomdevise5 = CNY.text();
        System.out.println("title : " + nomdevise5);
-       Element UniteCNY = doc.select("td.font-weight-bold").get(2);
-       String UniteDevise5 = UniteCNY.text();
-       System.out.println("unite 1 : " + UniteDevise5);
+       Element achatCNY = doc.select("td.font-weight-bold").get(2);
+       String achatDevise5 = achatCNY.text();
+       System.out.println("achat 1 : " + achatDevise5);
        Element td10 = doc.select("td.font-weight-bold").get(3);
-       String AchatDevise5 = td10.text();
-       System.out.println("achat 1 : " + AchatDevise5);
+       String venteDevise5 = td10.text();
+       System.out.println("achat 1 : " + venteDevise5);
        Element td11 = doc.select("td.text-center").get(7);
-       String VenteDevise5 = td11.text();
-       System.out.println("vente2 : " + VenteDevise5);
+       String uniteDevise5 = td11.text();
+       System.out.println("vente2 : " +uniteDevise5);
        
        Element GBP = doc.select("td.text-uppercase").get(2);
        String nomdevise14 = GBP.text();
-       Element UniteGBP = doc.select("td.font-weight-bold").get(4);
-       String UniteDevise14 = UniteGBP.text();
+       Element achatGBP = doc.select("td.font-weight-bold").get(4);
+       String achatDevise14 = achatGBP.text();
       
        Element td28 = doc.select("td.font-weight-bold").get(5);
-       String AchatDevise14 = td28.text();
+       String venteDevise14 = td28.text();
        Element td29 = doc.select("td.text-center").get(12);
-       String VenteDevise14 = td29.text();
+       String uniteDevise14 = td29.text();
        
        Element DKK = doc.select("td.text-uppercase").get(3);
        String nomdevise2 = DKK.text();
-       Element UniteDKK = doc.select("td.font-weight-bold").get(6);
-       String UniteDevise2 = UniteDKK.text();
+       Element achatDKK = doc.select("td.font-weight-bold").get(6);
+       String achatDevise2 = achatDKK.text();
        Element td4 = doc.select("td.font-weight-bold").get(7);
-       String AchatDevise2 = td4.text();
+       String venteDevise2 = td4.text();
        Element td5 = doc.select("td.text-center").get(17);
-       String VenteDevise2 = td5.text();
+       String uniteDevise2 = td5.text();
 
        Element USD = doc.select("td.text-uppercase").get(4);
        String nomdevise4 = USD.text();
-       Element UniteUSD = doc.select("td.font-weight-bold").get(8);
-       String UniteDevise4 = UniteUSD.text();
+       Element achatUSD = doc.select("td.font-weight-bold").get(8);
+       String achatDevise4 = achatUSD.text();
        Element td8 = doc.select("td.font-weight-bold").get(9);
-       String AchatDevise4 = td8.text();
+       String venteDevise4 = td8.text();
        Element td9 = doc.select("td.text-center").get(22);
-       String VenteDevise4 = td9.text();
+       String uniteDevise4 = td9.text();
        
        Element JPY = doc.select("td.text-uppercase").get(5);
        String nomdevise6 = JPY.text();
-       Element UniteJPY = doc.select("td.font-weight-bold").get(10);
-       String UniteDevise6 = UniteJPY.text();
+       Element achatJPY = doc.select("td.font-weight-bold").get(10);
+       String achatDevise6 = achatJPY.text();
        Element td12 = doc.select("td.font-weight-bold").get(11);
-       String AchatDevise6 = td12.text();
+       String venteDevise6 = td12.text();
        Element td13 = doc.select("td.text-center").get(27);
-       String VenteDevise6 = td13.text();
+       String uniteDevise6 = td13.text();
        
        Element EUR = doc.select("td.text-uppercase").get(6);
        String nomdevise12 = EUR.text();
-       Element UniteEUR = doc.select("td.font-weight-bold").get(12);
-       String UniteDevise12 = UniteEUR.text();
+       Element achatEUR = doc.select("td.font-weight-bold").get(12);
+       String achatDevise12 = achatEUR.text();
        Element td24 = doc.select("td.font-weight-bold").get(13);
-       String AchatDevise12 = td24.text();
+       String venteDevise12 = td24.text();
        Element td25 = doc.select("td.text-center").get(32);
-       String VenteDevise12 = td25.text();
+       String uniteDevise12 = td25.text();
  
     
        Element CAD = doc.select("td.text-uppercase").get(7);
        String nomdevise1 = CAD.text();
-       Element UniteCAD = doc.select("td.font-weight-bold").get(14);
-       String UniteDevise1 = UniteCAD.text();
+       Element achatCAD = doc.select("td.font-weight-bold").get(14);
+       String achatDevise1 = achatCAD.text();
        Element td2 = doc.select("td.font-weight-bold").get(15);
-       String AchatDevise1 = td2.text();
+       String venteDevise1 = td2.text();
        Element td3 = doc.select("td.text-center").get(37);
-       String VenteDevise1 = td3.text();
+       String uniteDevise1 = td3.text();
       
      
      
      
        Element ggg = doc.select("td.text-uppercase").get(8);
        String nomdevise3 = ggg.text();
-       Element Uniteggg = doc.select("td.font-weight-bold").get(16);
-       String UniteDevise3 = Uniteggg.text();
+       Element achatggg = doc.select("td.font-weight-bold").get(16);
+       String achatDevise3 = achatggg.text();
        Element td6 = doc.select("td.font-weight-bold").get(17);
-       String AchatDevise3 = td6.text();
+       String venteDevise3 = td6.text();
        Element td7 = doc.select("td.text-center").get(42);
-       String VenteDevise3 = td7.text();
+       String uniteDevise3 = td7.text();
      
        
      
@@ -917,69 +978,54 @@ public class ScrapingController {
      
        Element KWD = doc.select("td.text-uppercase").get(9);
        String nomdevise7 = KWD.text();
-       Element UniteKWD = doc.select("td.font-weight-bold").get(18);
-       String UniteDevise7 = UniteKWD.text();
+       Element achatKWD = doc.select("td.font-weight-bold").get(18);
+       String achatDevise7 = achatKWD.text();
        Element td14 = doc.select("td.font-weight-bold").get(19);
-       String AchatDevise7 = td14.text();
+       String venteDevise7 = td14.text();
        Element td15 = doc.select("td.text-center").get(47);
-       String VenteDevise7 = td15.text();
+       String uniteDevise7 = td15.text();
      
        Element NOK = doc.select("td.text-uppercase").get(10);
        String nomdevise8 = NOK.text();
-       Element UniteNOK = doc.select("td.font-weight-bold").get(20);
-       String UniteDevise8 = UniteNOK.text();
+       Element achatNOK = doc.select("td.font-weight-bold").get(20);
+       String achatDevise8 = achatNOK.text();
        Element td16 = doc.select("td.font-weight-bold").get(21);
-       String AchatDevise8 = td16.text();
+       String venteDevise8 = td16.text();
        Element td17 = doc.select("td.text-center").get(52);
-       String VenteDevise8 = td17.text();
+       String uniteDevise8 = td17.text();
      
        Element QAR = doc.select("td.text-uppercase").get(11);
        String nomdevise9 = QAR.text();
-       Element UniteQAR = doc.select("td.font-weight-bold").get(22);
-       String UniteDevise9 = UniteQAR.text();
+       Element achatQAR = doc.select("td.font-weight-bold").get(22);
+       String achatDevise9 = achatQAR.text();
        Element td18 = doc.select("td.font-weight-bold").get(23);
-       String AchatDevise9 = td18.text();
+       String venteDevise9 = td18.text();
        Element td19 = doc.select("td.text-center").get(57);
-       String VenteDevise9 = td19.text();
-     
-       Element SEK = doc.select("td.text-uppercase").get(12);
-       String nomdevise10 = SEK.text();
-       Element UniteSEK = doc.select("td.font-weight-bold").get(24);
-       String UniteDevise10 = UniteSEK.text();
-       Element td20 = doc.select("td.font-weight-bold").get(25);
-       String AchatDevise10 = td20.text();
-       Element td21 = doc.select("td.text-center").get(62);
-       String VenteDevise10 = td21.text();
-     
-       Element CHF = doc.select("td.text-uppercase").get(13);
-       String nomdevise11 = CHF.text();
-       Element UniteCHF = doc.select("td.font-weight-bold").get(26);
-       String UniteDevise11 = UniteCHF.text();
-       Element td22 = doc.select("td.font-weight-bold").get(27);
-       String AchatDevise11 = td22.text();
-       Element td23 = doc.select("td.text-center").get(67);
-       String VenteDevise11 = td23.text();
-
-      
-     
-       Element BHD = doc.select("td.text-uppercase").get(14);
-       String nomdevise13 = BHD.text();
-       Element UniteBHD = doc.select("td.font-weight-bold").get(28);
-       String UniteDevise13 = UniteBHD.text();
-       System.out.println("unite 5 : " + UniteDevise13);
-       Element td26 = doc.select("td.font-weight-bold").get(29);
-       String AchatDevise13 = td26.text();
-       Element td27 = doc.select("td.text-center").get(72);
-       String VenteDevise13 = td27.text();
+       String uniteDevise9 = td19.text();
      
       
+       Achat achat = new Achat();
+       achat.setData("al baraka", achatDevise5,achatDevise14, achatDevise2,achatDevise4,achatDevise6,
+    		   achatDevise12,achatDevise1,  achatDevise3, 
+    		   achatDevise7, achatDevise8, achatDevise9,"0","0",
+       		"0",  "0",  achatDevise0);
+     //verfication 
+       List<Achat> verfAchat = achatInterface.verification(achat.getNomBanque());
        
+       if(verfAchat.isEmpty()) {
+    	   //ajout
+    	   achatInterface.save(achat);
+       }
+       else  {
+    	   //update
+    	   achatInterface.updateAchat(verfAchat.get(0), achat);
+       }
        
        Vente v = new Vente();
-       v.setData("al baraka", AchatDevise5,AchatDevise14, AchatDevise2,AchatDevise4,AchatDevise6,
-       		AchatDevise12,AchatDevise1,  AchatDevise3, 
-       		 AchatDevise7, AchatDevise8, AchatDevise9,"0","0",
-       		"0",  "0",  AchatDevise0);
+       v.setData("al baraka", venteDevise5,venteDevise14, venteDevise2,venteDevise4,venteDevise6,
+    		   venteDevise12,venteDevise1,  venteDevise3, 
+    		   venteDevise7, venteDevise8, venteDevise9,"0","0",
+       		"0",  "0",  venteDevise0);
      //verfication 
        List<Vente> verf = venteInterface.verification(v.getNomBanque());
        
@@ -1016,97 +1062,97 @@ public class ScrapingController {
      Element AED = doc.select("td.text-uppercase").get(0);
      String nomdevise0 = AED.text();
      System.out.println("title 0 : " + nomdevise0);
-       Element UniteSAR = doc.select("td.font-weight-bold").get(0);
-       String UniteDevise0 = UniteSAR.text();
-       System.out.println("unite 0 : " + UniteDevise0);
+       Element achatSAR = doc.select("td.font-weight-bold").get(0);
+       String achatDevise0 = achatSAR.text();
+       System.out.println("achat 0 : " + achatDevise0);
        Element td1 = doc.select("td.font-weight-bold").get(1);
-       String AchatDevise0 = td1.text();
-       System.out.println("achat 0 : " + AchatDevise0);
+       String venteDevise0 = td1.text();
+       System.out.println("vente 0 : " + venteDevise0);
        Element td0 = doc.select("td.text-center").get(2);
-       String VenteDevise0 = td0.text();
-       System.out.println("vente0 : " + VenteDevise0);
+       String uniteDevise0 = td0.text();
+       System.out.println("vente0 : " + uniteDevise0);
       // System.out.println("title4 : " + VenteDevise0);
        
        Element CNY = doc.select("td.text-uppercase").get(1);
        String nomdevise5 = CNY.text();
        System.out.println("title : " + nomdevise5);
-       Element UniteCNY = doc.select("td.font-weight-bold").get(2);
-       String UniteDevise5 = UniteCNY.text();
-       System.out.println("unite 1 : " + UniteDevise5);
+       Element achatCNY = doc.select("td.font-weight-bold").get(2);
+       String achatDevise5 = achatCNY.text();
+       System.out.println("unite 1 : " + achatDevise5);
        Element td10 = doc.select("td.font-weight-bold").get(3);
-       String AchatDevise5 = td10.text();
-       System.out.println("achat 1 : " + AchatDevise5);
+       String venteDevise5 = td10.text();
+       System.out.println("vente 1 : " + venteDevise5);
        Element td11 = doc.select("td.text-center").get(7);
-       String VenteDevise5 = td11.text();
-       System.out.println("vente2 : " + VenteDevise5);
+       String uniteDevise5 = td11.text();
+       System.out.println("vente2 : " + uniteDevise5);
        
        Element GBP = doc.select("td.text-uppercase").get(2);
        String nomdevise14 = GBP.text();
-       Element UniteGBP = doc.select("td.font-weight-bold").get(4);
-       String UniteDevise14 = UniteGBP.text();
+       Element achatGBP = doc.select("td.font-weight-bold").get(4);
+       String achatDevise14 = achatGBP.text();
       
        Element td28 = doc.select("td.font-weight-bold").get(5);
-       String AchatDevise14 = td28.text();
+       String venteDevise14 = td28.text();
        Element td29 = doc.select("td.text-center").get(12);
-       String VenteDevise14 = td29.text();
+       String uniteDevise14 = td29.text();
        
        Element DKK = doc.select("td.text-uppercase").get(3);
        String nomdevise2 = DKK.text();
-       Element UniteDKK = doc.select("td.font-weight-bold").get(6);
-       String UniteDevise2 = UniteDKK.text();
+       Element achatDKK = doc.select("td.font-weight-bold").get(6);
+       String achatDevise2 = achatDKK.text();
        Element td4 = doc.select("td.font-weight-bold").get(7);
-       String AchatDevise2 = td4.text();
+       String venteDevise2 = td4.text();
        Element td5 = doc.select("td.text-center").get(17);
-       String VenteDevise2 = td5.text();
+       String uniteDevise2 = td5.text();
 
        Element USD = doc.select("td.text-uppercase").get(4);
        String nomdevise4 = USD.text();
-       Element UniteUSD = doc.select("td.font-weight-bold").get(8);
-       String UniteDevise4 = UniteUSD.text();
+       Element achatUSD = doc.select("td.font-weight-bold").get(8);
+       String achatDevise4 = achatUSD.text();
        Element td8 = doc.select("td.font-weight-bold").get(9);
-       String AchatDevise4 = td8.text();
+       String venteDevise4 = td8.text();
        Element td9 = doc.select("td.text-center").get(22);
-       String VenteDevise4 = td9.text();
+       String uniteDevise4 = td9.text();
        
        Element JPY = doc.select("td.text-uppercase").get(5);
        String nomdevise6 = JPY.text();
-       Element UniteJPY = doc.select("td.font-weight-bold").get(10);
-       String UniteDevise6 = UniteJPY.text();
+       Element achatJPY = doc.select("td.font-weight-bold").get(10);
+       String achatDevise6 = achatJPY.text();
        Element td12 = doc.select("td.font-weight-bold").get(11);
-       String AchatDevise6 = td12.text();
+       String venteDevise6 = td12.text();
        Element td13 = doc.select("td.text-center").get(27);
-       String VenteDevise6 = td13.text();
+       String uniteDevise6 = td13.text();
        
        Element EUR = doc.select("td.text-uppercase").get(6);
        String nomdevise12 = EUR.text();
-       Element UniteEUR = doc.select("td.font-weight-bold").get(12);
-       String UniteDevise12 = UniteEUR.text();
+       Element achatEUR = doc.select("td.font-weight-bold").get(12);
+       String achatDevise12 = achatEUR.text();
        Element td24 = doc.select("td.font-weight-bold").get(13);
-       String AchatDevise12 = td24.text();
+       String venteDevise12 = td24.text();
        Element td25 = doc.select("td.text-center").get(32);
-       String VenteDevise12 = td25.text();
+       String uniteDevise12 = td25.text();
  
     
        Element CAD = doc.select("td.text-uppercase").get(7);
        String nomdevise1 = CAD.text();
-       Element UniteCAD = doc.select("td.font-weight-bold").get(14);
-       String UniteDevise1 = UniteCAD.text();
+       Element achatCAD = doc.select("td.font-weight-bold").get(14);
+       String achatDevise1 = achatCAD.text();
        Element td2 = doc.select("td.font-weight-bold").get(15);
-       String AchatDevise1 = td2.text();
+       String venteDevise1 = td2.text();
        Element td3 = doc.select("td.text-center").get(37);
-       String VenteDevise1 = td3.text();
+       String uniteDevise1 = td3.text();
       
      
      
      
        Element ggg = doc.select("td.text-uppercase").get(8);
        String nomdevise3 = ggg.text();
-       Element Uniteggg = doc.select("td.font-weight-bold").get(16);
-       String UniteDevise3 = Uniteggg.text();
+       Element achatggg = doc.select("td.font-weight-bold").get(16);
+       String achatDevise3 = achatggg.text();
        Element td6 = doc.select("td.font-weight-bold").get(17);
-       String AchatDevise3 = td6.text();
+       String venteDevise3 = td6.text();
        Element td7 = doc.select("td.text-center").get(42);
-       String VenteDevise3 = td7.text();
+       String uniteDevise3 = td7.text();
      
        
      
@@ -1115,78 +1161,79 @@ public class ScrapingController {
      
        Element KWD = doc.select("td.text-uppercase").get(9);
        String nomdevise7 = KWD.text();
-       Element UniteKWD = doc.select("td.font-weight-bold").get(18);
-       String UniteDevise7 = UniteKWD.text();
+       Element achatKWD = doc.select("td.font-weight-bold").get(18);
+       String achatDevise7 = achatKWD.text();
        Element td14 = doc.select("td.font-weight-bold").get(19);
-       String AchatDevise7 = td14.text();
+       String venteDevise7 = td14.text();
        Element td15 = doc.select("td.text-center").get(47);
-       String VenteDevise7 = td15.text();
+       String uniteDevise7 = td15.text();
      
        Element NOK = doc.select("td.text-uppercase").get(10);
        String nomdevise8 = NOK.text();
-       Element UniteNOK = doc.select("td.font-weight-bold").get(20);
-       String UniteDevise8 = UniteNOK.text();
+       Element achatNOK = doc.select("td.font-weight-bold").get(20);
+       String achatDevise8 = achatNOK.text();
        Element td16 = doc.select("td.font-weight-bold").get(21);
-       String AchatDevise8 = td16.text();
+       String venteDevise8 = td16.text();
        Element td17 = doc.select("td.text-center").get(52);
-       String VenteDevise8 = td17.text();
+       String uniteDevise8 = td17.text();
      
        Element QAR = doc.select("td.text-uppercase").get(11);
        String nomdevise9 = QAR.text();
-       Element UniteQAR = doc.select("td.font-weight-bold").get(22);
-       String UniteDevise9 = UniteQAR.text();
+       Element achatQAR = doc.select("td.font-weight-bold").get(22);
+       String achatDevise9 = achatQAR.text();
        Element td18 = doc.select("td.font-weight-bold").get(23);
-       String AchatDevise9 = td18.text();
+       String venteDevise9 = td18.text();
        Element td19 = doc.select("td.text-center").get(57);
-       String VenteDevise9 = td19.text();
+       String uniteDevise9 = td19.text();
      
        Element SEK = doc.select("td.text-uppercase").get(12);
        String nomdevise10 = SEK.text();
-       Element UniteSEK = doc.select("td.font-weight-bold").get(24);
-       String UniteDevise10 = UniteSEK.text();
+       Element achatSEK = doc.select("td.font-weight-bold").get(24);
+       String achatDevise10 = achatSEK.text();
        Element td20 = doc.select("td.font-weight-bold").get(25);
-       String AchatDevise10 = td20.text();
+       String venteDevise10 = td20.text();
        Element td21 = doc.select("td.text-center").get(62);
-       String VenteDevise10 = td21.text();
+       String uniteDevise10 = td21.text();
      
        Element CHF = doc.select("td.text-uppercase").get(13);
        String nomdevise11 = CHF.text();
-       Element UniteCHF = doc.select("td.font-weight-bold").get(26);
-       String UniteDevise11 = UniteCHF.text();
+       Element achatCHF = doc.select("td.font-weight-bold").get(26);
+       String achatDevise11 = achatCHF.text();
        Element td22 = doc.select("td.font-weight-bold").get(27);
-       String AchatDevise11 = td22.text();
+       String venteDevise11 = td22.text();
        Element td23 = doc.select("td.text-center").get(67);
-       String VenteDevise11 = td23.text();
+       String uniteDevise11 = td23.text();
 
       
      
        Element BHD = doc.select("td.text-uppercase").get(14);
        String nomdevise13 = BHD.text();
-       Element UniteBHD = doc.select("td.font-weight-bold").get(28);
-       String UniteDevise13 = UniteBHD.text();
-       System.out.println("unite 5 : " + UniteDevise13);
+       Element achatBHD = doc.select("td.font-weight-bold").get(28);
+       String achatDevise13 = achatBHD.text();
+       System.out.println("unite 5 : " + achatDevise13);
        Element td26 = doc.select("td.font-weight-bold").get(29);
-       String AchatDevise13 = td26.text();
+       String venteDevise13 = td26.text();
        Element td27 = doc.select("td.text-center").get(72);
-       String VenteDevise13 = td27.text();
+       String uniteDevise13 = td27.text();
      
        Element CNYY= doc.select("td.text-uppercase").get(15);
        String nomdevise16 = CNYY.text();
-       Element UniteCNYY = doc.select("td.font-weight-bold").get(30);
-       String UniteDevise16 = UniteBHD.text();
-       System.out.println("unite 5 : " + UniteDevise13);
+       Element achatCNYY = doc.select("td.font-weight-bold").get(30);
+       String achatDevise16 = achatCNYY.text();
+       System.out.println("unite 5 : " + achatDevise13);
        Element td50 = doc.select("td.font-weight-bold").get(31);
-       String AchatDevise16 = td50.text();
+       String venteDevise16 = td50.text();
        Element td51 = doc.select("td.text-center").get(77);
-       String VenteDevise16 = td51.text();
+       String uniteDevise16 = td51.text();
      
        
        
        Vente v = new Vente();
-       v.setData("bh", AchatDevise5,AchatDevise14, AchatDevise2,AchatDevise4,AchatDevise6,
-       		AchatDevise12,AchatDevise1,  AchatDevise3, 
-       		 AchatDevise7, AchatDevise8, AchatDevise9,AchatDevise10,
-       		AchatDevise11,  AchatDevise13, AchatDevise16, AchatDevise0);
+       v.setData("bh", venteDevise5,venteDevise14, venteDevise2,venteDevise4,venteDevise6,
+    		   venteDevise12,venteDevise1,  venteDevise3, 
+    		   venteDevise7, venteDevise8, venteDevise9,venteDevise10,
+    		   venteDevise11,  venteDevise13, venteDevise16, venteDevise0);
+       System.out.println(v);
      //verfication 
        List<Vente> verf = venteInterface.verification(v.getNomBanque());
        
@@ -1197,6 +1244,24 @@ public class ScrapingController {
        else  {
     	   //update
     	   venteInterface.updateVente(verf.get(0), v);
+       }
+       
+       Achat achat = new Achat();
+       achat.setData("bh", achatDevise5,achatDevise14, achatDevise2,achatDevise4,achatDevise6,
+    		   achatDevise12,achatDevise1,  achatDevise3, 
+    		   achatDevise7, achatDevise8, achatDevise9,achatDevise10,
+    		   achatDevise11,  achatDevise13, achatDevise16, achatDevise0);
+       System.out.println(achat);
+     //verfication 
+       List<Achat> verfAchat = achatInterface.verification(achat.getNomBanque());
+       
+       if(verfAchat.isEmpty()) {
+    	   //ajout
+    	   achatInterface.save(achat);
+       }
+       else  {
+    	   //update
+    	   achatInterface.updateAchat(verfAchat.get(0), achat);
        }
        return("ok");
       	}catch (Exception e) {
@@ -1221,191 +1286,210 @@ public class ScrapingController {
        
        
      
-     Element AED = doc.select("td.text-uppercase").get(0);
-     String nomdevise0 = AED.text();
-     System.out.println("title 0 : " + nomdevise0);
-       Element UniteSAR = doc.select("td.font-weight-bold").get(0);
-       String UniteDevise0 = UniteSAR.text();
-       System.out.println("unite 0 : " + UniteDevise0);
-       Element td1 = doc.select("td.font-weight-bold").get(1);
-       String AchatDevise0 = td1.text();
-       System.out.println("achat 0 : " + AchatDevise0);
-       Element td0 = doc.select("td.text-center").get(2);
-       String VenteDevise0 = td0.text();
-       System.out.println("vente0 : " + VenteDevise0);
-      // System.out.println("title4 : " + VenteDevise0);
-       
-       Element CNY = doc.select("td.text-uppercase").get(1);
-       String nomdevise5 = CNY.text();
-       System.out.println("title : " + nomdevise5);
-       Element UniteCNY = doc.select("td.font-weight-bold").get(2);
-       String UniteDevise5 = UniteCNY.text();
-       System.out.println("unite 1 : " + UniteDevise5);
-       Element td10 = doc.select("td.font-weight-bold").get(3);
-       String AchatDevise5 = td10.text();
-       System.out.println("achat 1 : " + AchatDevise5);
-       Element td11 = doc.select("td.text-center").get(7);
-       String VenteDevise5 = td11.text();
-       System.out.println("vente2 : " + VenteDevise5);
-       
-       Element GBP = doc.select("td.text-uppercase").get(2);
-       String nomdevise14 = GBP.text();
-       Element UniteGBP = doc.select("td.font-weight-bold").get(4);
-       String UniteDevise14 = UniteGBP.text();
-      
-       Element td28 = doc.select("td.font-weight-bold").get(5);
-       String AchatDevise14 = td28.text();
-       Element td29 = doc.select("td.text-center").get(12);
-       String VenteDevise14 = td29.text();
-       
-       Element DKK = doc.select("td.text-uppercase").get(3);
-       String nomdevise2 = DKK.text();
-       Element UniteDKK = doc.select("td.font-weight-bold").get(6);
-       String UniteDevise2 = UniteDKK.text();
-       Element td4 = doc.select("td.font-weight-bold").get(7);
-       String AchatDevise2 = td4.text();
-       Element td5 = doc.select("td.text-center").get(17);
-       String VenteDevise2 = td5.text();
+       Element AED = doc.select("td.text-uppercase").get(0);
+       String nomdevise0 = AED.text();
+       System.out.println("title 0 : " + nomdevise0);
+         Element achatSAR = doc.select("td.font-weight-bold").get(0);
+         String achatDevise0 = achatSAR.text();
+         System.out.println("achat 0 : " + achatDevise0);
+         Element td1 = doc.select("td.font-weight-bold").get(1);
+         String venteDevise0 = td1.text();
+         System.out.println("vente 0 : " + venteDevise0);
+         Element td0 = doc.select("td.text-center").get(2);
+         String uniteDevise0 = td0.text();
+         System.out.println("vente0 : " + uniteDevise0);
+        // System.out.println("title4 : " + VenteDevise0);
+         
+         Element CNY = doc.select("td.text-uppercase").get(1);
+         String nomdevise5 = CNY.text();
+         System.out.println("title : " + nomdevise5);
+         Element achatCNY = doc.select("td.font-weight-bold").get(2);
+         String achatDevise5 = achatCNY.text();
+         System.out.println("unite 1 : " + achatDevise5);
+         Element td10 = doc.select("td.font-weight-bold").get(3);
+         String venteDevise5 = td10.text();
+         System.out.println("vente 1 : " + venteDevise5);
+         Element td11 = doc.select("td.text-center").get(7);
+         String uniteDevise5 = td11.text();
+         System.out.println("vente2 : " + uniteDevise5);
+         
+         Element GBP = doc.select("td.text-uppercase").get(2);
+         String nomdevise14 = GBP.text();
+         Element achatGBP = doc.select("td.font-weight-bold").get(4);
+         String achatDevise14 = achatGBP.text();
+        
+         Element td28 = doc.select("td.font-weight-bold").get(5);
+         String venteDevise14 = td28.text();
+         Element td29 = doc.select("td.text-center").get(12);
+         String uniteDevise14 = td29.text();
+         
+         Element DKK = doc.select("td.text-uppercase").get(3);
+         String nomdevise2 = DKK.text();
+         Element achatDKK = doc.select("td.font-weight-bold").get(6);
+         String achatDevise2 = achatDKK.text();
+         Element td4 = doc.select("td.font-weight-bold").get(7);
+         String venteDevise2 = td4.text();
+         Element td5 = doc.select("td.text-center").get(17);
+         String uniteDevise2 = td5.text();
 
-       Element USD = doc.select("td.text-uppercase").get(4);
-       String nomdevise4 = USD.text();
-       Element UniteUSD = doc.select("td.font-weight-bold").get(8);
-       String UniteDevise4 = UniteUSD.text();
-       Element td8 = doc.select("td.font-weight-bold").get(9);
-       String AchatDevise4 = td8.text();
-       Element td9 = doc.select("td.text-center").get(22);
-       String VenteDevise4 = td9.text();
-       
-       Element JPY = doc.select("td.text-uppercase").get(5);
-       String nomdevise6 = JPY.text();
-       Element UniteJPY = doc.select("td.font-weight-bold").get(10);
-       String UniteDevise6 = UniteJPY.text();
-       Element td12 = doc.select("td.font-weight-bold").get(11);
-       String AchatDevise6 = td12.text();
-       Element td13 = doc.select("td.text-center").get(27);
-       String VenteDevise6 = td13.text();
-       
-       Element EUR = doc.select("td.text-uppercase").get(6);
-       String nomdevise12 = EUR.text();
-       Element UniteEUR = doc.select("td.font-weight-bold").get(12);
-       String UniteDevise12 = UniteEUR.text();
-       Element td24 = doc.select("td.font-weight-bold").get(13);
-       String AchatDevise12 = td24.text();
-       Element td25 = doc.select("td.text-center").get(32);
-       String VenteDevise12 = td25.text();
- 
-    
-       Element CAD = doc.select("td.text-uppercase").get(7);
-       String nomdevise1 = CAD.text();
-       Element UniteCAD = doc.select("td.font-weight-bold").get(14);
-       String UniteDevise1 = UniteCAD.text();
-       Element td2 = doc.select("td.font-weight-bold").get(15);
-       String AchatDevise1 = td2.text();
-       Element td3 = doc.select("td.text-center").get(37);
-       String VenteDevise1 = td3.text();
+         Element USD = doc.select("td.text-uppercase").get(4);
+         String nomdevise4 = USD.text();
+         Element achatUSD = doc.select("td.font-weight-bold").get(8);
+         String achatDevise4 = achatUSD.text();
+         Element td8 = doc.select("td.font-weight-bold").get(9);
+         String venteDevise4 = td8.text();
+         Element td9 = doc.select("td.text-center").get(22);
+         String uniteDevise4 = td9.text();
+         
+         Element JPY = doc.select("td.text-uppercase").get(5);
+         String nomdevise6 = JPY.text();
+         Element achatJPY = doc.select("td.font-weight-bold").get(10);
+         String achatDevise6 = achatJPY.text();
+         Element td12 = doc.select("td.font-weight-bold").get(11);
+         String venteDevise6 = td12.text();
+         Element td13 = doc.select("td.text-center").get(27);
+         String uniteDevise6 = td13.text();
+         
+         Element EUR = doc.select("td.text-uppercase").get(6);
+         String nomdevise12 = EUR.text();
+         Element achatEUR = doc.select("td.font-weight-bold").get(12);
+         String achatDevise12 = achatEUR.text();
+         Element td24 = doc.select("td.font-weight-bold").get(13);
+         String venteDevise12 = td24.text();
+         Element td25 = doc.select("td.text-center").get(32);
+         String uniteDevise12 = td25.text();
+   
       
-     
-     
-     
-       Element ggg = doc.select("td.text-uppercase").get(8);
-       String nomdevise3 = ggg.text();
-       Element Uniteggg = doc.select("td.font-weight-bold").get(16);
-       String UniteDevise3 = Uniteggg.text();
-       Element td6 = doc.select("td.font-weight-bold").get(17);
-       String AchatDevise3 = td6.text();
-       Element td7 = doc.select("td.text-center").get(42);
-       String VenteDevise3 = td7.text();
-     
+         Element CAD = doc.select("td.text-uppercase").get(7);
+         String nomdevise1 = CAD.text();
+         Element achatCAD = doc.select("td.font-weight-bold").get(14);
+         String achatDevise1 = achatCAD.text();
+         Element td2 = doc.select("td.font-weight-bold").get(15);
+         String venteDevise1 = td2.text();
+         Element td3 = doc.select("td.text-center").get(37);
+         String uniteDevise1 = td3.text();
+        
        
-     
        
-     
-     
-       Element KWD = doc.select("td.text-uppercase").get(9);
-       String nomdevise7 = KWD.text();
-       Element UniteKWD = doc.select("td.font-weight-bold").get(18);
-       String UniteDevise7 = UniteKWD.text();
-       Element td14 = doc.select("td.font-weight-bold").get(19);
-       String AchatDevise7 = td14.text();
-       Element td15 = doc.select("td.text-center").get(47);
-       String VenteDevise7 = td15.text();
-     
-       Element NOK = doc.select("td.text-uppercase").get(10);
-       String nomdevise8 = NOK.text();
-       Element UniteNOK = doc.select("td.font-weight-bold").get(20);
-       String UniteDevise8 = UniteNOK.text();
-       Element td16 = doc.select("td.font-weight-bold").get(21);
-       String AchatDevise8 = td16.text();
-       Element td17 = doc.select("td.text-center").get(52);
-       String VenteDevise8 = td17.text();
-     
-       Element QAR = doc.select("td.text-uppercase").get(11);
-       String nomdevise9 = QAR.text();
-       Element UniteQAR = doc.select("td.font-weight-bold").get(22);
-       String UniteDevise9 = UniteQAR.text();
-       Element td18 = doc.select("td.font-weight-bold").get(23);
-       String AchatDevise9 = td18.text();
-       Element td19 = doc.select("td.text-center").get(57);
-       String VenteDevise9 = td19.text();
-     
-       Element SEK = doc.select("td.text-uppercase").get(12);
-       String nomdevise10 = SEK.text();
-       Element UniteSEK = doc.select("td.font-weight-bold").get(24);
-       String UniteDevise10 = UniteSEK.text();
-       Element td20 = doc.select("td.font-weight-bold").get(25);
-       String AchatDevise10 = td20.text();
-       Element td21 = doc.select("td.text-center").get(62);
-       String VenteDevise10 = td21.text();
-     
-       Element CHF = doc.select("td.text-uppercase").get(13);
-       String nomdevise11 = CHF.text();
-       Element UniteCHF = doc.select("td.font-weight-bold").get(26);
-       String UniteDevise11 = UniteCHF.text();
-       Element td22 = doc.select("td.font-weight-bold").get(27);
-       String AchatDevise11 = td22.text();
-       Element td23 = doc.select("td.text-center").get(67);
-       String VenteDevise11 = td23.text();
+       
+         Element ggg = doc.select("td.text-uppercase").get(8);
+         String nomdevise3 = ggg.text();
+         Element achatggg = doc.select("td.font-weight-bold").get(16);
+         String achatDevise3 = achatggg.text();
+         Element td6 = doc.select("td.font-weight-bold").get(17);
+         String venteDevise3 = td6.text();
+         Element td7 = doc.select("td.text-center").get(42);
+         String uniteDevise3 = td7.text();
+       
+         
+       
+         
+       
+       
+         Element KWD = doc.select("td.text-uppercase").get(9);
+         String nomdevise7 = KWD.text();
+         Element achatKWD = doc.select("td.font-weight-bold").get(18);
+         String achatDevise7 = achatKWD.text();
+         Element td14 = doc.select("td.font-weight-bold").get(19);
+         String venteDevise7 = td14.text();
+         Element td15 = doc.select("td.text-center").get(47);
+         String uniteDevise7 = td15.text();
+       
+         Element NOK = doc.select("td.text-uppercase").get(10);
+         String nomdevise8 = NOK.text();
+         Element achatNOK = doc.select("td.font-weight-bold").get(20);
+         String achatDevise8 = achatNOK.text();
+         Element td16 = doc.select("td.font-weight-bold").get(21);
+         String venteDevise8 = td16.text();
+         Element td17 = doc.select("td.text-center").get(52);
+         String uniteDevise8 = td17.text();
+       
+         Element QAR = doc.select("td.text-uppercase").get(11);
+         String nomdevise9 = QAR.text();
+         Element achatQAR = doc.select("td.font-weight-bold").get(22);
+         String achatDevise9 = achatQAR.text();
+         Element td18 = doc.select("td.font-weight-bold").get(23);
+         String venteDevise9 = td18.text();
+         Element td19 = doc.select("td.text-center").get(57);
+         String uniteDevise9 = td19.text();
+       
+         Element SEK = doc.select("td.text-uppercase").get(12);
+         String nomdevise10 = SEK.text();
+         Element achatSEK = doc.select("td.font-weight-bold").get(24);
+         String achatDevise10 = achatSEK.text();
+         Element td20 = doc.select("td.font-weight-bold").get(25);
+         String venteDevise10 = td20.text();
+         Element td21 = doc.select("td.text-center").get(62);
+         String uniteDevise10 = td21.text();
+       
+         Element CHF = doc.select("td.text-uppercase").get(13);
+         String nomdevise11 = CHF.text();
+         Element achatCHF = doc.select("td.font-weight-bold").get(26);
+         String achatDevise11 = achatCHF.text();
+         Element td22 = doc.select("td.font-weight-bold").get(27);
+         String venteDevise11 = td22.text();
+         Element td23 = doc.select("td.text-center").get(67);
+         String uniteDevise11 = td23.text();
 
-      
-     
-       Element BHD = doc.select("td.text-uppercase").get(14);
-       String nomdevise13 = BHD.text();
-       Element UniteBHD = doc.select("td.font-weight-bold").get(28);
-       String UniteDevise13 = UniteBHD.text();
-       System.out.println("unite 5 : " + UniteDevise13);
-       Element td26 = doc.select("td.font-weight-bold").get(29);
-       String AchatDevise13 = td26.text();
-       Element td27 = doc.select("td.text-center").get(72);
-       String VenteDevise13 = td27.text();
-     
-       Element CNYY= doc.select("td.text-uppercase").get(15);
-       String nomdevise16 = CNYY.text();
-       Element UniteCNYY = doc.select("td.font-weight-bold").get(30);
-       String UniteDevise16 = UniteBHD.text();
-       System.out.println("unite 5 : " + UniteDevise13);
-       Element td50 = doc.select("td.font-weight-bold").get(31);
-       String AchatDevise16 = td50.text();
-       Element td51 = doc.select("td.text-center").get(77);
-       String VenteDevise16 = td51.text();
-     
+        
        
+         Element BHD = doc.select("td.text-uppercase").get(14);
+         String nomdevise13 = BHD.text();
+         Element achatBHD = doc.select("td.font-weight-bold").get(28);
+         String achatDevise13 = achatBHD.text();
+         System.out.println("unite 5 : " + achatDevise13);
+         Element td26 = doc.select("td.font-weight-bold").get(29);
+         String venteDevise13 = td26.text();
+         Element td27 = doc.select("td.text-center").get(72);
+         String uniteDevise13 = td27.text();
        
-       Vente v = new Vente();
-       v.setData("qnb", AchatDevise5,AchatDevise14, AchatDevise2,AchatDevise4,AchatDevise6,
-       		AchatDevise12,AchatDevise1,  AchatDevise3, 
-       		 AchatDevise7, AchatDevise8, AchatDevise9,AchatDevise10,
-       		AchatDevise11,  AchatDevise13, AchatDevise16, AchatDevise0);
-     //verfication 
-       List<Vente> verf = venteInterface.verification(v.getNomBanque());
+         Element CNYY= doc.select("td.text-uppercase").get(15);
+         String nomdevise16 = CNYY.text();
+         Element achatCNYY = doc.select("td.font-weight-bold").get(30);
+         String achatDevise16 = achatCNYY.text();
+         System.out.println("unite 5 : " + achatDevise13);
+         Element td50 = doc.select("td.font-weight-bold").get(31);
+         String venteDevise16 = td50.text();
+         Element td51 = doc.select("td.text-center").get(77);
+         String uniteDevise16 = td51.text();
        
-       if(verf.isEmpty()) {
-    	   //ajout
-    	   venteInterface.save(v);
-       }
-       else  {
-    	   //update
-    	   venteInterface.updateVente(verf.get(0), v);
-       }
+         
+         
+         Vente v = new Vente();
+         v.setData("qnb", venteDevise5,venteDevise14, venteDevise2,venteDevise4,venteDevise6,
+      		   venteDevise12,venteDevise1,  venteDevise3, 
+      		   venteDevise7, venteDevise8, venteDevise9,venteDevise10,
+      		   venteDevise11,  venteDevise13, venteDevise16, venteDevise0);
+         System.out.println(v);
+       //verfication 
+         List<Vente> verf = venteInterface.verification(v.getNomBanque());
+         
+         if(verf.isEmpty()) {
+      	   //ajout
+      	   venteInterface.save(v);
+         }
+         else  {
+      	   //update
+      	   venteInterface.updateVente(verf.get(0), v);
+         }
+         
+         Achat achat = new Achat();
+         achat.setData("qnb", achatDevise5,achatDevise14, achatDevise2,achatDevise4,achatDevise6,
+      		   achatDevise12,achatDevise1,  achatDevise3, 
+      		   achatDevise7, achatDevise8, achatDevise9,achatDevise10,
+      		   achatDevise11,  achatDevise13, achatDevise16, achatDevise0);
+         System.out.println(achat);
+       //verfication 
+         List<Achat> verfAchat = achatInterface.verification(achat.getNomBanque());
+         
+         if(verfAchat.isEmpty()) {
+      	   //ajout
+      	   achatInterface.save(achat);
+         }
+         else  {
+      	   //update
+      	   achatInterface.updateAchat(verfAchat.get(0), achat);
+         }
        return("ok");
       	}catch (Exception e) {
   			return("no"+e);
@@ -1428,191 +1512,210 @@ public class ScrapingController {
        
        
      
-     Element AED = doc.select("td.text-uppercase").get(0);
-     String nomdevise0 = AED.text();
-     System.out.println("title 0 : " + nomdevise0);
-       Element UniteSAR = doc.select("td.font-weight-bold").get(0);
-       String UniteDevise0 = UniteSAR.text();
-       System.out.println("unite 0 : " + UniteDevise0);
-       Element td1 = doc.select("td.font-weight-bold").get(1);
-       String AchatDevise0 = td1.text();
-       System.out.println("achat 0 : " + AchatDevise0);
-       Element td0 = doc.select("td.text-center").get(2);
-       String VenteDevise0 = td0.text();
-       System.out.println("vente0 : " + VenteDevise0);
-      // System.out.println("title4 : " + VenteDevise0);
-       
-       Element CNY = doc.select("td.text-uppercase").get(1);
-       String nomdevise5 = CNY.text();
-       System.out.println("title : " + nomdevise5);
-       Element UniteCNY = doc.select("td.font-weight-bold").get(2);
-       String UniteDevise5 = UniteCNY.text();
-       System.out.println("unite 1 : " + UniteDevise5);
-       Element td10 = doc.select("td.font-weight-bold").get(3);
-       String AchatDevise5 = td10.text();
-       System.out.println("achat 1 : " + AchatDevise5);
-       Element td11 = doc.select("td.text-center").get(7);
-       String VenteDevise5 = td11.text();
-       System.out.println("vente2 : " + VenteDevise5);
-       
-       Element GBP = doc.select("td.text-uppercase").get(2);
-       String nomdevise14 = GBP.text();
-       Element UniteGBP = doc.select("td.font-weight-bold").get(4);
-       String UniteDevise14 = UniteGBP.text();
-      
-       Element td28 = doc.select("td.font-weight-bold").get(5);
-       String AchatDevise14 = td28.text();
-       Element td29 = doc.select("td.text-center").get(12);
-       String VenteDevise14 = td29.text();
-       
-       Element DKK = doc.select("td.text-uppercase").get(3);
-       String nomdevise2 = DKK.text();
-       Element UniteDKK = doc.select("td.font-weight-bold").get(6);
-       String UniteDevise2 = UniteDKK.text();
-       Element td4 = doc.select("td.font-weight-bold").get(7);
-       String AchatDevise2 = td4.text();
-       Element td5 = doc.select("td.text-center").get(17);
-       String VenteDevise2 = td5.text();
+       Element AED = doc.select("td.text-uppercase").get(0);
+       String nomdevise0 = AED.text();
+       System.out.println("title 0 : " + nomdevise0);
+         Element achatSAR = doc.select("td.font-weight-bold").get(0);
+         String achatDevise0 = achatSAR.text();
+         System.out.println("achat 0 : " + achatDevise0);
+         Element td1 = doc.select("td.font-weight-bold").get(1);
+         String venteDevise0 = td1.text();
+         System.out.println("vente 0 : " + venteDevise0);
+         Element td0 = doc.select("td.text-center").get(2);
+         String uniteDevise0 = td0.text();
+         System.out.println("vente0 : " + uniteDevise0);
+        // System.out.println("title4 : " + VenteDevise0);
+         
+         Element CNY = doc.select("td.text-uppercase").get(1);
+         String nomdevise5 = CNY.text();
+         System.out.println("title : " + nomdevise5);
+         Element achatCNY = doc.select("td.font-weight-bold").get(2);
+         String achatDevise5 = achatCNY.text();
+         System.out.println("unite 1 : " + achatDevise5);
+         Element td10 = doc.select("td.font-weight-bold").get(3);
+         String venteDevise5 = td10.text();
+         System.out.println("vente 1 : " + venteDevise5);
+         Element td11 = doc.select("td.text-center").get(7);
+         String uniteDevise5 = td11.text();
+         System.out.println("vente2 : " + uniteDevise5);
+         
+         Element GBP = doc.select("td.text-uppercase").get(2);
+         String nomdevise14 = GBP.text();
+         Element achatGBP = doc.select("td.font-weight-bold").get(4);
+         String achatDevise14 = achatGBP.text();
+        
+         Element td28 = doc.select("td.font-weight-bold").get(5);
+         String venteDevise14 = td28.text();
+         Element td29 = doc.select("td.text-center").get(12);
+         String uniteDevise14 = td29.text();
+         
+         Element DKK = doc.select("td.text-uppercase").get(3);
+         String nomdevise2 = DKK.text();
+         Element achatDKK = doc.select("td.font-weight-bold").get(6);
+         String achatDevise2 = achatDKK.text();
+         Element td4 = doc.select("td.font-weight-bold").get(7);
+         String venteDevise2 = td4.text();
+         Element td5 = doc.select("td.text-center").get(17);
+         String uniteDevise2 = td5.text();
 
-       Element USD = doc.select("td.text-uppercase").get(4);
-       String nomdevise4 = USD.text();
-       Element UniteUSD = doc.select("td.font-weight-bold").get(8);
-       String UniteDevise4 = UniteUSD.text();
-       Element td8 = doc.select("td.font-weight-bold").get(9);
-       String AchatDevise4 = td8.text();
-       Element td9 = doc.select("td.text-center").get(22);
-       String VenteDevise4 = td9.text();
-       
-       Element JPY = doc.select("td.text-uppercase").get(5);
-       String nomdevise6 = JPY.text();
-       Element UniteJPY = doc.select("td.font-weight-bold").get(10);
-       String UniteDevise6 = UniteJPY.text();
-       Element td12 = doc.select("td.font-weight-bold").get(11);
-       String AchatDevise6 = td12.text();
-       Element td13 = doc.select("td.text-center").get(27);
-       String VenteDevise6 = td13.text();
-       
-       Element EUR = doc.select("td.text-uppercase").get(6);
-       String nomdevise12 = EUR.text();
-       Element UniteEUR = doc.select("td.font-weight-bold").get(12);
-       String UniteDevise12 = UniteEUR.text();
-       Element td24 = doc.select("td.font-weight-bold").get(13);
-       String AchatDevise12 = td24.text();
-       Element td25 = doc.select("td.text-center").get(32);
-       String VenteDevise12 = td25.text();
- 
-    
-       Element CAD = doc.select("td.text-uppercase").get(7);
-       String nomdevise1 = CAD.text();
-       Element UniteCAD = doc.select("td.font-weight-bold").get(14);
-       String UniteDevise1 = UniteCAD.text();
-       Element td2 = doc.select("td.font-weight-bold").get(15);
-       String AchatDevise1 = td2.text();
-       Element td3 = doc.select("td.text-center").get(37);
-       String VenteDevise1 = td3.text();
+         Element USD = doc.select("td.text-uppercase").get(4);
+         String nomdevise4 = USD.text();
+         Element achatUSD = doc.select("td.font-weight-bold").get(8);
+         String achatDevise4 = achatUSD.text();
+         Element td8 = doc.select("td.font-weight-bold").get(9);
+         String venteDevise4 = td8.text();
+         Element td9 = doc.select("td.text-center").get(22);
+         String uniteDevise4 = td9.text();
+         
+         Element JPY = doc.select("td.text-uppercase").get(5);
+         String nomdevise6 = JPY.text();
+         Element achatJPY = doc.select("td.font-weight-bold").get(10);
+         String achatDevise6 = achatJPY.text();
+         Element td12 = doc.select("td.font-weight-bold").get(11);
+         String venteDevise6 = td12.text();
+         Element td13 = doc.select("td.text-center").get(27);
+         String uniteDevise6 = td13.text();
+         
+         Element EUR = doc.select("td.text-uppercase").get(6);
+         String nomdevise12 = EUR.text();
+         Element achatEUR = doc.select("td.font-weight-bold").get(12);
+         String achatDevise12 = achatEUR.text();
+         Element td24 = doc.select("td.font-weight-bold").get(13);
+         String venteDevise12 = td24.text();
+         Element td25 = doc.select("td.text-center").get(32);
+         String uniteDevise12 = td25.text();
+   
       
-     
-     
-     
-       Element ggg = doc.select("td.text-uppercase").get(8);
-       String nomdevise3 = ggg.text();
-       Element Uniteggg = doc.select("td.font-weight-bold").get(16);
-       String UniteDevise3 = Uniteggg.text();
-       Element td6 = doc.select("td.font-weight-bold").get(17);
-       String AchatDevise3 = td6.text();
-       Element td7 = doc.select("td.text-center").get(42);
-       String VenteDevise3 = td7.text();
-     
+         Element CAD = doc.select("td.text-uppercase").get(7);
+         String nomdevise1 = CAD.text();
+         Element achatCAD = doc.select("td.font-weight-bold").get(14);
+         String achatDevise1 = achatCAD.text();
+         Element td2 = doc.select("td.font-weight-bold").get(15);
+         String venteDevise1 = td2.text();
+         Element td3 = doc.select("td.text-center").get(37);
+         String uniteDevise1 = td3.text();
+        
        
-     
        
-     
-     
-       Element KWD = doc.select("td.text-uppercase").get(9);
-       String nomdevise7 = KWD.text();
-       Element UniteKWD = doc.select("td.font-weight-bold").get(18);
-       String UniteDevise7 = UniteKWD.text();
-       Element td14 = doc.select("td.font-weight-bold").get(19);
-       String AchatDevise7 = td14.text();
-       Element td15 = doc.select("td.text-center").get(47);
-       String VenteDevise7 = td15.text();
-     
-       Element NOK = doc.select("td.text-uppercase").get(10);
-       String nomdevise8 = NOK.text();
-       Element UniteNOK = doc.select("td.font-weight-bold").get(20);
-       String UniteDevise8 = UniteNOK.text();
-       Element td16 = doc.select("td.font-weight-bold").get(21);
-       String AchatDevise8 = td16.text();
-       Element td17 = doc.select("td.text-center").get(52);
-       String VenteDevise8 = td17.text();
-     
-       Element QAR = doc.select("td.text-uppercase").get(11);
-       String nomdevise9 = QAR.text();
-       Element UniteQAR = doc.select("td.font-weight-bold").get(22);
-       String UniteDevise9 = UniteQAR.text();
-       Element td18 = doc.select("td.font-weight-bold").get(23);
-       String AchatDevise9 = td18.text();
-       Element td19 = doc.select("td.text-center").get(57);
-       String VenteDevise9 = td19.text();
-     
-       Element SEK = doc.select("td.text-uppercase").get(12);
-       String nomdevise10 = SEK.text();
-       Element UniteSEK = doc.select("td.font-weight-bold").get(24);
-       String UniteDevise10 = UniteSEK.text();
-       Element td20 = doc.select("td.font-weight-bold").get(25);
-       String AchatDevise10 = td20.text();
-       Element td21 = doc.select("td.text-center").get(62);
-       String VenteDevise10 = td21.text();
-     
-       Element CHF = doc.select("td.text-uppercase").get(13);
-       String nomdevise11 = CHF.text();
-       Element UniteCHF = doc.select("td.font-weight-bold").get(26);
-       String UniteDevise11 = UniteCHF.text();
-       Element td22 = doc.select("td.font-weight-bold").get(27);
-       String AchatDevise11 = td22.text();
-       Element td23 = doc.select("td.text-center").get(67);
-       String VenteDevise11 = td23.text();
+       
+         Element ggg = doc.select("td.text-uppercase").get(8);
+         String nomdevise3 = ggg.text();
+         Element achatggg = doc.select("td.font-weight-bold").get(16);
+         String achatDevise3 = achatggg.text();
+         Element td6 = doc.select("td.font-weight-bold").get(17);
+         String venteDevise3 = td6.text();
+         Element td7 = doc.select("td.text-center").get(42);
+         String uniteDevise3 = td7.text();
+       
+         
+       
+         
+       
+       
+         Element KWD = doc.select("td.text-uppercase").get(9);
+         String nomdevise7 = KWD.text();
+         Element achatKWD = doc.select("td.font-weight-bold").get(18);
+         String achatDevise7 = achatKWD.text();
+         Element td14 = doc.select("td.font-weight-bold").get(19);
+         String venteDevise7 = td14.text();
+         Element td15 = doc.select("td.text-center").get(47);
+         String uniteDevise7 = td15.text();
+       
+         Element NOK = doc.select("td.text-uppercase").get(10);
+         String nomdevise8 = NOK.text();
+         Element achatNOK = doc.select("td.font-weight-bold").get(20);
+         String achatDevise8 = achatNOK.text();
+         Element td16 = doc.select("td.font-weight-bold").get(21);
+         String venteDevise8 = td16.text();
+         Element td17 = doc.select("td.text-center").get(52);
+         String uniteDevise8 = td17.text();
+       
+         Element QAR = doc.select("td.text-uppercase").get(11);
+         String nomdevise9 = QAR.text();
+         Element achatQAR = doc.select("td.font-weight-bold").get(22);
+         String achatDevise9 = achatQAR.text();
+         Element td18 = doc.select("td.font-weight-bold").get(23);
+         String venteDevise9 = td18.text();
+         Element td19 = doc.select("td.text-center").get(57);
+         String uniteDevise9 = td19.text();
+       
+         Element SEK = doc.select("td.text-uppercase").get(12);
+         String nomdevise10 = SEK.text();
+         Element achatSEK = doc.select("td.font-weight-bold").get(24);
+         String achatDevise10 = achatSEK.text();
+         Element td20 = doc.select("td.font-weight-bold").get(25);
+         String venteDevise10 = td20.text();
+         Element td21 = doc.select("td.text-center").get(62);
+         String uniteDevise10 = td21.text();
+       
+         Element CHF = doc.select("td.text-uppercase").get(13);
+         String nomdevise11 = CHF.text();
+         Element achatCHF = doc.select("td.font-weight-bold").get(26);
+         String achatDevise11 = achatCHF.text();
+         Element td22 = doc.select("td.font-weight-bold").get(27);
+         String venteDevise11 = td22.text();
+         Element td23 = doc.select("td.text-center").get(67);
+         String uniteDevise11 = td23.text();
 
-      
-     
-       Element BHD = doc.select("td.text-uppercase").get(14);
-       String nomdevise13 = BHD.text();
-       Element UniteBHD = doc.select("td.font-weight-bold").get(28);
-       String UniteDevise13 = UniteBHD.text();
-       System.out.println("unite 5 : " + UniteDevise13);
-       Element td26 = doc.select("td.font-weight-bold").get(29);
-       String AchatDevise13 = td26.text();
-       Element td27 = doc.select("td.text-center").get(72);
-       String VenteDevise13 = td27.text();
-     
-       Element CNYY= doc.select("td.text-uppercase").get(15);
-       String nomdevise16 = CNYY.text();
-       Element UniteCNYY = doc.select("td.font-weight-bold").get(30);
-       String UniteDevise16 = UniteBHD.text();
-       System.out.println("unite 5 : " + UniteDevise13);
-       Element td50 = doc.select("td.font-weight-bold").get(31);
-       String AchatDevise16 = td50.text();
-       Element td51 = doc.select("td.text-center").get(77);
-       String VenteDevise16 = td51.text();
-     
+        
        
+         Element BHD = doc.select("td.text-uppercase").get(14);
+         String nomdevise13 = BHD.text();
+         Element achatBHD = doc.select("td.font-weight-bold").get(28);
+         String achatDevise13 = achatBHD.text();
+         System.out.println("unite 5 : " + achatDevise13);
+         Element td26 = doc.select("td.font-weight-bold").get(29);
+         String venteDevise13 = td26.text();
+         Element td27 = doc.select("td.text-center").get(72);
+         String uniteDevise13 = td27.text();
        
-       Vente v = new Vente();
-       v.setData("attijari", AchatDevise5,AchatDevise14, AchatDevise2,AchatDevise4,AchatDevise6,
-       		AchatDevise12,AchatDevise1,  AchatDevise3, 
-       		 AchatDevise7, AchatDevise8, AchatDevise9,AchatDevise10,
-       		AchatDevise11,  AchatDevise13, AchatDevise16, AchatDevise0);
-     //verfication 
-       List<Vente> verf = venteInterface.verification(v.getNomBanque());
+         Element CNYY= doc.select("td.text-uppercase").get(15);
+         String nomdevise16 = CNYY.text();
+         Element achatCNYY = doc.select("td.font-weight-bold").get(30);
+         String achatDevise16 = achatCNYY.text();
+         System.out.println("unite 5 : " + achatDevise13);
+         Element td50 = doc.select("td.font-weight-bold").get(31);
+         String venteDevise16 = td50.text();
+         Element td51 = doc.select("td.text-center").get(77);
+         String uniteDevise16 = td51.text();
        
-       if(verf.isEmpty()) {
-    	   //ajout
-    	   venteInterface.save(v);
-       }
-       else  {
-    	   //update
-    	   venteInterface.updateVente(verf.get(0), v);
-       }
+         
+         
+         Vente v = new Vente();
+         v.setData("attijari", venteDevise5,venteDevise14, venteDevise2,venteDevise4,venteDevise6,
+      		   venteDevise12,venteDevise1,  venteDevise3, 
+      		   venteDevise7, venteDevise8, venteDevise9,venteDevise10,
+      		   venteDevise11,  venteDevise13, venteDevise16, venteDevise0);
+         System.out.println(v);
+       //verfication 
+         List<Vente> verf = venteInterface.verification(v.getNomBanque());
+         
+         if(verf.isEmpty()) {
+      	   //ajout
+      	   venteInterface.save(v);
+         }
+         else  {
+      	   //update
+      	   venteInterface.updateVente(verf.get(0), v);
+         }
+         
+         Achat achat = new Achat();
+         achat.setData("attijari", achatDevise5,achatDevise14, achatDevise2,achatDevise4,achatDevise6,
+      		   achatDevise12,achatDevise1,  achatDevise3, 
+      		   achatDevise7, achatDevise8, achatDevise9,achatDevise10,
+      		   achatDevise11,  achatDevise13, achatDevise16, achatDevise0);
+         System.out.println(achat);
+       //verfication 
+         List<Achat> verfAchat = achatInterface.verification(achat.getNomBanque());
+         
+         if(verfAchat.isEmpty()) {
+      	   //ajout
+      	   achatInterface.save(achat);
+         }
+         else  {
+      	   //update
+      	   achatInterface.updateAchat(verfAchat.get(0), achat);
+         }
        return("ok");
       	}catch (Exception e) {
   			return("no"+e);
@@ -1635,182 +1738,199 @@ public class ScrapingController {
           
           
         
-        Element AED = doc.select("td.text-uppercase").get(0);
-        String nomdevise0 = AED.text();
-        System.out.println("title 0 : " + nomdevise0);
-          Element UniteSAR = doc.select("td.font-weight-bold").get(0);
-          String UniteDevise0 = UniteSAR.text();
-          System.out.println("unite 0 : " + UniteDevise0);
-          Element td1 = doc.select("td.font-weight-bold").get(1);
-          String AchatDevise0 = td1.text();
-          System.out.println("achat 0 : " + AchatDevise0);
-          Element td0 = doc.select("td.text-center").get(2);
-          String VenteDevise0 = td0.text();
-          System.out.println("vente0 : " + VenteDevise0);
-         // System.out.println("title4 : " + VenteDevise0);
-          
-          Element CNY = doc.select("td.text-uppercase").get(1);
-          String nomdevise5 = CNY.text();
-          System.out.println("title : " + nomdevise5);
-          Element UniteCNY = doc.select("td.font-weight-bold").get(2);
-          String UniteDevise5 = UniteCNY.text();
-          System.out.println("unite 1 : " + UniteDevise5);
-          Element td10 = doc.select("td.font-weight-bold").get(3);
-          String AchatDevise5 = td10.text();
-          System.out.println("achat 1 : " + AchatDevise5);
-          Element td11 = doc.select("td.text-center").get(7);
-          String VenteDevise5 = td11.text();
-          System.out.println("vente2 : " + VenteDevise5);
-          
-          Element GBP = doc.select("td.text-uppercase").get(2);
-          String nomdevise14 = GBP.text();
-          Element UniteGBP = doc.select("td.font-weight-bold").get(4);
-          String UniteDevise14 = UniteGBP.text();
-         
-          Element td28 = doc.select("td.font-weight-bold").get(5);
-          String AchatDevise14 = td28.text();
-          Element td29 = doc.select("td.text-center").get(12);
-          String VenteDevise14 = td29.text();
-          
-          Element DKK = doc.select("td.text-uppercase").get(3);
-          String nomdevise2 = DKK.text();
-          Element UniteDKK = doc.select("td.font-weight-bold").get(6);
-          String UniteDevise2 = UniteDKK.text();
-          Element td4 = doc.select("td.font-weight-bold").get(7);
-          String AchatDevise2 = td4.text();
-          Element td5 = doc.select("td.text-center").get(17);
-          String VenteDevise2 = td5.text();
+          Element AED = doc.select("td.text-uppercase").get(0);
+          String nomdevise0 = AED.text();
+          System.out.println("title 0 : " + nomdevise0);
+            Element UniteSAR = doc.select("td.font-weight-bold").get(0);
+            String achatDevise0 = UniteSAR.text();
+            System.out.println("achat 0 : " + achatDevise0);
+            Element td1 = doc.select("td.font-weight-bold").get(1);
+            String venteDevise0 = td1.text();
+            System.out.println("vente 0 : " + venteDevise0);
+            Element td0 = doc.select("td.text-center").get(2);
+            String uniteDevise0 = td0.text();
+            System.out.println("unite0 : " + uniteDevise0);
+           // System.out.println("title4 : " + VenteDevise0);
+            
+            Element CNY = doc.select("td.text-uppercase").get(1);
+            String nomdevise5 = CNY.text();
+            System.out.println("title : " + nomdevise5);
+            Element UniteCNY = doc.select("td.font-weight-bold").get(2);
+            String achatDevise5 = UniteCNY.text();
+            System.out.println("unite 1 : " + achatDevise5);
+            Element td10 = doc.select("td.font-weight-bold").get(3);
+            String venteDevise5 = td10.text();
+            System.out.println("achat 1 : " + venteDevise5);
+            Element td11 = doc.select("td.text-center").get(7);
+            String uniteDevise5 = td11.text();
+            System.out.println("vente2 : " + uniteDevise5);
+            
+            Element GBP = doc.select("td.text-uppercase").get(2);
+            String nomdevise14 = GBP.text();
+            Element achatGBP = doc.select("td.font-weight-bold").get(4);
+            String achatDevise14 = achatGBP.text();
+           
+            Element td28 = doc.select("td.font-weight-bold").get(5);
+            String venteDevise14 = td28.text();
+            Element td29 = doc.select("td.text-center").get(12);
+            String uniteDevise14 = td29.text();
+            
+            Element DKK = doc.select("td.text-uppercase").get(3);
+            String nomdevise2 = DKK.text();
+            Element achatDKK = doc.select("td.font-weight-bold").get(6);
+            String achatDevise2 = achatDKK.text();
+            Element td4 = doc.select("td.font-weight-bold").get(7);
+            String venteDevise2 = td4.text();
+            Element td5 = doc.select("td.text-center").get(17);
+            String uniteDevise2 = td5.text();
 
-          Element USD = doc.select("td.text-uppercase").get(4);
-          String nomdevise4 = USD.text();
-          Element UniteUSD = doc.select("td.font-weight-bold").get(8);
-          String UniteDevise4 = UniteUSD.text();
-          Element td8 = doc.select("td.font-weight-bold").get(9);
-          String AchatDevise4 = td8.text();
-          Element td9 = doc.select("td.text-center").get(22);
-          String VenteDevise4 = td9.text();
-          
-          Element JPY = doc.select("td.text-uppercase").get(5);
-          String nomdevise6 = JPY.text();
-          Element UniteJPY = doc.select("td.font-weight-bold").get(10);
-          String UniteDevise6 = UniteJPY.text();
-          Element td12 = doc.select("td.font-weight-bold").get(11);
-          String AchatDevise6 = td12.text();
-          Element td13 = doc.select("td.text-center").get(27);
-          String VenteDevise6 = td13.text();
-          
-          Element EUR = doc.select("td.text-uppercase").get(6);
-          String nomdevise12 = EUR.text();
-          Element UniteEUR = doc.select("td.font-weight-bold").get(12);
-          String UniteDevise12 = UniteEUR.text();
-          Element td24 = doc.select("td.font-weight-bold").get(13);
-          String AchatDevise12 = td24.text();
-          Element td25 = doc.select("td.text-center").get(32);
-          String VenteDevise12 = td25.text();
-    
-       
-          Element CAD = doc.select("td.text-uppercase").get(7);
-          String nomdevise1 = CAD.text();
-          Element UniteCAD = doc.select("td.font-weight-bold").get(14);
-          String UniteDevise1 = UniteCAD.text();
-          Element td2 = doc.select("td.font-weight-bold").get(15);
-          String AchatDevise1 = td2.text();
-          Element td3 = doc.select("td.text-center").get(37);
-          String VenteDevise1 = td3.text();
+            Element USD = doc.select("td.text-uppercase").get(4);
+            String nomdevise4 = USD.text();
+            Element achatUSD = doc.select("td.font-weight-bold").get(8);
+            String achatDevise4 = achatUSD.text();
+            Element td8 = doc.select("td.font-weight-bold").get(9);
+            String venteDevise4 = td8.text();
+            Element td9 = doc.select("td.text-center").get(22);
+            String uniteDevise4 = td9.text();
+            
+            Element JPY = doc.select("td.text-uppercase").get(5);
+            String nomdevise6 = JPY.text();
+            Element achatJPY = doc.select("td.font-weight-bold").get(10);
+            String achatDevise6 = achatJPY.text();
+            Element td12 = doc.select("td.font-weight-bold").get(11);
+            String venteDevise6 = td12.text();
+            Element td13 = doc.select("td.text-center").get(27);
+            String uniteDevise6 = td13.text();
+            
+            Element EUR = doc.select("td.text-uppercase").get(6);
+            String nomdevise12 = EUR.text();
+            Element achatEUR = doc.select("td.font-weight-bold").get(12);
+            String achatDevise12 = achatEUR.text();
+            Element td24 = doc.select("td.font-weight-bold").get(13);
+            String venteDevise12 = td24.text();
+            Element td25 = doc.select("td.text-center").get(32);
+            String uniteDevise12 = td25.text();
+      
          
-        
-        
-        
-          Element ggg = doc.select("td.text-uppercase").get(8);
-          String nomdevise3 = ggg.text();
-          Element Uniteggg = doc.select("td.font-weight-bold").get(16);
-          String UniteDevise3 = Uniteggg.text();
-          Element td6 = doc.select("td.font-weight-bold").get(17);
-          String AchatDevise3 = td6.text();
-          Element td7 = doc.select("td.text-center").get(42);
-          String VenteDevise3 = td7.text();
-        
+            Element CAD = doc.select("td.text-uppercase").get(7);
+            String nomdevise1 = CAD.text();
+            Element achatCAD = doc.select("td.font-weight-bold").get(14);
+            String achatDevise1 = achatCAD.text();
+            Element td2 = doc.select("td.font-weight-bold").get(15);
+            String venteDevise1 = td2.text();
+            Element td3 = doc.select("td.text-center").get(37);
+            String uniteDevise1 = td3.text();
+           
           
-        
           
-        
-        
-          Element KWD = doc.select("td.text-uppercase").get(9);
-          String nomdevise7 = KWD.text();
-          Element UniteKWD = doc.select("td.font-weight-bold").get(18);
-          String UniteDevise7 = UniteKWD.text();
-          Element td14 = doc.select("td.font-weight-bold").get(19);
-          String AchatDevise7 = td14.text();
-          Element td15 = doc.select("td.text-center").get(47);
-          String VenteDevise7 = td15.text();
-        
-          Element NOK = doc.select("td.text-uppercase").get(10);
-          String nomdevise8 = NOK.text();
-          Element UniteNOK = doc.select("td.font-weight-bold").get(20);
-          String UniteDevise8 = UniteNOK.text();
-          Element td16 = doc.select("td.font-weight-bold").get(21);
-          String AchatDevise8 = td16.text();
-          Element td17 = doc.select("td.text-center").get(52);
-          String VenteDevise8 = td17.text();
-        
-          Element QAR = doc.select("td.text-uppercase").get(11);
-          String nomdevise9 = QAR.text();
-          Element UniteQAR = doc.select("td.font-weight-bold").get(22);
-          String UniteDevise9 = UniteQAR.text();
-          Element td18 = doc.select("td.font-weight-bold").get(23);
-          String AchatDevise9 = td18.text();
-          Element td19 = doc.select("td.text-center").get(57);
-          String VenteDevise9 = td19.text();
-        
-          Element SEK = doc.select("td.text-uppercase").get(12);
-          String nomdevise10 = SEK.text();
-          Element UniteSEK = doc.select("td.font-weight-bold").get(24);
-          String UniteDevise10 = UniteSEK.text();
-          Element td20 = doc.select("td.font-weight-bold").get(25);
-          String AchatDevise10 = td20.text();
-          Element td21 = doc.select("td.text-center").get(62);
-          String VenteDevise10 = td21.text();
-        
-          Element CHF = doc.select("td.text-uppercase").get(13);
-          String nomdevise11 = CHF.text();
-          Element UniteCHF = doc.select("td.font-weight-bold").get(26);
-          String UniteDevise11 = UniteCHF.text();
-          Element td22 = doc.select("td.font-weight-bold").get(27);
-          String AchatDevise11 = td22.text();
-          Element td23 = doc.select("td.text-center").get(67);
-          String VenteDevise11 = td23.text();
+          
+            Element ggg = doc.select("td.text-uppercase").get(8);
+            String nomdevise3 = ggg.text();
+            Element achatggg = doc.select("td.font-weight-bold").get(16);
+            String achatDevise3 = achatggg.text();
+            Element td6 = doc.select("td.font-weight-bold").get(17);
+            String venteDevise3 = td6.text();
+            Element td7 = doc.select("td.text-center").get(42);
+            String uniteDevise3 = td7.text();
+          
+            
+          
+            
+          
+          
+            Element KWD = doc.select("td.text-uppercase").get(9);
+            String nomdevise7 = KWD.text();
+            Element achatKWD = doc.select("td.font-weight-bold").get(18);
+            String achatDevise7 = achatKWD.text();
+            Element td14 = doc.select("td.font-weight-bold").get(19);
+            String venteDevise7 = td14.text();
+            Element td15 = doc.select("td.text-center").get(47);
+            String uniteDevise7 = td15.text();
+          
+            Element NOK = doc.select("td.text-uppercase").get(10);
+            String nomdevise8 = NOK.text();
+            Element achatNOK = doc.select("td.font-weight-bold").get(20);
+            String achatDevise8 = achatNOK.text();
+            Element td16 = doc.select("td.font-weight-bold").get(21);
+            String venteDevise8 = td16.text();
+            Element td17 = doc.select("td.text-center").get(52);
+            String uniteDevise8 = td17.text();
+          
+            Element QAR = doc.select("td.text-uppercase").get(11);
+            String nomdevise9 = QAR.text();
+            Element achatQAR = doc.select("td.font-weight-bold").get(22);
+            String achatDevise9 = achatQAR.text();
+            Element td18 = doc.select("td.font-weight-bold").get(23);
+            String venteDevise9 = td18.text();
+            Element td19 = doc.select("td.text-center").get(57);
+            String uniteDevise9 = td19.text();
+          
+            Element SEK = doc.select("td.text-uppercase").get(12);
+            String nomdevise10 = SEK.text();
+            Element achatSEK = doc.select("td.font-weight-bold").get(24);
+            String achatDevise10 = achatSEK.text();
+            Element td20 = doc.select("td.font-weight-bold").get(25);
+            String venteDevise10 = td20.text();
+            Element td21 = doc.select("td.text-center").get(62);
+            String uniteDevise10 = td21.text();
+          
+            Element CHF = doc.select("td.text-uppercase").get(13);
+            String nomdevise11 = CHF.text();
+            Element achatCHF = doc.select("td.font-weight-bold").get(26);
+            String achatDevise11 = achatCHF.text();
+            Element td22 = doc.select("td.font-weight-bold").get(27);
+            String venteDevise11 = td22.text();
+            Element td23 = doc.select("td.text-center").get(67);
+            String uniteDevise11 = td23.text();
 
-         
-        
-          Element BHD = doc.select("td.text-uppercase").get(14);
-          String nomdevise13 = BHD.text();
-          Element UniteBHD = doc.select("td.font-weight-bold").get(28);
-          String UniteDevise13 = UniteBHD.text();
-          System.out.println("unite 5 : " + UniteDevise13);
-          Element td26 = doc.select("td.font-weight-bold").get(29);
-          String AchatDevise13 = td26.text();
-          Element td27 = doc.select("td.text-center").get(72);
-          String VenteDevise13 = td27.text();
-        
-         
+           
           
+            Element BHD = doc.select("td.text-uppercase").get(14);
+            String nomdevise13 = BHD.text();
+            Element achatBHD = doc.select("td.font-weight-bold").get(28);
+            String achatDevise13 = achatBHD.text();
+            System.out.println("unite 5 : " + achatDevise13);
+            Element td26 = doc.select("td.font-weight-bold").get(29);
+            String venteDevise13 = td26.text();
+            Element td27 = doc.select("td.text-center").get(72);
+            String uniteDevise13 = td27.text();
           
-          Vente v = new Vente();
-          v.setData("amen", AchatDevise5,AchatDevise14, AchatDevise2,AchatDevise4,AchatDevise6,
-          		AchatDevise12,AchatDevise1,  AchatDevise3, 
-          		 AchatDevise7, AchatDevise8, AchatDevise9,"0",AchatDevise10,
-          		AchatDevise11,  AchatDevise13,  AchatDevise0);
-        //verfication 
-          List<Vente> verf = venteInterface.verification(v.getNomBanque());
-          
-          if(verf.isEmpty()) {
-       	   //ajout
-       	   venteInterface.save(v);
-          }
-          else  {
-       	   //update
-       	   venteInterface.updateVente(verf.get(0), v);
-          }
+           
+            
+
+            Achat achat = new Achat();
+            achat.setData("amen", achatDevise5,achatDevise14, achatDevise2,achatDevise4,achatDevise6,
+         		   achatDevise12,achatDevise1,  achatDevise3, 
+         		   achatDevise7, achatDevise8, achatDevise9,"0",achatDevise10,
+         		   achatDevise11,  achatDevise13,  achatDevise0);
+          //verfication 
+            List<Achat> verfAchat = achatInterface.verification(achat.getNomBanque());
+            
+            if(verfAchat.isEmpty()) {
+         	   //ajout
+         	   achatInterface.save(achat);
+            }
+            else  {
+         	   //update
+         	   achatInterface.updateAchat(verfAchat.get(0), achat);
+            }
+            
+            Vente v = new Vente();
+            v.setData("amen", venteDevise5,venteDevise14, venteDevise2,venteDevise4,venteDevise6,
+         		   venteDevise12,venteDevise1,  venteDevise3, 
+         		   venteDevise7,venteDevise8, venteDevise9,"0",venteDevise10,
+         		   venteDevise11,  venteDevise13,  venteDevise0);
+            //verfication 
+            List<Vente> verf = venteInterface.verification(v.getNomBanque());
+            
+            if(verf.isEmpty()) {
+         	   //ajout
+         	   venteInterface.save(v);
+            }
+            else  {
+         	   //update
+         	   venteInterface.updateVente(verf.get(0), v);
+            }
           return("ok");
          	}catch (Exception e) {
      			return("no"+e);
@@ -1833,190 +1953,210 @@ public class ScrapingController {
         
         
       
-      Element AED = doc.select("td.text-uppercase").get(0);
-      String nomdevise0 = AED.text();
-      System.out.println("title 0 : " + nomdevise0);
-        Element UniteSAR = doc.select("td.font-weight-bold").get(0);
-        String UniteDevise0 = UniteSAR.text();
-        System.out.println("unite 0 : " + UniteDevise0);
-        Element td1 = doc.select("td.font-weight-bold").get(1);
-        String AchatDevise0 = td1.text();
-        System.out.println("achat 0 : " + AchatDevise0);
-        Element td0 = doc.select("td.text-center").get(2);
-        String VenteDevise0 = td0.text();
-        System.out.println("vente0 : " + VenteDevise0);
-       // System.out.println("title4 : " + VenteDevise0);
-        
-        Element CNY = doc.select("td.text-uppercase").get(1);
-        String nomdevise5 = CNY.text();
-        System.out.println("title : " + nomdevise5);
-        Element UniteCNY = doc.select("td.font-weight-bold").get(2);
-        String UniteDevise5 = UniteCNY.text();
-        System.out.println("unite 1 : " + UniteDevise5);
-        Element td10 = doc.select("td.font-weight-bold").get(3);
-        String AchatDevise5 = td10.text();
-        System.out.println("achat 1 : " + AchatDevise5);
-        Element td11 = doc.select("td.text-center").get(7);
-        String VenteDevise5 = td11.text();
-        System.out.println("vente2 : " + VenteDevise5);
-        
-        Element GBP = doc.select("td.text-uppercase").get(2);
-        String nomdevise14 = GBP.text();
-        Element UniteGBP = doc.select("td.font-weight-bold").get(4);
-        String UniteDevise14 = UniteGBP.text();
-       
-        Element td28 = doc.select("td.font-weight-bold").get(5);
-        String AchatDevise14 = td28.text();
-        Element td29 = doc.select("td.text-center").get(12);
-        String VenteDevise14 = td29.text();
-        
-        Element DKK = doc.select("td.text-uppercase").get(3);
-        String nomdevise2 = DKK.text();
-        Element UniteDKK = doc.select("td.font-weight-bold").get(6);
-        String UniteDevise2 = UniteDKK.text();
-        Element td4 = doc.select("td.font-weight-bold").get(7);
-        String AchatDevise2 = td4.text();
-        Element td5 = doc.select("td.text-center").get(17);
-        String VenteDevise2 = td5.text();
+        Element AED = doc.select("td.text-uppercase").get(0);
+        String nomdevise0 = AED.text();
+        System.out.println("title 0 : " + nomdevise0);
+          Element achatSAR = doc.select("td.font-weight-bold").get(0);
+          String achatDevise0 = achatSAR.text();
+          System.out.println("achat 0 : " + achatDevise0);
+          Element td1 = doc.select("td.font-weight-bold").get(1);
+          String venteDevise0 = td1.text();
+          System.out.println("vente 0 : " + venteDevise0);
+          Element td0 = doc.select("td.text-center").get(2);
+          String uniteDevise0 = td0.text();
+          System.out.println("vente0 : " + uniteDevise0);
+         // System.out.println("title4 : " + VenteDevise0);
+          
+          Element CNY = doc.select("td.text-uppercase").get(1);
+          String nomdevise5 = CNY.text();
+          System.out.println("title : " + nomdevise5);
+          Element achatCNY = doc.select("td.font-weight-bold").get(2);
+          String achatDevise5 = achatCNY.text();
+          System.out.println("unite 1 : " + achatDevise5);
+          Element td10 = doc.select("td.font-weight-bold").get(3);
+          String venteDevise5 = td10.text();
+          System.out.println("vente 1 : " + venteDevise5);
+          Element td11 = doc.select("td.text-center").get(7);
+          String uniteDevise5 = td11.text();
+          System.out.println("vente2 : " + uniteDevise5);
+          
+          Element GBP = doc.select("td.text-uppercase").get(2);
+          String nomdevise14 = GBP.text();
+          Element achatGBP = doc.select("td.font-weight-bold").get(4);
+          String achatDevise14 = achatGBP.text();
+         
+          Element td28 = doc.select("td.font-weight-bold").get(5);
+          String venteDevise14 = td28.text();
+          Element td29 = doc.select("td.text-center").get(12);
+          String uniteDevise14 = td29.text();
+          
+          Element DKK = doc.select("td.text-uppercase").get(3);
+          String nomdevise2 = DKK.text();
+          Element achatDKK = doc.select("td.font-weight-bold").get(6);
+          String achatDevise2 = achatDKK.text();
+          Element td4 = doc.select("td.font-weight-bold").get(7);
+          String venteDevise2 = td4.text();
+          Element td5 = doc.select("td.text-center").get(17);
+          String uniteDevise2 = td5.text();
 
-        Element USD = doc.select("td.text-uppercase").get(4);
-        String nomdevise4 = USD.text();
-        Element UniteUSD = doc.select("td.font-weight-bold").get(8);
-        String UniteDevise4 = UniteUSD.text();
-        Element td8 = doc.select("td.font-weight-bold").get(9);
-        String AchatDevise4 = td8.text();
-        Element td9 = doc.select("td.text-center").get(22);
-        String VenteDevise4 = td9.text();
-        
-        Element JPY = doc.select("td.text-uppercase").get(5);
-        String nomdevise6 = JPY.text();
-        Element UniteJPY = doc.select("td.font-weight-bold").get(10);
-        String UniteDevise6 = UniteJPY.text();
-        Element td12 = doc.select("td.font-weight-bold").get(11);
-        String AchatDevise6 = td12.text();
-        Element td13 = doc.select("td.text-center").get(27);
-        String VenteDevise6 = td13.text();
-        
-        Element EUR = doc.select("td.text-uppercase").get(6);
-        String nomdevise12 = EUR.text();
-        Element UniteEUR = doc.select("td.font-weight-bold").get(12);
-        String UniteDevise12 = UniteEUR.text();
-        Element td24 = doc.select("td.font-weight-bold").get(13);
-        String AchatDevise12 = td24.text();
-        Element td25 = doc.select("td.text-center").get(32);
-        String VenteDevise12 = td25.text();
-  
-     
-        Element CAD = doc.select("td.text-uppercase").get(7);
-        String nomdevise1 = CAD.text();
-        Element UniteCAD = doc.select("td.font-weight-bold").get(14);
-        String UniteDevise1 = UniteCAD.text();
-        Element td2 = doc.select("td.font-weight-bold").get(15);
-        String AchatDevise1 = td2.text();
-        Element td3 = doc.select("td.text-center").get(37);
-        String VenteDevise1 = td3.text();
+          Element USD = doc.select("td.text-uppercase").get(4);
+          String nomdevise4 = USD.text();
+          Element achatUSD = doc.select("td.font-weight-bold").get(8);
+          String achatDevise4 = achatUSD.text();
+          Element td8 = doc.select("td.font-weight-bold").get(9);
+          String venteDevise4 = td8.text();
+          Element td9 = doc.select("td.text-center").get(22);
+          String uniteDevise4 = td9.text();
+          
+          Element JPY = doc.select("td.text-uppercase").get(5);
+          String nomdevise6 = JPY.text();
+          Element achatJPY = doc.select("td.font-weight-bold").get(10);
+          String achatDevise6 = achatJPY.text();
+          Element td12 = doc.select("td.font-weight-bold").get(11);
+          String venteDevise6 = td12.text();
+          Element td13 = doc.select("td.text-center").get(27);
+          String uniteDevise6 = td13.text();
+          
+          Element EUR = doc.select("td.text-uppercase").get(6);
+          String nomdevise12 = EUR.text();
+          Element achatEUR = doc.select("td.font-weight-bold").get(12);
+          String achatDevise12 = achatEUR.text();
+          Element td24 = doc.select("td.font-weight-bold").get(13);
+          String venteDevise12 = td24.text();
+          Element td25 = doc.select("td.text-center").get(32);
+          String uniteDevise12 = td25.text();
+    
        
-      
-      
-      
-        Element ggg = doc.select("td.text-uppercase").get(8);
-        String nomdevise3 = ggg.text();
-        Element Uniteggg = doc.select("td.font-weight-bold").get(16);
-        String UniteDevise3 = Uniteggg.text();
-        Element td6 = doc.select("td.font-weight-bold").get(17);
-        String AchatDevise3 = td6.text();
-        Element td7 = doc.select("td.text-center").get(42);
-        String VenteDevise3 = td7.text();
-      
+          Element CAD = doc.select("td.text-uppercase").get(7);
+          String nomdevise1 = CAD.text();
+          Element achatCAD = doc.select("td.font-weight-bold").get(14);
+          String achatDevise1 = achatCAD.text();
+          Element td2 = doc.select("td.font-weight-bold").get(15);
+          String venteDevise1 = td2.text();
+          Element td3 = doc.select("td.text-center").get(37);
+          String uniteDevise1 = td3.text();
+         
         
-      
         
-      
-      
-        Element KWD = doc.select("td.text-uppercase").get(9);
-        String nomdevise7 = KWD.text();
-        Element UniteKWD = doc.select("td.font-weight-bold").get(18);
-        String UniteDevise7 = UniteKWD.text();
-        Element td14 = doc.select("td.font-weight-bold").get(19);
-        String AchatDevise7 = td14.text();
-        Element td15 = doc.select("td.text-center").get(47);
-        String VenteDevise7 = td15.text();
-      
-        Element NOK = doc.select("td.text-uppercase").get(10);
-        String nomdevise8 = NOK.text();
-        Element UniteNOK = doc.select("td.font-weight-bold").get(20);
-        String UniteDevise8 = UniteNOK.text();
-        Element td16 = doc.select("td.font-weight-bold").get(21);
-        String AchatDevise8 = td16.text();
-        Element td17 = doc.select("td.text-center").get(52);
-        String VenteDevise8 = td17.text();
-      
-        Element QAR = doc.select("td.text-uppercase").get(11);
-        String nomdevise9 = QAR.text();
-        Element UniteQAR = doc.select("td.font-weight-bold").get(22);
-        String UniteDevise9 = UniteQAR.text();
-        Element td18 = doc.select("td.font-weight-bold").get(23);
-        String AchatDevise9 = td18.text();
-        Element td19 = doc.select("td.text-center").get(57);
-        String VenteDevise9 = td19.text();
-      
-        Element SEK = doc.select("td.text-uppercase").get(12);
-        String nomdevise10 = SEK.text();
-        Element UniteSEK = doc.select("td.font-weight-bold").get(24);
-        String UniteDevise10 = UniteSEK.text();
-        Element td20 = doc.select("td.font-weight-bold").get(25);
-        String AchatDevise10 = td20.text();
-        Element td21 = doc.select("td.text-center").get(62);
-        String VenteDevise10 = td21.text();
-      
-        Element CHF = doc.select("td.text-uppercase").get(13);
-        String nomdevise11 = CHF.text();
-        Element UniteCHF = doc.select("td.font-weight-bold").get(26);
-        String UniteDevise11 = UniteCHF.text();
-        Element td22 = doc.select("td.font-weight-bold").get(27);
-        String AchatDevise11 = td22.text();
-        Element td23 = doc.select("td.text-center").get(67);
-        String VenteDevise11 = td23.text();
+        
+          Element ggg = doc.select("td.text-uppercase").get(8);
+          String nomdevise3 = ggg.text();
+          Element achatggg = doc.select("td.font-weight-bold").get(16);
+          String achatDevise3 = achatggg.text();
+          Element td6 = doc.select("td.font-weight-bold").get(17);
+          String venteDevise3 = td6.text();
+          Element td7 = doc.select("td.text-center").get(42);
+          String uniteDevise3 = td7.text();
+        
+          
+        
+          
+        
+        
+          Element KWD = doc.select("td.text-uppercase").get(9);
+          String nomdevise7 = KWD.text();
+          Element achatKWD = doc.select("td.font-weight-bold").get(18);
+          String achatDevise7 = achatKWD.text();
+          Element td14 = doc.select("td.font-weight-bold").get(19);
+          String venteDevise7 = td14.text();
+          Element td15 = doc.select("td.text-center").get(47);
+          String uniteDevise7 = td15.text();
+        
+          Element NOK = doc.select("td.text-uppercase").get(10);
+          String nomdevise8 = NOK.text();
+          Element achatNOK = doc.select("td.font-weight-bold").get(20);
+          String achatDevise8 = achatNOK.text();
+          Element td16 = doc.select("td.font-weight-bold").get(21);
+          String venteDevise8 = td16.text();
+          Element td17 = doc.select("td.text-center").get(52);
+          String uniteDevise8 = td17.text();
+        
+          Element QAR = doc.select("td.text-uppercase").get(11);
+          String nomdevise9 = QAR.text();
+          Element achatQAR = doc.select("td.font-weight-bold").get(22);
+          String achatDevise9 = achatQAR.text();
+          Element td18 = doc.select("td.font-weight-bold").get(23);
+          String venteDevise9 = td18.text();
+          Element td19 = doc.select("td.text-center").get(57);
+          String uniteDevise9 = td19.text();
+        
+          Element SEK = doc.select("td.text-uppercase").get(12);
+          String nomdevise10 = SEK.text();
+          Element achatSEK = doc.select("td.font-weight-bold").get(24);
+          String achatDevise10 = achatSEK.text();
+          Element td20 = doc.select("td.font-weight-bold").get(25);
+          String venteDevise10 = td20.text();
+          Element td21 = doc.select("td.text-center").get(62);
+          String uniteDevise10 = td21.text();
+        
+          Element CHF = doc.select("td.text-uppercase").get(13);
+          String nomdevise11 = CHF.text();
+          Element achatCHF = doc.select("td.font-weight-bold").get(26);
+          String achatDevise11 = achatCHF.text();
+          Element td22 = doc.select("td.font-weight-bold").get(27);
+          String venteDevise11 = td22.text();
+          Element td23 = doc.select("td.text-center").get(67);
+          String uniteDevise11 = td23.text();
 
-       
-      
-        Element BHD = doc.select("td.text-uppercase").get(14);
-        String nomdevise13 = BHD.text();
-        Element UniteBHD = doc.select("td.font-weight-bold").get(28);
-        String UniteDevise13 = UniteBHD.text();
-        System.out.println("unite 5 : " + UniteDevise13);
-        Element td26 = doc.select("td.font-weight-bold").get(29);
-        String AchatDevise13 = td26.text();
-        Element td27 = doc.select("td.text-center").get(72);
-        String VenteDevise13 = td27.text();
-      
-
-        Element CNYY= doc.select("td.text-uppercase").get(15);
-        String nomdevise16 = CNYY.text();
-        Element UniteCNYY = doc.select("td.font-weight-bold").get(30);
-        String UniteDevise16 = UniteBHD.text();
-        System.out.println("unite 5 : " + UniteDevise13);
-        Element td50 = doc.select("td.font-weight-bold").get(31);
-        String AchatDevise16 = td50.text();
-        Element td51 = doc.select("td.text-center").get(77);
-        String VenteDevise16 = td51.text();
+         
         
-        Vente v = new Vente();
-        v.setData("uib", AchatDevise5,AchatDevise14, AchatDevise2,AchatDevise4,AchatDevise6,
-        		AchatDevise12,AchatDevise1,  AchatDevise3, 
-        		 AchatDevise7, AchatDevise8, AchatDevise9,AchatDevise10,
-        		AchatDevise11,  AchatDevise13, AchatDevise16, AchatDevise0);
-      //verfication 
-        List<Vente> verf = venteInterface.verification(v.getNomBanque());
+          Element BHD = doc.select("td.text-uppercase").get(14);
+          String nomdevise13 = BHD.text();
+          Element achatBHD = doc.select("td.font-weight-bold").get(28);
+          String achatDevise13 = achatBHD.text();
+          System.out.println("unite 5 : " + achatDevise13);
+          Element td26 = doc.select("td.font-weight-bold").get(29);
+          String venteDevise13 = td26.text();
+          Element td27 = doc.select("td.text-center").get(72);
+          String uniteDevise13 = td27.text();
         
-        if(verf.isEmpty()) {
-     	   //ajout
-     	   venteInterface.save(v);
-        }
-        else  {
-     	   //update
-     	   venteInterface.updateVente(verf.get(0), v);
-        }
+          Element CNYY= doc.select("td.text-uppercase").get(15);
+          String nomdevise16 = CNYY.text();
+          Element achatCNYY = doc.select("td.font-weight-bold").get(30);
+          String achatDevise16 = achatCNYY.text();
+          System.out.println("unite 5 : " + achatDevise13);
+          Element td50 = doc.select("td.font-weight-bold").get(31);
+          String venteDevise16 = td50.text();
+          Element td51 = doc.select("td.text-center").get(77);
+          String uniteDevise16 = td51.text();
+        
+          
+          
+          Vente v = new Vente();
+          v.setData("uib", venteDevise5,venteDevise14, venteDevise2,venteDevise4,venteDevise6,
+       		   venteDevise12,venteDevise1,  venteDevise3, 
+       		   venteDevise7, venteDevise8, venteDevise9,venteDevise10,
+       		   venteDevise11,  venteDevise13, venteDevise16, venteDevise0);
+          System.out.println(v);
+        //verfication 
+          List<Vente> verf = venteInterface.verification(v.getNomBanque());
+          
+          if(verf.isEmpty()) {
+       	   //ajout
+       	   venteInterface.save(v);
+          }
+          else  {
+       	   //update
+       	   venteInterface.updateVente(verf.get(0), v);
+          }
+          
+          Achat achat = new Achat();
+          achat.setData("uib", achatDevise5,achatDevise14, achatDevise2,achatDevise4,achatDevise6,
+       		   achatDevise12,achatDevise1,  achatDevise3, 
+       		   achatDevise7, achatDevise8, achatDevise9,achatDevise10,
+       		   achatDevise11,  achatDevise13, achatDevise16, achatDevise0);
+          System.out.println(achat);
+        //verfication 
+          List<Achat> verfAchat = achatInterface.verification(achat.getNomBanque());
+          
+          if(verfAchat.isEmpty()) {
+       	   //ajout
+       	   achatInterface.save(achat);
+          }
+          else  {
+       	   //update
+       	   achatInterface.updateAchat(verfAchat.get(0), achat);
+          }
         return("ok");
        	}catch (Exception e) {
    			return("no"+e);
@@ -2283,96 +2423,96 @@ public class ScrapingController {
       Element AED = doc.select("td.text-uppercase").get(0);
       String nomdevise0 = AED.text();
       System.out.println("title 0 : " + nomdevise0);
-        Element UniteSAR = doc.select("td.font-weight-bold").get(0);
-        String UniteDevise0 = UniteSAR.text();
-        System.out.println("unite 0 : " + UniteDevise0);
+        Element achatSAR = doc.select("td.font-weight-bold").get(0);
+        String achatDevise0 = achatSAR.text();
+        System.out.println("achat 0 : " + achatDevise0);
         Element td1 = doc.select("td.font-weight-bold").get(1);
-        String AchatDevise0 = td1.text();
-        System.out.println("achat 0 : " + AchatDevise0);
+        String venteDevise0 = td1.text();
+        System.out.println("achat 0 : " + venteDevise0);
         Element td0 = doc.select("td.text-center").get(2);
-        String VenteDevise0 = td0.text();
-        System.out.println("vente0 : " + VenteDevise0);
+        String uniteDevise0 = td0.text();
+        System.out.println("vente0 : " + uniteDevise0);
         
         Element CNY = doc.select("td.text-uppercase").get(1);
         String nomdevise5 = CNY.text();
         System.out.println("title : " + nomdevise5);
-        Element UniteCNY = doc.select("td.font-weight-bold").get(2);
-        String UniteDevise5 = UniteCNY.text();
-        System.out.println("unite 1 : " + UniteDevise5);
+        Element achatCNY = doc.select("td.font-weight-bold").get(2);
+        String achatDevise5 = achatCNY.text();
+        System.out.println("achat : " + achatDevise5);
         Element td10 = doc.select("td.font-weight-bold").get(3);
-        String AchatDevise5 = td10.text();
-        System.out.println("achat 1 : " + AchatDevise5);
+        String venteDevise5 = td10.text();
+        System.out.println("vente 1 : " + venteDevise5);
         Element td11 = doc.select("td.text-center").get(7);
-        String VenteDevise5 = td11.text();
-        System.out.println("vente2 : " + VenteDevise5);
+        String uniteDevise5 = td11.text();
+        System.out.println("unite : " + uniteDevise5);
         
         Element GBP = doc.select("td.text-uppercase").get(2);
         String nomdevise14 = GBP.text();
-        Element UniteGBP = doc.select("td.font-weight-bold").get(4);
-        String UniteDevise14 = UniteGBP.text();
+        Element achatGBP = doc.select("td.font-weight-bold").get(4);
+        String achatDevise14 = achatGBP.text();
        
         Element td28 = doc.select("td.font-weight-bold").get(5);
-        String AchatDevise14 = td28.text();
+        String venteDevise14 = td28.text();
         Element td29 = doc.select("td.text-center").get(12);
-        String VenteDevise14 = td29.text();
+        String uniteDevise14 = td29.text();
         
         Element DKK = doc.select("td.text-uppercase").get(3);
         String nomdevise2 = DKK.text();
-        Element UniteDKK = doc.select("td.font-weight-bold").get(6);
-        String UniteDevise2 = UniteDKK.text();
+        Element achatDKK = doc.select("td.font-weight-bold").get(6);
+        String achatDevise2 = achatDKK.text();
         Element td4 = doc.select("td.font-weight-bold").get(7);
-        String AchatDevise2 = td4.text();
+        String venteDevise2 = td4.text();
         Element td5 = doc.select("td.text-center").get(17);
-        String VenteDevise2 = td5.text();
+        String uniteDevise2 = td5.text();
 
         Element USD = doc.select("td.text-uppercase").get(4);
         String nomdevise4 = USD.text();
-        Element UniteUSD = doc.select("td.font-weight-bold").get(8);
-        String UniteDevise4 = UniteUSD.text();
+        Element achatUSD = doc.select("td.font-weight-bold").get(8);
+        String achatDevise4 = achatUSD.text();
         Element td8 = doc.select("td.font-weight-bold").get(9);
-        String AchatDevise4 = td8.text();
+        String venteDevise4 = td8.text();
         Element td9 = doc.select("td.text-center").get(22);
-        String VenteDevise4 = td9.text();
+        String uniteDevise4 = td9.text();
         
         Element JPY = doc.select("td.text-uppercase").get(5);
         String nomdevise6 = JPY.text();
-        Element UniteJPY = doc.select("td.font-weight-bold").get(10);
-        String UniteDevise6 = UniteJPY.text();
+        Element achatJPY = doc.select("td.font-weight-bold").get(10);
+        String achatDevise6 = achatJPY.text();
         Element td12 = doc.select("td.font-weight-bold").get(11);
-        String AchatDevise6 = td12.text();
+        String venteDevise6 = td12.text();
         Element td13 = doc.select("td.text-center").get(27);
-        String VenteDevise6 = td13.text();
+        String uniteDevise6 = td13.text();
         
         Element EUR = doc.select("td.text-uppercase").get(6);
         String nomdevise12 = EUR.text();
-        Element UniteEUR = doc.select("td.font-weight-bold").get(12);
-        String UniteDevise12 = UniteEUR.text();
+        Element achatEUR = doc.select("td.font-weight-bold").get(12);
+        String achatDevise12 = achatEUR.text();
         Element td24 = doc.select("td.font-weight-bold").get(13);
-        String AchatDevise12 = td24.text();
+        String venteDevise12 = td24.text();
         Element td25 = doc.select("td.text-center").get(32);
-        String VenteDevise12 = td25.text();
+        String uniteDevise12 = td25.text();
   
      
         Element CAD = doc.select("td.text-uppercase").get(7);
         String nomdevise1 = CAD.text();
-        Element UniteCAD = doc.select("td.font-weight-bold").get(14);
-        String UniteDevise1 = UniteCAD.text();
+        Element achatCAD = doc.select("td.font-weight-bold").get(14);
+        String achatDevise1 = achatCAD.text();
         Element td2 = doc.select("td.font-weight-bold").get(15);
-        String AchatDevise1 = td2.text();
+        String venteDevise1 = td2.text();
         Element td3 = doc.select("td.text-center").get(37);
-        String VenteDevise1 = td3.text();
+        String uniteDevise1 = td3.text();
        
       
       
       
         Element ggg = doc.select("td.text-uppercase").get(8);
         String nomdevise3 = ggg.text();
-        Element Uniteggg = doc.select("td.font-weight-bold").get(16);
-        String UniteDevise3 = Uniteggg.text();
+        Element achatggg = doc.select("td.font-weight-bold").get(16);
+        String achatDevise3 = achatggg.text();
         Element td6 = doc.select("td.font-weight-bold").get(17);
-        String AchatDevise3 = td6.text();
+        String venteDevise3 = td6.text();
         Element td7 = doc.select("td.text-center").get(42);
-        String VenteDevise3 = td7.text();
+        String uniteDevise3 = td7.text();
       
         
       
@@ -2381,69 +2521,69 @@ public class ScrapingController {
       
         Element KWD = doc.select("td.text-uppercase").get(9);
         String nomdevise7 = KWD.text();
-        Element UniteKWD = doc.select("td.font-weight-bold").get(18);
-        String UniteDevise7 = UniteKWD.text();
+        Element achatKWD = doc.select("td.font-weight-bold").get(18);
+        String achatDevise7 = achatKWD.text();
         Element td14 = doc.select("td.font-weight-bold").get(19);
-        String AchatDevise7 = td14.text();
+        String venteDevise7 = td14.text();
         Element td15 = doc.select("td.text-center").get(47);
-        String VenteDevise7 = td15.text();
+        String uniteDevise7 = td15.text();
       
         Element NOK = doc.select("td.text-uppercase").get(10);
         String nomdevise8 = NOK.text();
-        Element UniteNOK = doc.select("td.font-weight-bold").get(20);
-        String UniteDevise8 = UniteNOK.text();
+        Element achatNOK = doc.select("td.font-weight-bold").get(20);
+        String achatDevise8 = achatNOK.text();
         Element td16 = doc.select("td.font-weight-bold").get(21);
-        String AchatDevise8 = td16.text();
+        String venteDevise8 = td16.text();
         Element td17 = doc.select("td.text-center").get(52);
-        String VenteDevise8 = td17.text();
+        String uniteDevise8 = td17.text();
       
         Element QAR = doc.select("td.text-uppercase").get(11);
         String nomdevise9 = QAR.text();
-        Element UniteQAR = doc.select("td.font-weight-bold").get(22);
-        String UniteDevise9 = UniteQAR.text();
+        Element achatQAR = doc.select("td.font-weight-bold").get(22);
+        String achatDevise9 = achatQAR.text();
         Element td18 = doc.select("td.font-weight-bold").get(23);
-        String AchatDevise9 = td18.text();
+        String venteDevise9 = td18.text();
         Element td19 = doc.select("td.text-center").get(57);
-        String VenteDevise9 = td19.text();
+        String uniteDevise9 = td19.text();
       
         Element SEK = doc.select("td.text-uppercase").get(12);
         String nomdevise10 = SEK.text();
-        Element UniteSEK = doc.select("td.font-weight-bold").get(24);
-        String UniteDevise10 = UniteSEK.text();
+        Element achatSEK = doc.select("td.font-weight-bold").get(24);
+        String achatDevise10 = achatSEK.text();
         Element td20 = doc.select("td.font-weight-bold").get(25);
-        String AchatDevise10 = td20.text();
+        String venteDevise10 = td20.text();
         Element td21 = doc.select("td.text-center").get(62);
-        String VenteDevise10 = td21.text();
+        String uniteDevise10 = td21.text();
       
         Element CHF = doc.select("td.text-uppercase").get(13);
         String nomdevise11 = CHF.text();
-        Element UniteCHF = doc.select("td.font-weight-bold").get(26);
-        String UniteDevise11 = UniteCHF.text();
+        Element achatCHF = doc.select("td.font-weight-bold").get(26);
+        String achatDevise11 = achatCHF.text();
         Element td22 = doc.select("td.font-weight-bold").get(27);
-        String AchatDevise11 = td22.text();
+        String venteDevise11 = td22.text();
         Element td23 = doc.select("td.text-center").get(67);
-        String VenteDevise11 = td23.text();
+        String uniteDevise11 = td23.text();
 
        
       
         Element BHD = doc.select("td.text-uppercase").get(14);
         String nomdevise13 = BHD.text();
-        Element UniteBHD = doc.select("td.font-weight-bold").get(28);
-        String UniteDevise13 = UniteBHD.text();
-        System.out.println("unite 5 : " + UniteDevise13);
+        Element achatBHD = doc.select("td.font-weight-bold").get(28);
+        String achatDevise13 = achatBHD.text();
+        System.out.println("unite 5 : " + achatDevise13);
         Element td26 = doc.select("td.font-weight-bold").get(29);
-        String AchatDevise13 = td26.text();
+        String venteDevise13 = td26.text();
         Element td27 = doc.select("td.text-center").get(72);
-        String VenteDevise13 = td27.text();
+        String uniteDevise13 = td27.text();
       
 
         
         
         Vente v = new Vente();
-        v.setData("atb", AchatDevise5,AchatDevise14, AchatDevise2,AchatDevise4,AchatDevise6,
-        		AchatDevise12,AchatDevise1,  AchatDevise3, 
-        		 AchatDevise7, AchatDevise8, AchatDevise9,AchatDevise10,
-        		AchatDevise11,  AchatDevise13, "0", AchatDevise0);
+        v.setData("atb", venteDevise5,venteDevise14, venteDevise2,venteDevise4,venteDevise6,
+        		venteDevise12,venteDevise1,  venteDevise3, 
+        		venteDevise7, venteDevise8, venteDevise9,venteDevise10,
+        		venteDevise11,  venteDevise13, "0", venteDevise0);
       //verfication 
         List<Vente> verf = venteInterface.verification(v.getNomBanque());
         
@@ -2454,6 +2594,23 @@ public class ScrapingController {
         else  {
      	   //update
      	   venteInterface.updateVente(verf.get(0), v);
+        }
+        
+        Achat achat = new Achat();
+        achat.setData("atb", achatDevise5,achatDevise14, achatDevise2,achatDevise4,achatDevise6,
+        		achatDevise12,achatDevise1,  achatDevise3, 
+       		 achatDevise7, achatDevise8, achatDevise9,achatDevise10,
+       		achatDevise11,  achatDevise13, "0", achatDevise0);
+      //verfication 
+        List<Achat> verfAchat = achatInterface.verification(achat.getNomBanque());
+        
+        if(verfAchat.isEmpty()) {
+     	   //ajout
+     	   achatInterface.save(achat);
+        }
+        else  {
+     	   //update
+     	   achatInterface.updateAchat(verfAchat.get(0), achat);
         }
         return("ok");
        	}catch (Exception e) {
@@ -2477,182 +2634,194 @@ public class ScrapingController {
         
         
       
-      Element AED = doc.select("td.text-uppercase").get(0);
-      String nomdevise0 = AED.text();
-      System.out.println("title 0 : " + nomdevise0);
-        Element UniteSAR = doc.select("td.font-weight-bold").get(0);
-        String UniteDevise0 = UniteSAR.text();
-        System.out.println("unite 0 : " + UniteDevise0);
-        Element td1 = doc.select("td.font-weight-bold").get(1);
-        String AchatDevise0 = td1.text();
-        System.out.println("achat 0 : " + AchatDevise0);
-        Element td0 = doc.select("td.text-center").get(2);
-        String VenteDevise0 = td0.text();
-        System.out.println("vente0 : " + VenteDevise0);
-       // System.out.println("title4 : " + VenteDevise0);
-        
-        Element CNY = doc.select("td.text-uppercase").get(1);
-        String nomdevise5 = CNY.text();
-        System.out.println("title : " + nomdevise5);
-        Element UniteCNY = doc.select("td.font-weight-bold").get(2);
-        String UniteDevise5 = UniteCNY.text();
-        System.out.println("unite 1 : " + UniteDevise5);
-        Element td10 = doc.select("td.font-weight-bold").get(3);
-        String AchatDevise5 = td10.text();
-        System.out.println("achat 1 : " + AchatDevise5);
-        Element td11 = doc.select("td.text-center").get(7);
-        String VenteDevise5 = td11.text();
-        System.out.println("vente2 : " + VenteDevise5);
-        
-        Element GBP = doc.select("td.text-uppercase").get(2);
-        String nomdevise14 = GBP.text();
-        Element UniteGBP = doc.select("td.font-weight-bold").get(4);
-        String UniteDevise14 = UniteGBP.text();
-       
-        Element td28 = doc.select("td.font-weight-bold").get(5);
-        String AchatDevise14 = td28.text();
-        Element td29 = doc.select("td.text-center").get(12);
-        String VenteDevise14 = td29.text();
-        
-        Element DKK = doc.select("td.text-uppercase").get(3);
-        String nomdevise2 = DKK.text();
-        Element UniteDKK = doc.select("td.font-weight-bold").get(6);
-        String UniteDevise2 = UniteDKK.text();
-        Element td4 = doc.select("td.font-weight-bold").get(7);
-        String AchatDevise2 = td4.text();
-        Element td5 = doc.select("td.text-center").get(17);
-        String VenteDevise2 = td5.text();
+        Element AED = doc.select("td.text-uppercase").get(0);
+        String nomdevise0 = AED.text();
+        System.out.println("title 0 : " + nomdevise0);
+          Element achatSAR = doc.select("td.font-weight-bold").get(0);
+          String achatDevise0 = achatSAR.text();
+          System.out.println("achat 0 : " + achatDevise0);
+          Element td1 = doc.select("td.font-weight-bold").get(1);
+          String venteDevise0 = td1.text();
+          System.out.println("vente 0 : " + venteDevise0);
+          Element td0 = doc.select("td.text-center").get(2);
+          String uniteDevise0 = td0.text();
+          System.out.println("vente0 : " + uniteDevise0);
+         // System.out.println("title4 : " + VenteDevise0);
+          
+          Element CNY = doc.select("td.text-uppercase").get(1);
+          String nomdevise5 = CNY.text();
+          System.out.println("title : " + nomdevise5);
+          Element achatCNY = doc.select("td.font-weight-bold").get(2);
+          String achatDevise5 = achatCNY.text();
+          System.out.println("unite 1 : " + achatDevise5);
+          Element td10 = doc.select("td.font-weight-bold").get(3);
+          String venteDevise5 = td10.text();
+          System.out.println("vente 1 : " + venteDevise5);
+          Element td11 = doc.select("td.text-center").get(7);
+          String uniteDevise5 = td11.text();
+          System.out.println("vente2 : " + uniteDevise5);
+          
+          Element GBP = doc.select("td.text-uppercase").get(2);
+          String nomdevise14 = GBP.text();
+          Element achatGBP = doc.select("td.font-weight-bold").get(4);
+          String achatDevise14 = achatGBP.text();
+         
+          Element td28 = doc.select("td.font-weight-bold").get(5);
+          String venteDevise14 = td28.text();
+          Element td29 = doc.select("td.text-center").get(12);
+          String uniteDevise14 = td29.text();
+          
+          Element DKK = doc.select("td.text-uppercase").get(3);
+          String nomdevise2 = DKK.text();
+          Element achatDKK = doc.select("td.font-weight-bold").get(6);
+          String achatDevise2 = achatDKK.text();
+          Element td4 = doc.select("td.font-weight-bold").get(7);
+          String venteDevise2 = td4.text();
+          Element td5 = doc.select("td.text-center").get(17);
+          String uniteDevise2 = td5.text();
 
-        Element USD = doc.select("td.text-uppercase").get(4);
-        String nomdevise4 = USD.text();
-        Element UniteUSD = doc.select("td.font-weight-bold").get(8);
-        String UniteDevise4 = UniteUSD.text();
-        Element td8 = doc.select("td.font-weight-bold").get(9);
-        String AchatDevise4 = td8.text();
-        Element td9 = doc.select("td.text-center").get(22);
-        String VenteDevise4 = td9.text();
-        
-        Element JPY = doc.select("td.text-uppercase").get(5);
-        String nomdevise6 = JPY.text();
-        Element UniteJPY = doc.select("td.font-weight-bold").get(10);
-        String UniteDevise6 = UniteJPY.text();
-        Element td12 = doc.select("td.font-weight-bold").get(11);
-        String AchatDevise6 = td12.text();
-        Element td13 = doc.select("td.text-center").get(27);
-        String VenteDevise6 = td13.text();
-        
-        Element EUR = doc.select("td.text-uppercase").get(6);
-        String nomdevise12 = EUR.text();
-        Element UniteEUR = doc.select("td.font-weight-bold").get(12);
-        String UniteDevise12 = UniteEUR.text();
-        Element td24 = doc.select("td.font-weight-bold").get(13);
-        String AchatDevise12 = td24.text();
-        Element td25 = doc.select("td.text-center").get(32);
-        String VenteDevise12 = td25.text();
-  
-     
-        Element CAD = doc.select("td.text-uppercase").get(7);
-        String nomdevise1 = CAD.text();
-        Element UniteCAD = doc.select("td.font-weight-bold").get(14);
-        String UniteDevise1 = UniteCAD.text();
-        Element td2 = doc.select("td.font-weight-bold").get(15);
-        String AchatDevise1 = td2.text();
-        Element td3 = doc.select("td.text-center").get(37);
-        String VenteDevise1 = td3.text();
+          Element USD = doc.select("td.text-uppercase").get(4);
+          String nomdevise4 = USD.text();
+          Element achatUSD = doc.select("td.font-weight-bold").get(8);
+          String achatDevise4 = achatUSD.text();
+          Element td8 = doc.select("td.font-weight-bold").get(9);
+          String venteDevise4 = td8.text();
+          Element td9 = doc.select("td.text-center").get(22);
+          String uniteDevise4 = td9.text();
+          
+          Element JPY = doc.select("td.text-uppercase").get(5);
+          String nomdevise6 = JPY.text();
+          Element achatJPY = doc.select("td.font-weight-bold").get(10);
+          String achatDevise6 = achatJPY.text();
+          Element td12 = doc.select("td.font-weight-bold").get(11);
+          String venteDevise6 = td12.text();
+          Element td13 = doc.select("td.text-center").get(27);
+          String uniteDevise6 = td13.text();
+          
+          Element EUR = doc.select("td.text-uppercase").get(6);
+          String nomdevise12 = EUR.text();
+          Element achatEUR = doc.select("td.font-weight-bold").get(12);
+          String achatDevise12 = achatEUR.text();
+          Element td24 = doc.select("td.font-weight-bold").get(13);
+          String venteDevise12 = td24.text();
+          Element td25 = doc.select("td.text-center").get(32);
+          String uniteDevise12 = td25.text();
+    
        
-      
-      
-      
-        Element ggg = doc.select("td.text-uppercase").get(8);
-        String nomdevise3 = ggg.text();
-        Element Uniteggg = doc.select("td.font-weight-bold").get(16);
-        String UniteDevise3 = Uniteggg.text();
-        Element td6 = doc.select("td.font-weight-bold").get(17);
-        String AchatDevise3 = td6.text();
-        Element td7 = doc.select("td.text-center").get(42);
-        String VenteDevise3 = td7.text();
-      
+          Element CAD = doc.select("td.text-uppercase").get(7);
+          String nomdevise1 = CAD.text();
+          Element achatCAD = doc.select("td.font-weight-bold").get(14);
+          String achatDevise1 = achatCAD.text();
+          Element td2 = doc.select("td.font-weight-bold").get(15);
+          String venteDevise1 = td2.text();
+          Element td3 = doc.select("td.text-center").get(37);
+          String uniteDevise1 = td3.text();
+         
         
-      
         
-      
-      
-        Element KWD = doc.select("td.text-uppercase").get(9);
-        String nomdevise7 = KWD.text();
-        Element UniteKWD = doc.select("td.font-weight-bold").get(18);
-        String UniteDevise7 = UniteKWD.text();
-        Element td14 = doc.select("td.font-weight-bold").get(19);
-        String AchatDevise7 = td14.text();
-        Element td15 = doc.select("td.text-center").get(47);
-        String VenteDevise7 = td15.text();
-      
-        Element NOK = doc.select("td.text-uppercase").get(10);
-        String nomdevise8 = NOK.text();
-        Element UniteNOK = doc.select("td.font-weight-bold").get(20);
-        String UniteDevise8 = UniteNOK.text();
-        Element td16 = doc.select("td.font-weight-bold").get(21);
-        String AchatDevise8 = td16.text();
-        Element td17 = doc.select("td.text-center").get(52);
-        String VenteDevise8 = td17.text();
-      
-        Element QAR = doc.select("td.text-uppercase").get(11);
-        String nomdevise9 = QAR.text();
-        Element UniteQAR = doc.select("td.font-weight-bold").get(22);
-        String UniteDevise9 = UniteQAR.text();
-        Element td18 = doc.select("td.font-weight-bold").get(23);
-        String AchatDevise9 = td18.text();
-        Element td19 = doc.select("td.text-center").get(57);
-        String VenteDevise9 = td19.text();
-      
-        Element SEK = doc.select("td.text-uppercase").get(12);
-        String nomdevise10 = SEK.text();
-        Element UniteSEK = doc.select("td.font-weight-bold").get(24);
-        String UniteDevise10 = UniteSEK.text();
-        Element td20 = doc.select("td.font-weight-bold").get(25);
-        String AchatDevise10 = td20.text();
-        Element td21 = doc.select("td.text-center").get(62);
-        String VenteDevise10 = td21.text();
-      
-        Element CHF = doc.select("td.text-uppercase").get(13);
-        String nomdevise11 = CHF.text();
-        Element UniteCHF = doc.select("td.font-weight-bold").get(26);
-        String UniteDevise11 = UniteCHF.text();
-        Element td22 = doc.select("td.font-weight-bold").get(27);
-        String AchatDevise11 = td22.text();
-        Element td23 = doc.select("td.text-center").get(67);
-        String VenteDevise11 = td23.text();
+        
+          Element ggg = doc.select("td.text-uppercase").get(8);
+          String nomdevise3 = ggg.text();
+          Element achatggg = doc.select("td.font-weight-bold").get(16);
+          String achatDevise3 = achatggg.text();
+          Element td6 = doc.select("td.font-weight-bold").get(17);
+          String venteDevise3 = td6.text();
+          Element td7 = doc.select("td.text-center").get(42);
+          String uniteDevise3 = td7.text();
+        
+          
+        
+          
+        
+        
+          Element KWD = doc.select("td.text-uppercase").get(9);
+          String nomdevise7 = KWD.text();
+          Element achatKWD = doc.select("td.font-weight-bold").get(18);
+          String achatDevise7 = achatKWD.text();
+          Element td14 = doc.select("td.font-weight-bold").get(19);
+          String venteDevise7 = td14.text();
+          Element td15 = doc.select("td.text-center").get(47);
+          String uniteDevise7 = td15.text();
+        
+          Element NOK = doc.select("td.text-uppercase").get(10);
+          String nomdevise8 = NOK.text();
+          Element achatNOK = doc.select("td.font-weight-bold").get(20);
+          String achatDevise8 = achatNOK.text();
+          Element td16 = doc.select("td.font-weight-bold").get(21);
+          String venteDevise8 = td16.text();
+          Element td17 = doc.select("td.text-center").get(52);
+          String uniteDevise8 = td17.text();
+        
+          Element QAR = doc.select("td.text-uppercase").get(11);
+          String nomdevise9 = QAR.text();
+          Element achatQAR = doc.select("td.font-weight-bold").get(22);
+          String achatDevise9 = achatQAR.text();
+          Element td18 = doc.select("td.font-weight-bold").get(23);
+          String venteDevise9 = td18.text();
+          Element td19 = doc.select("td.text-center").get(57);
+          String uniteDevise9 = td19.text();
+        
+          Element SEK = doc.select("td.text-uppercase").get(12);
+          String nomdevise10 = SEK.text();
+          Element achatSEK = doc.select("td.font-weight-bold").get(24);
+          String achatDevise10 = achatSEK.text();
+          Element td20 = doc.select("td.font-weight-bold").get(25);
+          String venteDevise10 = td20.text();
+          Element td21 = doc.select("td.text-center").get(62);
+          String uniteDevise10 = td21.text();
+        
+          Element CHF = doc.select("td.text-uppercase").get(13);
+          String nomdevise11 = CHF.text();
+          Element achatCHF = doc.select("td.font-weight-bold").get(26);
+          String achatDevise11 = achatCHF.text();
+          Element td22 = doc.select("td.font-weight-bold").get(27);
+          String venteDevise11 = td22.text();
+          Element td23 = doc.select("td.text-center").get(67);
+          String uniteDevise11 = td23.text();
 
-       
-      
-        Element BHD = doc.select("td.text-uppercase").get(14);
-        String nomdevise13 = BHD.text();
-        Element UniteBHD = doc.select("td.font-weight-bold").get(28);
-        String UniteDevise13 = UniteBHD.text();
-        System.out.println("unite 5 : " + UniteDevise13);
-        Element td26 = doc.select("td.font-weight-bold").get(29);
-        String AchatDevise13 = td26.text();
-        Element td27 = doc.select("td.text-center").get(72);
-        String VenteDevise13 = td27.text();
-      
-
+         
         
-        
-        Vente v = new Vente();
-        v.setData("tsb", AchatDevise5,AchatDevise14, AchatDevise2,AchatDevise4,AchatDevise6,
-        		AchatDevise12,AchatDevise1,  AchatDevise3, 
-        		 AchatDevise7, AchatDevise8, AchatDevise9,AchatDevise10,
-        		AchatDevise11,  AchatDevise13, "0", AchatDevise0);
-      //verfication 
-        List<Vente> verf = venteInterface.verification(v.getNomBanque());
-        
-        if(verf.isEmpty()) {
-     	   //ajout
-     	   venteInterface.save(v);
-        }
-        else  {
-     	   //update
-     	   venteInterface.updateVente(verf.get(0), v);
-        }
+          Element BHD = doc.select("td.text-uppercase").get(14);
+          String nomdevise13 = BHD.text();
+          Element achatBHD = doc.select("td.font-weight-bold").get(28);
+          String achatDevise13 = achatBHD.text();
+          System.out.println("unite 5 : " + achatDevise13);
+          Element td26 = doc.select("td.font-weight-bold").get(29);
+          String venteDevise13 = td26.text();
+          Element td27 = doc.select("td.text-center").get(72);
+          String uniteDevise13 = td27.text();
+            Vente v = new Vente();
+            v.setData("tsb", venteDevise5,venteDevise14, venteDevise2,venteDevise4,venteDevise6,
+            		venteDevise12,venteDevise1,  venteDevise3, 
+            		venteDevise7, venteDevise8, venteDevise9,venteDevise10,
+            		venteDevise11,  venteDevise13, "0", venteDevise0);
+          //verfication 
+            List<Vente> verf = venteInterface.verification(v.getNomBanque());
+            
+            if(verf.isEmpty()) {
+         	   //ajout
+         	   venteInterface.save(v);
+            }
+            else  {
+         	   //update
+         	   venteInterface.updateVente(verf.get(0), v);
+            }
+            Achat achat = new Achat();
+            achat.setData("tsb", achatDevise5,achatDevise14, achatDevise2,achatDevise4,achatDevise6,
+            		achatDevise12,achatDevise1,  achatDevise3, 
+           		 achatDevise7, achatDevise8, achatDevise9,achatDevise10,
+           		achatDevise11,  achatDevise13, "0", achatDevise0);
+          //verfication 
+            List<Achat> verfAchat = achatInterface.verification(achat.getNomBanque());
+            
+            if(verfAchat.isEmpty()) {
+         	   //ajout
+         	   achatInterface.save(achat);
+            }
+            else  {
+         	   //update
+         	   achatInterface.updateAchat(verfAchat.get(0), achat);
+            }
         return("ok");
        	}catch (Exception e) {
    			return("no"+e);
@@ -2674,168 +2843,167 @@ public class ScrapingController {
         System.out.println("title6 : " + title);
        
       
-      Element AED = doc.select("td.text-uppercase").get(0);
-      String nomdevise0 = AED.text();
-      System.out.println("title 0 : " + nomdevise0);
-        Element UniteSAR = doc.select("td.font-weight-bold").get(0);
-        String UniteDevise0 = UniteSAR.text();
-        System.out.println("unite 0 : " + UniteDevise0);
-        Element td1 = doc.select("td.font-weight-bold").get(1);
-        String AchatDevise0 = td1.text();
-        System.out.println("achat 0 : " + AchatDevise0);
-        Element td0 = doc.select("td.text-center").get(2);
-        String VenteDevise0 = td0.text();
-        System.out.println("vente0 : " + VenteDevise0);
-       // System.out.println("title4 : " + VenteDevise0);
-        
-        Element CNY = doc.select("td.text-uppercase").get(1);
-        String nomdevise5 = CNY.text();
-        System.out.println("title : " + nomdevise5);
-        Element UniteCNY = doc.select("td.font-weight-bold").get(2);
-        String UniteDevise5 = UniteCNY.text();
-        System.out.println("unite 1 : " + UniteDevise5);
-        Element td10 = doc.select("td.font-weight-bold").get(3);
-        String AchatDevise5 = td10.text();
-        System.out.println("achat 1 : " + AchatDevise5);
-        Element td11 = doc.select("td.text-center").get(7);
-        String VenteDevise5 = td11.text();
-        System.out.println("vente2 : " + VenteDevise5);
-        
-        Element GBP = doc.select("td.text-uppercase").get(2);
-        String nomdevise14 = GBP.text();
-        Element UniteGBP = doc.select("td.font-weight-bold").get(4);
-        String UniteDevise14 = UniteGBP.text();
-       
-        Element td28 = doc.select("td.font-weight-bold").get(5);
-        String AchatDevise14 = td28.text();
-        Element td29 = doc.select("td.text-center").get(12);
-        String VenteDevise14 = td29.text();
-        
-        Element DKK = doc.select("td.text-uppercase").get(3);
-        String nomdevise2 = DKK.text();
-        Element UniteDKK = doc.select("td.font-weight-bold").get(6);
-        String UniteDevise2 = UniteDKK.text();
-        Element td4 = doc.select("td.font-weight-bold").get(7);
-        String AchatDevise2 = td4.text();
-        Element td5 = doc.select("td.text-center").get(17);
-        String VenteDevise2 = td5.text();
+        Element AED = doc.select("td.text-uppercase").get(0);
+        String nomdevise0 = AED.text();
+        System.out.println("title 0 : " + nomdevise0);
+          Element achatSAR = doc.select("td.font-weight-bold").get(0);
+          String achatDevise0 = achatSAR.text();
+          System.out.println("achat 0 : " + achatDevise0);
+          Element td1 = doc.select("td.font-weight-bold").get(1);
+          String venteDevise0 = td1.text();
+          System.out.println("vente 0 : " + venteDevise0);
+          Element td0 = doc.select("td.text-center").get(2);
+          String uniteDevise0 = td0.text();
+          System.out.println("vente0 : " + uniteDevise0);
+         // System.out.println("title4 : " + VenteDevise0);
+          
+          Element CNY = doc.select("td.text-uppercase").get(1);
+          String nomdevise5 = CNY.text();
+          System.out.println("title : " + nomdevise5);
+          Element achatCNY = doc.select("td.font-weight-bold").get(2);
+          String achatDevise5 = achatCNY.text();
+          System.out.println("unite 1 : " + achatDevise5);
+          Element td10 = doc.select("td.font-weight-bold").get(3);
+          String venteDevise5 = td10.text();
+          System.out.println("vente 1 : " + venteDevise5);
+          Element td11 = doc.select("td.text-center").get(7);
+          String uniteDevise5 = td11.text();
+          System.out.println("vente2 : " + uniteDevise5);
+          
+          Element GBP = doc.select("td.text-uppercase").get(2);
+          String nomdevise14 = GBP.text();
+          Element achatGBP = doc.select("td.font-weight-bold").get(4);
+          String achatDevise14 = achatGBP.text();
+         
+          Element td28 = doc.select("td.font-weight-bold").get(5);
+          String venteDevise14 = td28.text();
+          Element td29 = doc.select("td.text-center").get(12);
+          String uniteDevise14 = td29.text();
+          
+          Element DKK = doc.select("td.text-uppercase").get(3);
+          String nomdevise2 = DKK.text();
+          Element achatDKK = doc.select("td.font-weight-bold").get(6);
+          String achatDevise2 = achatDKK.text();
+          Element td4 = doc.select("td.font-weight-bold").get(7);
+          String venteDevise2 = td4.text();
+          Element td5 = doc.select("td.text-center").get(17);
+          String uniteDevise2 = td5.text();
 
-        Element USD = doc.select("td.text-uppercase").get(4);
-        String nomdevise4 = USD.text();
-        Element UniteUSD = doc.select("td.font-weight-bold").get(8);
-        String UniteDevise4 = UniteUSD.text();
-        Element td8 = doc.select("td.font-weight-bold").get(9);
-        String AchatDevise4 = td8.text();
-        Element td9 = doc.select("td.text-center").get(22);
-        String VenteDevise4 = td9.text();
-        
-        Element JPY = doc.select("td.text-uppercase").get(5);
-        String nomdevise6 = JPY.text();
-        Element UniteJPY = doc.select("td.font-weight-bold").get(10);
-        String UniteDevise6 = UniteJPY.text();
-        Element td12 = doc.select("td.font-weight-bold").get(11);
-        String AchatDevise6 = td12.text();
-        Element td13 = doc.select("td.text-center").get(27);
-        String VenteDevise6 = td13.text();
-        
-        Element EUR = doc.select("td.text-uppercase").get(6);
-        String nomdevise12 = EUR.text();
-        Element UniteEUR = doc.select("td.font-weight-bold").get(12);
-        String UniteDevise12 = UniteEUR.text();
-        Element td24 = doc.select("td.font-weight-bold").get(13);
-        String AchatDevise12 = td24.text();
-        Element td25 = doc.select("td.text-center").get(32);
-        String VenteDevise12 = td25.text();
-  
-     
-        Element CAD = doc.select("td.text-uppercase").get(7);
-        String nomdevise1 = CAD.text();
-        Element UniteCAD = doc.select("td.font-weight-bold").get(14);
-        String UniteDevise1 = UniteCAD.text();
-        Element td2 = doc.select("td.font-weight-bold").get(15);
-        String AchatDevise1 = td2.text();
-        Element td3 = doc.select("td.text-center").get(37);
-        String VenteDevise1 = td3.text();
+          Element USD = doc.select("td.text-uppercase").get(4);
+          String nomdevise4 = USD.text();
+          Element achatUSD = doc.select("td.font-weight-bold").get(8);
+          String achatDevise4 = achatUSD.text();
+          Element td8 = doc.select("td.font-weight-bold").get(9);
+          String venteDevise4 = td8.text();
+          Element td9 = doc.select("td.text-center").get(22);
+          String uniteDevise4 = td9.text();
+          
+          Element JPY = doc.select("td.text-uppercase").get(5);
+          String nomdevise6 = JPY.text();
+          Element achatJPY = doc.select("td.font-weight-bold").get(10);
+          String achatDevise6 = achatJPY.text();
+          Element td12 = doc.select("td.font-weight-bold").get(11);
+          String venteDevise6 = td12.text();
+          Element td13 = doc.select("td.text-center").get(27);
+          String uniteDevise6 = td13.text();
+          
+          Element EUR = doc.select("td.text-uppercase").get(6);
+          String nomdevise12 = EUR.text();
+          Element achatEUR = doc.select("td.font-weight-bold").get(12);
+          String achatDevise12 = achatEUR.text();
+          Element td24 = doc.select("td.font-weight-bold").get(13);
+          String venteDevise12 = td24.text();
+          Element td25 = doc.select("td.text-center").get(32);
+          String uniteDevise12 = td25.text();
+    
        
-      
-      
-      
-        Element ggg = doc.select("td.text-uppercase").get(8);
-        String nomdevise3 = ggg.text();
-        Element Uniteggg = doc.select("td.font-weight-bold").get(16);
-        String UniteDevise3 = Uniteggg.text();
-        Element td6 = doc.select("td.font-weight-bold").get(17);
-        String AchatDevise3 = td6.text();
-        Element td7 = doc.select("td.text-center").get(42);
-        String VenteDevise3 = td7.text();
-      
+          Element CAD = doc.select("td.text-uppercase").get(7);
+          String nomdevise1 = CAD.text();
+          Element achatCAD = doc.select("td.font-weight-bold").get(14);
+          String achatDevise1 = achatCAD.text();
+          Element td2 = doc.select("td.font-weight-bold").get(15);
+          String venteDevise1 = td2.text();
+          Element td3 = doc.select("td.text-center").get(37);
+          String uniteDevise1 = td3.text();
+         
         
-      
         
-      
-      
-        Element KWD = doc.select("td.text-uppercase").get(9);
-        String nomdevise7 = KWD.text();
-        Element UniteKWD = doc.select("td.font-weight-bold").get(18);
-        String UniteDevise7 = UniteKWD.text();
-        Element td14 = doc.select("td.font-weight-bold").get(19);
-        String AchatDevise7 = td14.text();
-        Element td15 = doc.select("td.text-center").get(47);
-        String VenteDevise7 = td15.text();
-      
-        Element NOK = doc.select("td.text-uppercase").get(10);
-        String nomdevise8 = NOK.text();
-        Element UniteNOK = doc.select("td.font-weight-bold").get(20);
-        String UniteDevise8 = UniteNOK.text();
-        Element td16 = doc.select("td.font-weight-bold").get(21);
-        String AchatDevise8 = td16.text();
-        Element td17 = doc.select("td.text-center").get(52);
-        String VenteDevise8 = td17.text();
-      
-        Element QAR = doc.select("td.text-uppercase").get(11);
-        String nomdevise9 = QAR.text();
-        Element UniteQAR = doc.select("td.font-weight-bold").get(22);
-        String UniteDevise9 = UniteQAR.text();
-        Element td18 = doc.select("td.font-weight-bold").get(23);
-        String AchatDevise9 = td18.text();
-        Element td19 = doc.select("td.text-center").get(57);
-        String VenteDevise9 = td19.text();
-      
-        Element SEK = doc.select("td.text-uppercase").get(12);
-        String nomdevise10 = SEK.text();
-        Element UniteSEK = doc.select("td.font-weight-bold").get(24);
-        String UniteDevise10 = UniteSEK.text();
-        Element td20 = doc.select("td.font-weight-bold").get(25);
-        String AchatDevise10 = td20.text();
-        Element td21 = doc.select("td.text-center").get(62);
-        String VenteDevise10 = td21.text();
-      
-        Element CHF = doc.select("td.text-uppercase").get(13);
-        String nomdevise11 = CHF.text();
-        Element UniteCHF = doc.select("td.font-weight-bold").get(26);
-        String UniteDevise11 = UniteCHF.text();
-        Element td22 = doc.select("td.font-weight-bold").get(27);
-        String AchatDevise11 = td22.text();
-        Element td23 = doc.select("td.text-center").get(67);
-        String VenteDevise11 = td23.text();
+        
+          Element ggg = doc.select("td.text-uppercase").get(8);
+          String nomdevise3 = ggg.text();
+          Element achatggg = doc.select("td.font-weight-bold").get(16);
+          String achatDevise3 = achatggg.text();
+          Element td6 = doc.select("td.font-weight-bold").get(17);
+          String venteDevise3 = td6.text();
+          Element td7 = doc.select("td.text-center").get(42);
+          String uniteDevise3 = td7.text();
+        
+          
+        
+          
+        
+        
+          Element KWD = doc.select("td.text-uppercase").get(9);
+          String nomdevise7 = KWD.text();
+          Element achatKWD = doc.select("td.font-weight-bold").get(18);
+          String achatDevise7 = achatKWD.text();
+          Element td14 = doc.select("td.font-weight-bold").get(19);
+          String venteDevise7 = td14.text();
+          Element td15 = doc.select("td.text-center").get(47);
+          String uniteDevise7 = td15.text();
+        
+          Element NOK = doc.select("td.text-uppercase").get(10);
+          String nomdevise8 = NOK.text();
+          Element achatNOK = doc.select("td.font-weight-bold").get(20);
+          String achatDevise8 = achatNOK.text();
+          Element td16 = doc.select("td.font-weight-bold").get(21);
+          String venteDevise8 = td16.text();
+          Element td17 = doc.select("td.text-center").get(52);
+          String uniteDevise8 = td17.text();
+        
+          Element QAR = doc.select("td.text-uppercase").get(11);
+          String nomdevise9 = QAR.text();
+          Element achatQAR = doc.select("td.font-weight-bold").get(22);
+          String achatDevise9 = achatQAR.text();
+          Element td18 = doc.select("td.font-weight-bold").get(23);
+          String venteDevise9 = td18.text();
+          Element td19 = doc.select("td.text-center").get(57);
+          String uniteDevise9 = td19.text();
+        
+          Element SEK = doc.select("td.text-uppercase").get(12);
+          String nomdevise10 = SEK.text();
+          Element achatSEK = doc.select("td.font-weight-bold").get(24);
+          String achatDevise10 = achatSEK.text();
+          Element td20 = doc.select("td.font-weight-bold").get(25);
+          String venteDevise10 = td20.text();
+          Element td21 = doc.select("td.text-center").get(62);
+          String uniteDevise10 = td21.text();
+        
+          Element CHF = doc.select("td.text-uppercase").get(13);
+          String nomdevise11 = CHF.text();
+          Element achatCHF = doc.select("td.font-weight-bold").get(26);
+          String achatDevise11 = achatCHF.text();
+          Element td22 = doc.select("td.font-weight-bold").get(27);
+          String venteDevise11 = td22.text();
+          Element td23 = doc.select("td.text-center").get(67);
+          String uniteDevise11 = td23.text();
 
-       
-      
-        Element BHD = doc.select("td.text-uppercase").get(14);
-        String nomdevise13 = BHD.text();
-        Element UniteBHD = doc.select("td.font-weight-bold").get(28);
-        String UniteDevise13 = UniteBHD.text();
-        System.out.println("unite 5 : " + UniteDevise13);
-        Element td26 = doc.select("td.font-weight-bold").get(29);
-        String AchatDevise13 = td26.text();
-        Element td27 = doc.select("td.text-center").get(72);
-        String VenteDevise13 = td27.text();
-      
+         
+        
+          Element BHD = doc.select("td.text-uppercase").get(14);
+          String nomdevise13 = BHD.text();
+          Element achatBHD = doc.select("td.font-weight-bold").get(28);
+          String achatDevise13 = achatBHD.text();
+          System.out.println("unite 5 : " + achatDevise13);
+          Element td26 = doc.select("td.font-weight-bold").get(29);
+          String venteDevise13 = td26.text();
+          Element td27 = doc.select("td.text-center").get(72);
+          String uniteDevise13 = td27.text();
             Vente v = new Vente();
-            v.setData("btl", AchatDevise5,AchatDevise14, AchatDevise2,AchatDevise4,AchatDevise6,
-            		AchatDevise12,AchatDevise1,  AchatDevise3, 
-           		 AchatDevise7, AchatDevise8, AchatDevise9,AchatDevise10,
-           		AchatDevise11,  AchatDevise13, "0", AchatDevise0);
+            v.setData("btl", venteDevise5,venteDevise14, venteDevise2,venteDevise4,venteDevise6,
+            		venteDevise12,venteDevise1,  venteDevise3, 
+            		venteDevise7, venteDevise8, venteDevise9,venteDevise10,
+            		venteDevise11,  venteDevise13, "0", venteDevise0);
           //verfication 
             List<Vente> verf = venteInterface.verification(v.getNomBanque());
             
@@ -2846,6 +3014,22 @@ public class ScrapingController {
             else  {
          	   //update
          	   venteInterface.updateVente(verf.get(0), v);
+            }
+            Achat achat = new Achat();
+            achat.setData("btl", achatDevise5,achatDevise14, achatDevise2,achatDevise4,achatDevise6,
+            		achatDevise12,achatDevise1,  achatDevise3, 
+           		 achatDevise7, achatDevise8, achatDevise9,achatDevise10,
+           		achatDevise11,  achatDevise13, "0", achatDevise0);
+          //verfication 
+            List<Achat> verfAchat = achatInterface.verification(achat.getNomBanque());
+            
+            if(verfAchat.isEmpty()) {
+         	   //ajout
+         	   achatInterface.save(achat);
+            }
+            else  {
+         	   //update
+         	   achatInterface.updateAchat(verfAchat.get(0), achat);
             }
             return("ok");
            	}catch (Exception e) {
@@ -2868,191 +3052,211 @@ public class ScrapingController {
         
         
       
-      Element AED = doc.select("td.text-uppercase").get(0);
-      String nomdevise0 = AED.text();
-      System.out.println("title 0 : " + nomdevise0);
-        Element UniteSAR = doc.select("td.font-weight-bold").get(0);
-        String UniteDevise0 = UniteSAR.text();
-        System.out.println("unite 0 : " + UniteDevise0);
-        Element td1 = doc.select("td.font-weight-bold").get(1);
-        String AchatDevise0 = td1.text();
-        System.out.println("achat 0 : " + AchatDevise0);
-        Element td0 = doc.select("td.text-center").get(2);
-        String VenteDevise0 = td0.text();
-        System.out.println("vente0 : " + VenteDevise0);
-       // System.out.println("title4 : " + VenteDevise0);
-        
-        Element CNY = doc.select("td.text-uppercase").get(1);
-        String nomdevise5 = CNY.text();
-        System.out.println("title : " + nomdevise5);
-        Element UniteCNY = doc.select("td.font-weight-bold").get(2);
-        String UniteDevise5 = UniteCNY.text();
-        System.out.println("unite 1 : " + UniteDevise5);
-        Element td10 = doc.select("td.font-weight-bold").get(3);
-        String AchatDevise5 = td10.text();
-        System.out.println("achat 1 : " + AchatDevise5);
-        Element td11 = doc.select("td.text-center").get(7);
-        String VenteDevise5 = td11.text();
-        System.out.println("vente2 : " + VenteDevise5);
-        
-        Element GBP = doc.select("td.text-uppercase").get(2);
-        String nomdevise14 = GBP.text();
-        Element UniteGBP = doc.select("td.font-weight-bold").get(4);
-        String UniteDevise14 = UniteGBP.text();
-       
-        Element td28 = doc.select("td.font-weight-bold").get(5);
-        String AchatDevise14 = td28.text();
-        Element td29 = doc.select("td.text-center").get(12);
-        String VenteDevise14 = td29.text();
-        
-        Element DKK = doc.select("td.text-uppercase").get(3);
-        String nomdevise2 = DKK.text();
-        Element UniteDKK = doc.select("td.font-weight-bold").get(6);
-        String UniteDevise2 = UniteDKK.text();
-        Element td4 = doc.select("td.font-weight-bold").get(7);
-        String AchatDevise2 = td4.text();
-        Element td5 = doc.select("td.text-center").get(17);
-        String VenteDevise2 = td5.text();
+        Element AED = doc.select("td.text-uppercase").get(0);
+        String nomdevise0 = AED.text();
+        System.out.println("title 0 : " + nomdevise0);
+          Element achatSAR = doc.select("td.font-weight-bold").get(0);
+          String achatDevise0 = achatSAR.text();
+          System.out.println("achat 0 : " + achatDevise0);
+          Element td1 = doc.select("td.font-weight-bold").get(1);
+          String venteDevise0 = td1.text();
+          System.out.println("vente 0 : " + venteDevise0);
+          Element td0 = doc.select("td.text-center").get(2);
+          String uniteDevise0 = td0.text();
+          System.out.println("vente0 : " + uniteDevise0);
+         // System.out.println("title4 : " + VenteDevise0);
+          
+          Element CNY = doc.select("td.text-uppercase").get(1);
+          String nomdevise5 = CNY.text();
+          System.out.println("title : " + nomdevise5);
+          Element achatCNY = doc.select("td.font-weight-bold").get(2);
+          String achatDevise5 = achatCNY.text();
+          System.out.println("unite 1 : " + achatDevise5);
+          Element td10 = doc.select("td.font-weight-bold").get(3);
+          String venteDevise5 = td10.text();
+          System.out.println("vente 1 : " + venteDevise5);
+          Element td11 = doc.select("td.text-center").get(7);
+          String uniteDevise5 = td11.text();
+          System.out.println("vente2 : " + uniteDevise5);
+          
+          Element GBP = doc.select("td.text-uppercase").get(2);
+          String nomdevise14 = GBP.text();
+          Element achatGBP = doc.select("td.font-weight-bold").get(4);
+          String achatDevise14 = achatGBP.text();
+         
+          Element td28 = doc.select("td.font-weight-bold").get(5);
+          String venteDevise14 = td28.text();
+          Element td29 = doc.select("td.text-center").get(12);
+          String uniteDevise14 = td29.text();
+          
+          Element DKK = doc.select("td.text-uppercase").get(3);
+          String nomdevise2 = DKK.text();
+          Element achatDKK = doc.select("td.font-weight-bold").get(6);
+          String achatDevise2 = achatDKK.text();
+          Element td4 = doc.select("td.font-weight-bold").get(7);
+          String venteDevise2 = td4.text();
+          Element td5 = doc.select("td.text-center").get(17);
+          String uniteDevise2 = td5.text();
 
-        Element USD = doc.select("td.text-uppercase").get(4);
-        String nomdevise4 = USD.text();
-        Element UniteUSD = doc.select("td.font-weight-bold").get(8);
-        String UniteDevise4 = UniteUSD.text();
-        Element td8 = doc.select("td.font-weight-bold").get(9);
-        String AchatDevise4 = td8.text();
-        Element td9 = doc.select("td.text-center").get(22);
-        String VenteDevise4 = td9.text();
-        
-        Element JPY = doc.select("td.text-uppercase").get(5);
-        String nomdevise6 = JPY.text();
-        Element UniteJPY = doc.select("td.font-weight-bold").get(10);
-        String UniteDevise6 = UniteJPY.text();
-        Element td12 = doc.select("td.font-weight-bold").get(11);
-        String AchatDevise6 = td12.text();
-        Element td13 = doc.select("td.text-center").get(27);
-        String VenteDevise6 = td13.text();
-        
-        Element EUR = doc.select("td.text-uppercase").get(6);
-        String nomdevise12 = EUR.text();
-        Element UniteEUR = doc.select("td.font-weight-bold").get(12);
-        String UniteDevise12 = UniteEUR.text();
-        Element td24 = doc.select("td.font-weight-bold").get(13);
-        String AchatDevise12 = td24.text();
-        Element td25 = doc.select("td.text-center").get(32);
-        String VenteDevise12 = td25.text();
-  
-     
-        Element CAD = doc.select("td.text-uppercase").get(7);
-        String nomdevise1 = CAD.text();
-        Element UniteCAD = doc.select("td.font-weight-bold").get(14);
-        String UniteDevise1 = UniteCAD.text();
-        Element td2 = doc.select("td.font-weight-bold").get(15);
-        String AchatDevise1 = td2.text();
-        Element td3 = doc.select("td.text-center").get(37);
-        String VenteDevise1 = td3.text();
+          Element USD = doc.select("td.text-uppercase").get(4);
+          String nomdevise4 = USD.text();
+          Element achatUSD = doc.select("td.font-weight-bold").get(8);
+          String achatDevise4 = achatUSD.text();
+          Element td8 = doc.select("td.font-weight-bold").get(9);
+          String venteDevise4 = td8.text();
+          Element td9 = doc.select("td.text-center").get(22);
+          String uniteDevise4 = td9.text();
+          
+          Element JPY = doc.select("td.text-uppercase").get(5);
+          String nomdevise6 = JPY.text();
+          Element achatJPY = doc.select("td.font-weight-bold").get(10);
+          String achatDevise6 = achatJPY.text();
+          Element td12 = doc.select("td.font-weight-bold").get(11);
+          String venteDevise6 = td12.text();
+          Element td13 = doc.select("td.text-center").get(27);
+          String uniteDevise6 = td13.text();
+          
+          Element EUR = doc.select("td.text-uppercase").get(6);
+          String nomdevise12 = EUR.text();
+          Element achatEUR = doc.select("td.font-weight-bold").get(12);
+          String achatDevise12 = achatEUR.text();
+          Element td24 = doc.select("td.font-weight-bold").get(13);
+          String venteDevise12 = td24.text();
+          Element td25 = doc.select("td.text-center").get(32);
+          String uniteDevise12 = td25.text();
+    
        
-      
-      
-      
-        Element ggg = doc.select("td.text-uppercase").get(8);
-        String nomdevise3 = ggg.text();
-        Element Uniteggg = doc.select("td.font-weight-bold").get(16);
-        String UniteDevise3 = Uniteggg.text();
-        Element td6 = doc.select("td.font-weight-bold").get(17);
-        String AchatDevise3 = td6.text();
-        Element td7 = doc.select("td.text-center").get(42);
-        String VenteDevise3 = td7.text();
-      
+          Element CAD = doc.select("td.text-uppercase").get(7);
+          String nomdevise1 = CAD.text();
+          Element achatCAD = doc.select("td.font-weight-bold").get(14);
+          String achatDevise1 = achatCAD.text();
+          Element td2 = doc.select("td.font-weight-bold").get(15);
+          String venteDevise1 = td2.text();
+          Element td3 = doc.select("td.text-center").get(37);
+          String uniteDevise1 = td3.text();
+         
         
-      
         
-      
-      
-        Element KWD = doc.select("td.text-uppercase").get(9);
-        String nomdevise7 = KWD.text();
-        Element UniteKWD = doc.select("td.font-weight-bold").get(18);
-        String UniteDevise7 = UniteKWD.text();
-        Element td14 = doc.select("td.font-weight-bold").get(19);
-        String AchatDevise7 = td14.text();
-        Element td15 = doc.select("td.text-center").get(47);
-        String VenteDevise7 = td15.text();
-      
-        Element NOK = doc.select("td.text-uppercase").get(10);
-        String nomdevise8 = NOK.text();
-        Element UniteNOK = doc.select("td.font-weight-bold").get(20);
-        String UniteDevise8 = UniteNOK.text();
-        Element td16 = doc.select("td.font-weight-bold").get(21);
-        String AchatDevise8 = td16.text();
-        Element td17 = doc.select("td.text-center").get(52);
-        String VenteDevise8 = td17.text();
-      
-        Element QAR = doc.select("td.text-uppercase").get(11);
-        String nomdevise9 = QAR.text();
-        Element UniteQAR = doc.select("td.font-weight-bold").get(22);
-        String UniteDevise9 = UniteQAR.text();
-        Element td18 = doc.select("td.font-weight-bold").get(23);
-        String AchatDevise9 = td18.text();
-        Element td19 = doc.select("td.text-center").get(57);
-        String VenteDevise9 = td19.text();
-      
-        Element SEK = doc.select("td.text-uppercase").get(12);
-        String nomdevise10 = SEK.text();
-        Element UniteSEK = doc.select("td.font-weight-bold").get(24);
-        String UniteDevise10 = UniteSEK.text();
-        Element td20 = doc.select("td.font-weight-bold").get(25);
-        String AchatDevise10 = td20.text();
-        Element td21 = doc.select("td.text-center").get(62);
-        String VenteDevise10 = td21.text();
-      
-        Element CHF = doc.select("td.text-uppercase").get(13);
-        String nomdevise11 = CHF.text();
-        Element UniteCHF = doc.select("td.font-weight-bold").get(26);
-        String UniteDevise11 = UniteCHF.text();
-        Element td22 = doc.select("td.font-weight-bold").get(27);
-        String AchatDevise11 = td22.text();
-        Element td23 = doc.select("td.text-center").get(67);
-        String VenteDevise11 = td23.text();
+        
+          Element ggg = doc.select("td.text-uppercase").get(8);
+          String nomdevise3 = ggg.text();
+          Element achatggg = doc.select("td.font-weight-bold").get(16);
+          String achatDevise3 = achatggg.text();
+          Element td6 = doc.select("td.font-weight-bold").get(17);
+          String venteDevise3 = td6.text();
+          Element td7 = doc.select("td.text-center").get(42);
+          String uniteDevise3 = td7.text();
+        
+          
+        
+          
+        
+        
+          Element KWD = doc.select("td.text-uppercase").get(9);
+          String nomdevise7 = KWD.text();
+          Element achatKWD = doc.select("td.font-weight-bold").get(18);
+          String achatDevise7 = achatKWD.text();
+          Element td14 = doc.select("td.font-weight-bold").get(19);
+          String venteDevise7 = td14.text();
+          Element td15 = doc.select("td.text-center").get(47);
+          String uniteDevise7 = td15.text();
+        
+          Element NOK = doc.select("td.text-uppercase").get(10);
+          String nomdevise8 = NOK.text();
+          Element achatNOK = doc.select("td.font-weight-bold").get(20);
+          String achatDevise8 = achatNOK.text();
+          Element td16 = doc.select("td.font-weight-bold").get(21);
+          String venteDevise8 = td16.text();
+          Element td17 = doc.select("td.text-center").get(52);
+          String uniteDevise8 = td17.text();
+        
+          Element QAR = doc.select("td.text-uppercase").get(11);
+          String nomdevise9 = QAR.text();
+          Element achatQAR = doc.select("td.font-weight-bold").get(22);
+          String achatDevise9 = achatQAR.text();
+          Element td18 = doc.select("td.font-weight-bold").get(23);
+          String venteDevise9 = td18.text();
+          Element td19 = doc.select("td.text-center").get(57);
+          String uniteDevise9 = td19.text();
+        
+          Element SEK = doc.select("td.text-uppercase").get(12);
+          String nomdevise10 = SEK.text();
+          Element achatSEK = doc.select("td.font-weight-bold").get(24);
+          String achatDevise10 = achatSEK.text();
+          Element td20 = doc.select("td.font-weight-bold").get(25);
+          String venteDevise10 = td20.text();
+          Element td21 = doc.select("td.text-center").get(62);
+          String uniteDevise10 = td21.text();
+        
+          Element CHF = doc.select("td.text-uppercase").get(13);
+          String nomdevise11 = CHF.text();
+          Element achatCHF = doc.select("td.font-weight-bold").get(26);
+          String achatDevise11 = achatCHF.text();
+          Element td22 = doc.select("td.font-weight-bold").get(27);
+          String venteDevise11 = td22.text();
+          Element td23 = doc.select("td.text-center").get(67);
+          String uniteDevise11 = td23.text();
 
-       
-      
-        Element BHD = doc.select("td.text-uppercase").get(14);
-        String nomdevise13 = BHD.text();
-        Element UniteBHD = doc.select("td.font-weight-bold").get(28);
-        String UniteDevise13 = UniteBHD.text();
-        System.out.println("unite 5 : " + UniteDevise13);
-        Element td26 = doc.select("td.font-weight-bold").get(29);
-        String AchatDevise13 = td26.text();
-        Element td27 = doc.select("td.text-center").get(72);
-        String VenteDevise13 = td27.text();
-      
-        Element CNYY= doc.select("td.text-uppercase").get(15);
-        String nomdevise16 = CNYY.text();
-        Element UniteCNYY = doc.select("td.font-weight-bold").get(30);
-        String UniteDevise16 = UniteBHD.text();
-        System.out.println("unite 5 : " + UniteDevise13);
-        Element td50 = doc.select("td.font-weight-bold").get(31);
-        String AchatDevise16 = td50.text();
-        Element td51 = doc.select("td.text-center").get(77);
-        String VenteDevise16 = td51.text();
-      
+         
         
+          Element BHD = doc.select("td.text-uppercase").get(14);
+          String nomdevise13 = BHD.text();
+          Element achatBHD = doc.select("td.font-weight-bold").get(28);
+          String achatDevise13 = achatBHD.text();
+          System.out.println("unite 5 : " + achatDevise13);
+          Element td26 = doc.select("td.font-weight-bold").get(29);
+          String venteDevise13 = td26.text();
+          Element td27 = doc.select("td.text-center").get(72);
+          String uniteDevise13 = td27.text();
         
-        Vente v = new Vente();
-        v.setData("stb", AchatDevise5,AchatDevise14, AchatDevise2,AchatDevise4,AchatDevise6,
-        		AchatDevise12,AchatDevise1,  AchatDevise3, 
-        		 AchatDevise7, AchatDevise8, AchatDevise9,AchatDevise10,
-        		AchatDevise11,  AchatDevise13, AchatDevise16, AchatDevise0);
-      //verfication 
-        List<Vente> verf = venteInterface.verification(v.getNomBanque());
+          Element CNYY= doc.select("td.text-uppercase").get(15);
+          String nomdevise16 = CNYY.text();
+          Element achatCNYY = doc.select("td.font-weight-bold").get(30);
+          String achatDevise16 = achatCNYY.text();
+          System.out.println("unite 5 : " + achatDevise13);
+          Element td50 = doc.select("td.font-weight-bold").get(31);
+          String venteDevise16 = td50.text();
+          Element td51 = doc.select("td.text-center").get(77);
+          String uniteDevise16 = td51.text();
         
-        if(verf.isEmpty()) {
-     	   //ajout
-     	   venteInterface.save(v);
-        }
-        else  {
-     	   //update
-     	   venteInterface.updateVente(verf.get(0), v);
-        }
+          
+          
+          Vente v = new Vente();
+          v.setData("stb", venteDevise5,venteDevise14, venteDevise2,venteDevise4,venteDevise6,
+       		   venteDevise12,venteDevise1,  venteDevise3, 
+       		   venteDevise7, venteDevise8, venteDevise9,venteDevise10,
+       		   venteDevise11,  venteDevise13, venteDevise16, venteDevise0);
+          System.out.println(v);
+        //verfication 
+          List<Vente> verf = venteInterface.verification(v.getNomBanque());
+          
+          if(verf.isEmpty()) {
+       	   //ajout
+       	   venteInterface.save(v);
+          }
+          else  {
+       	   //update
+       	   venteInterface.updateVente(verf.get(0), v);
+          }
+          
+          Achat achat = new Achat();
+          achat.setData("stb", achatDevise5,achatDevise14, achatDevise2,achatDevise4,achatDevise6,
+       		   achatDevise12,achatDevise1,  achatDevise3, 
+       		   achatDevise7, achatDevise8, achatDevise9,achatDevise10,
+       		   achatDevise11,  achatDevise13, achatDevise16, achatDevise0);
+          System.out.println(achat);
+        //verfication 
+          List<Achat> verfAchat = achatInterface.verification(achat.getNomBanque());
+          
+          if(verfAchat.isEmpty()) {
+       	   //ajout
+       	   achatInterface.save(achat);
+          }
+          else  {
+       	   //update
+       	   achatInterface.updateAchat(verfAchat.get(0), achat);
+          }
+        
         return("ok");
        	}catch (Exception e) {
    			return("no"+e);
@@ -3078,63 +3282,63 @@ public class ScrapingController {
       Element AED = doc.select("td.text-uppercase").get(0);
       String nomdevise0 = AED.text();
       System.out.println("title 0 : " + nomdevise0);
-        Element UniteSAR = doc.select("td.font-weight-bold").get(0);
-        String UniteDevise0 = UniteSAR.text();
-        System.out.println("unite 0 : " + UniteDevise0);
+        Element achatSAR = doc.select("td.font-weight-bold").get(0);
+        String achatDevise0 = achatSAR.text();
+        System.out.println("achat 0 : " + achatDevise0);
         Element td1 = doc.select("td.font-weight-bold").get(1);
-        String AchatDevise0 = td1.text();
-        System.out.println("achat 0 : " + AchatDevise0);
+        String venteDevise0 = td1.text();
+        System.out.println("vente 0 : " + venteDevise0);
         Element td0 = doc.select("td.text-center").get(2);
-        String VenteDevise0 = td0.text();
-        System.out.println("vente0 : " + VenteDevise0);
+        String uniteDevise0 = td0.text();
+        System.out.println("unite0 : " + uniteDevise0);
        
         
         Element CNY = doc.select("td.text-uppercase").get(1);
         String nomdevise5 = CNY.text();
         System.out.println("title : " + nomdevise5);
-        Element UniteCNY = doc.select("td.font-weight-bold").get(2);
-        String UniteDevise5 = UniteCNY.text();
-        System.out.println("unite 1 : " + UniteDevise5);
+        Element achatCNY = doc.select("td.font-weight-bold").get(2);
+        String achatDevise5 = achatCNY.text();
+        System.out.println("achat 1 : " + achatDevise5);
         Element td10 = doc.select("td.font-weight-bold").get(3);
-        String AchatDevise5 = td10.text();
-        System.out.println("achat 1 : " + AchatDevise5);
+        String venteDevise5 = td10.text();
+        System.out.println("vente 1 : " + venteDevise5);
         Element td11 = doc.select("td.text-center").get(7);
-        String VenteDevise5 = td11.text();
-        System.out.println("vente2 : " + VenteDevise5);
+        String uniteDevise5 = td11.text();
+        System.out.println("unite : " + uniteDevise5);
         
         Element GBP = doc.select("td.text-uppercase").get(2);
         String nomdevise14 = GBP.text();
-        Element UniteGBP = doc.select("td.font-weight-bold").get(4);
-        String UniteDevise14 = UniteGBP.text();
+        Element achatGBP = doc.select("td.font-weight-bold").get(4);
+        String achatDevise14 = achatGBP.text();
        
         Element td28 = doc.select("td.font-weight-bold").get(5);
-        String AchatDevise14 = td28.text();
+        String venteDevise14 = td28.text();
         Element td29 = doc.select("td.text-center").get(12);
-        String VenteDevise14 = td29.text();
+        String uniteDevise14 = td29.text();
         
         Element DKK = doc.select("td.text-uppercase").get(3);
         String nomdevise2 = DKK.text();
-        Element UniteDKK = doc.select("td.font-weight-bold").get(6);
-        String UniteDevise2 = UniteDKK.text();
+        Element achatDKK = doc.select("td.font-weight-bold").get(6);
+        String achatDevise2 = achatDKK.text();
         Element td4 = doc.select("td.font-weight-bold").get(7);
-        String AchatDevise2 = td4.text();
+        String venteDevise2 = td4.text();
         Element td5 = doc.select("td.text-center").get(17);
-        String VenteDevise2 = td5.text();
+        String uniteDevise2 = td5.text();
 
         Element USD = doc.select("td.text-uppercase").get(4);
         String nomdevise4 = USD.text();
-        Element UniteUSD = doc.select("td.font-weight-bold").get(8);
-        String UniteDevise4 = UniteUSD.text();
+        Element achatUSD = doc.select("td.font-weight-bold").get(8);
+        String achatDevise4 = achatUSD.text();
         Element td8 = doc.select("td.font-weight-bold").get(9);
-        String AchatDevise4 = td8.text();
+        String venteDevise4 = td8.text();
         Element td9 = doc.select("td.text-center").get(22);
-        String VenteDevise4 = td9.text();
+        String uniteDevise4 = td9.text();
         
         
         Vente v = new Vente();
-        v.setData("bte", "0", "0", AchatDevise0, "0", AchatDevise5,
-        		"0", "0", AchatDevise14, "0",AchatDevise2,
-        		AchatDevise4, "0", "0", "0","0", "0");
+        v.setData("bte", "0", "0",venteDevise0, "0", venteDevise5,
+        		"0", "0", venteDevise14, "0",venteDevise2,
+        		venteDevise4, "0", "0", "0","0", "0");
       //verfication 
         List<Vente> verf = venteInterface.verification(v.getNomBanque());
         
@@ -3145,6 +3349,21 @@ public class ScrapingController {
         else  {
      	   //update
      	   venteInterface.updateVente(verf.get(0), v);
+        }
+        Achat achat = new Achat();
+        achat.setData("bte", "0", "0",achatDevise0, "0", achatDevise5,
+        		"0", "0", achatDevise14, "0",achatDevise2,
+        		achatDevise4, "0", "0", "0","0", "0");
+      //verfication 
+        List<Achat> verifList = achatInterface.verification(achat.getNomBanque());
+        
+        if(verifList.isEmpty()) {
+     	   //ajout
+     	   achatInterface.save(achat);
+        }
+        else  {
+     	   //update
+     	   achatInterface.updateAchat(verifList.get(0), achat);
         }
         return("ok");
        	}catch (Exception e) {
@@ -3171,97 +3390,97 @@ public class ScrapingController {
       Element AED = doc.select("td.text-uppercase").get(0);
       String nomdevise0 = AED.text();
       System.out.println("title 0 : " + nomdevise0);
-        Element UniteSAR = doc.select("td.font-weight-bold").get(0);
-        String UniteDevise0 = UniteSAR.text();
-        System.out.println("unite 0 : " + UniteDevise0);
+        Element achatSAR = doc.select("td.font-weight-bold").get(0);
+        String achatDevise0 = achatSAR.text();
+        System.out.println("achat 0 : " + achatDevise0);
         Element td1 = doc.select("td.font-weight-bold").get(1);
-        String AchatDevise0 = td1.text();
-        System.out.println("achat 0 : " + AchatDevise0);
+        String venteDevise0 = td1.text();
+        System.out.println("vente 0 : " + venteDevise0);
         Element td0 = doc.select("td.text-center").get(2);
-        String VenteDevise0 = td0.text();
-        System.out.println("vente0 : " + VenteDevise0);
+        String uniteDevise0 = td0.text();
+        System.out.println("vente0 : " + uniteDevise0);
        // System.out.println("title4 : " + VenteDevise0);
         
         Element CNY = doc.select("td.text-uppercase").get(1);
         String nomdevise5 = CNY.text();
         System.out.println("title : " + nomdevise5);
-        Element UniteCNY = doc.select("td.font-weight-bold").get(2);
-        String UniteDevise5 = UniteCNY.text();
-        System.out.println("unite 1 : " + UniteDevise5);
+        Element achatCNY = doc.select("td.font-weight-bold").get(2);
+        String achatDevise5 = achatCNY.text();
+        System.out.println("achat 1 : " + achatDevise5);
         Element td10 = doc.select("td.font-weight-bold").get(3);
-        String AchatDevise5 = td10.text();
-        System.out.println("achat 1 : " + AchatDevise5);
+        String venteDevise5 = td10.text();
+        System.out.println("vente 1 : " + venteDevise5);
         Element td11 = doc.select("td.text-center").get(7);
-        String VenteDevise5 = td11.text();
-        System.out.println("vente2 : " + VenteDevise5);
+        String uniteDevise5 = td11.text();
+        System.out.println("vente2 : " + uniteDevise5);
         
         Element GBP = doc.select("td.text-uppercase").get(2);
         String nomdevise14 = GBP.text();
-        Element UniteGBP = doc.select("td.font-weight-bold").get(4);
-        String UniteDevise14 = UniteGBP.text();
+        Element achatGBP = doc.select("td.font-weight-bold").get(4);
+        String achatDevise14 = achatGBP.text();
        
         Element td28 = doc.select("td.font-weight-bold").get(5);
-        String AchatDevise14 = td28.text();
+        String venteDevise14 = td28.text();
         Element td29 = doc.select("td.text-center").get(12);
-        String VenteDevise14 = td29.text();
+        String uniteDevise14 = td29.text();
         
         Element DKK = doc.select("td.text-uppercase").get(3);
         String nomdevise2 = DKK.text();
-        Element UniteDKK = doc.select("td.font-weight-bold").get(6);
-        String UniteDevise2 = UniteDKK.text();
+        Element achatDKK = doc.select("td.font-weight-bold").get(6);
+        String achatDevise2 = achatDKK.text();
         Element td4 = doc.select("td.font-weight-bold").get(7);
-        String AchatDevise2 = td4.text();
+        String venteDevise2 = td4.text();
         Element td5 = doc.select("td.text-center").get(17);
-        String VenteDevise2 = td5.text();
+        String uniteDevise2 = td5.text();
 
         Element USD = doc.select("td.text-uppercase").get(4);
         String nomdevise4 = USD.text();
-        Element UniteUSD = doc.select("td.font-weight-bold").get(8);
-        String UniteDevise4 = UniteUSD.text();
+        Element achatUSD = doc.select("td.font-weight-bold").get(8);
+        String achatDevise4 = achatUSD.text();
         Element td8 = doc.select("td.font-weight-bold").get(9);
-        String AchatDevise4 = td8.text();
+        String venteDevise4 = td8.text();
         Element td9 = doc.select("td.text-center").get(22);
-        String VenteDevise4 = td9.text();
+        String uniteDevise4 = td9.text();
         
         Element JPY = doc.select("td.text-uppercase").get(5);
         String nomdevise6 = JPY.text();
-        Element UniteJPY = doc.select("td.font-weight-bold").get(10);
-        String UniteDevise6 = UniteJPY.text();
+        Element achatJPY = doc.select("td.font-weight-bold").get(10);
+        String achatDevise6 =achatJPY.text();
         Element td12 = doc.select("td.font-weight-bold").get(11);
-        String AchatDevise6 = td12.text();
+        String venteDevise6 = td12.text();
         Element td13 = doc.select("td.text-center").get(27);
-        String VenteDevise6 = td13.text();
+        String uniteDevise6 = td13.text();
         
         Element EUR = doc.select("td.text-uppercase").get(6);
         String nomdevise12 = EUR.text();
-        Element UniteEUR = doc.select("td.font-weight-bold").get(12);
-        String UniteDevise12 = UniteEUR.text();
+        Element achatEUR = doc.select("td.font-weight-bold").get(12);
+        String achatDevise12 = achatEUR.text();
         Element td24 = doc.select("td.font-weight-bold").get(13);
-        String AchatDevise12 = td24.text();
+        String venteDevise12 = td24.text();
         Element td25 = doc.select("td.text-center").get(32);
-        String VenteDevise12 = td25.text();
+        String uniteDevise12 = td25.text();
   
      
         Element CAD = doc.select("td.text-uppercase").get(7);
         String nomdevise1 = CAD.text();
-        Element UniteCAD = doc.select("td.font-weight-bold").get(14);
-        String UniteDevise1 = UniteCAD.text();
+        Element achatCAD = doc.select("td.font-weight-bold").get(14);
+        String achatDevise1 = achatCAD.text();
         Element td2 = doc.select("td.font-weight-bold").get(15);
-        String AchatDevise1 = td2.text();
+        String venteDevise1 = td2.text();
         Element td3 = doc.select("td.text-center").get(37);
-        String VenteDevise1 = td3.text();
+        String uniteDevise1 = td3.text();
        
       
       
       
         Element ggg = doc.select("td.text-uppercase").get(8);
         String nomdevise3 = ggg.text();
-        Element Uniteggg = doc.select("td.font-weight-bold").get(16);
-        String UniteDevise3 = Uniteggg.text();
+        Element achatggg = doc.select("td.font-weight-bold").get(16);
+        String achatDevise3 = achatggg.text();
         Element td6 = doc.select("td.font-weight-bold").get(17);
-        String AchatDevise3 = td6.text();
+        String venteDevise3 = td6.text();
         Element td7 = doc.select("td.text-center").get(42);
-        String VenteDevise3 = td7.text();
+        String uniteDevise3 = td7.text();
       
         
       
@@ -3270,55 +3489,55 @@ public class ScrapingController {
       
         Element KWD = doc.select("td.text-uppercase").get(9);
         String nomdevise7 = KWD.text();
-        Element UniteKWD = doc.select("td.font-weight-bold").get(18);
-        String UniteDevise7 = UniteKWD.text();
+        Element achatKWD = doc.select("td.font-weight-bold").get(18);
+        String achatDevise7 = achatKWD.text();
         Element td14 = doc.select("td.font-weight-bold").get(19);
-        String AchatDevise7 = td14.text();
+        String venteDevise7 = td14.text();
         Element td15 = doc.select("td.text-center").get(47);
-        String VenteDevise7 = td15.text();
+        String uniteDevise7 = td15.text();
       
         Element NOK = doc.select("td.text-uppercase").get(10);
         String nomdevise8 = NOK.text();
-        Element UniteNOK = doc.select("td.font-weight-bold").get(20);
-        String UniteDevise8 = UniteNOK.text();
+        Element achatNOK = doc.select("td.font-weight-bold").get(20);
+        String achatDevise8 = achatNOK.text();
         Element td16 = doc.select("td.font-weight-bold").get(21);
-        String AchatDevise8 = td16.text();
+        String venteDevise8 = td16.text();
         Element td17 = doc.select("td.text-center").get(52);
-        String VenteDevise8 = td17.text();
+        String uniteDevise8 = td17.text();
       
         Element QAR = doc.select("td.text-uppercase").get(11);
         String nomdevise9 = QAR.text();
-        Element UniteQAR = doc.select("td.font-weight-bold").get(22);
-        String UniteDevise9 = UniteQAR.text();
+        Element achatQAR = doc.select("td.font-weight-bold").get(22);
+        String achatDevise9 = achatQAR.text();
         Element td18 = doc.select("td.font-weight-bold").get(23);
-        String AchatDevise9 = td18.text();
+        String venteDevise9 = td18.text();
         Element td19 = doc.select("td.text-center").get(57);
-        String VenteDevise9 = td19.text();
+        String uniteDevise9 = td19.text();
       
         Element SEK = doc.select("td.text-uppercase").get(12);
         String nomdevise10 = SEK.text();
-        Element UniteSEK = doc.select("td.font-weight-bold").get(24);
-        String UniteDevise10 = UniteSEK.text();
+        Element achatSEK = doc.select("td.font-weight-bold").get(24);
+        String achatDevise10 = achatSEK.text();
         Element td20 = doc.select("td.font-weight-bold").get(25);
-        String AchatDevise10 = td20.text();
+        String venteDevise10 = td20.text();
         Element td21 = doc.select("td.text-center").get(62);
-        String VenteDevise10 = td21.text();
+        String uniteDevise10 = td21.text();
       
         Element CHF = doc.select("td.text-uppercase").get(13);
         String nomdevise11 = CHF.text();
-        Element UniteCHF = doc.select("td.font-weight-bold").get(26);
-        String UniteDevise11 = UniteCHF.text();
+        Element achatCHF = doc.select("td.font-weight-bold").get(26);
+        String achatDevise11 = achatCHF.text();
         Element td22 = doc.select("td.font-weight-bold").get(27);
-        String AchatDevise11 = td22.text();
+        String venteDevise11 = td22.text();
         Element td23 = doc.select("td.text-center").get(67);
-        String VenteDevise11 = td23.text();
+        String uniteDevise11 = td23.text();
         
         
         Vente v = new Vente();
-        v.setData("btk", AchatDevise5,AchatDevise14, AchatDevise2,AchatDevise4,AchatDevise6,
-           		AchatDevise12,AchatDevise1,  AchatDevise3, 
-           		 AchatDevise7, AchatDevise8, AchatDevise9,"0",AchatDevise10,
-           		AchatDevise11,  "0",  AchatDevise0);
+        v.setData("btk", venteDevise5,venteDevise14, venteDevise2,venteDevise4,venteDevise6,
+        		venteDevise12,venteDevise1,  venteDevise3, 
+        		venteDevise7, venteDevise8, venteDevise9,"0",venteDevise10,
+        		venteDevise11,  "0",  venteDevise0);
       //verfication 
         List<Vente> verf = venteInterface.verification(v.getNomBanque());
         
@@ -3329,6 +3548,23 @@ public class ScrapingController {
         else  {
      	   //update
      	   venteInterface.updateVente(verf.get(0), v);
+        }
+        Achat achat = new Achat();
+        achat.setData("btk", achatDevise5,achatDevise14, achatDevise2,achatDevise4,achatDevise6,
+     		   achatDevise12,achatDevise1,  achatDevise3, 
+     		   achatDevise7, achatDevise8, achatDevise9,"0",achatDevise10,
+     		   achatDevise11,  "0", achatDevise0);
+        System.out.println(achat);
+      //verfication 
+        List<Achat> verfAchat = achatInterface.verification(achat.getNomBanque());
+        
+        if(verfAchat.isEmpty()) {
+     	   //ajout
+     	   achatInterface.save(achat);
+        }
+        else  {
+     	   //update
+     	   achatInterface.updateAchat(verfAchat.get(0), achat);
         }
         return("ok");
        	}catch (Exception e) {
@@ -3354,191 +3590,210 @@ public class ScrapingController {
        System.out.println("title6 : " + title);
        
      
-     Element AED = doc.select("td.text-uppercase").get(0);
-     String nomdevise0 = AED.text();
-     System.out.println("title 0 : " + nomdevise0);
-       Element UniteSAR = doc.select("td.font-weight-bold").get(0);
-       String UniteDevise0 = UniteSAR.text();
-       System.out.println("unite 0 : " + UniteDevise0);
-       Element td1 = doc.select("td.font-weight-bold").get(1);
-       String AchatDevise0 = td1.text();
-       System.out.println("achat 0 : " + AchatDevise0);
-       Element td0 = doc.select("td.text-center").get(2);
-       String VenteDevise0 = td0.text();
-       System.out.println("vente0 : " + VenteDevise0);
-      // System.out.println("title4 : " + VenteDevise0);
-       
-       Element CNY = doc.select("td.text-uppercase").get(1);
-       String nomdevise5 = CNY.text();
-       System.out.println("title : " + nomdevise5);
-       Element UniteCNY = doc.select("td.font-weight-bold").get(2);
-       String UniteDevise5 = UniteCNY.text();
-       System.out.println("unite 1 : " + UniteDevise5);
-       Element td10 = doc.select("td.font-weight-bold").get(3);
-       String AchatDevise5 = td10.text();
-       System.out.println("achat 1 : " + AchatDevise5);
-       Element td11 = doc.select("td.text-center").get(7);
-       String VenteDevise5 = td11.text();
-       System.out.println("vente2 : " + VenteDevise5);
-       
-       Element GBP = doc.select("td.text-uppercase").get(2);
-       String nomdevise14 = GBP.text();
-       Element UniteGBP = doc.select("td.font-weight-bold").get(4);
-       String UniteDevise14 = UniteGBP.text();
-      
-       Element td28 = doc.select("td.font-weight-bold").get(5);
-       String AchatDevise14 = td28.text();
-       Element td29 = doc.select("td.text-center").get(12);
-       String VenteDevise14 = td29.text();
-       
-       Element DKK = doc.select("td.text-uppercase").get(3);
-       String nomdevise2 = DKK.text();
-       Element UniteDKK = doc.select("td.font-weight-bold").get(6);
-       String UniteDevise2 = UniteDKK.text();
-       Element td4 = doc.select("td.font-weight-bold").get(7);
-       String AchatDevise2 = td4.text();
-       Element td5 = doc.select("td.text-center").get(17);
-       String VenteDevise2 = td5.text();
+       Element AED = doc.select("td.text-uppercase").get(0);
+       String nomdevise0 = AED.text();
+       System.out.println("title 0 : " + nomdevise0);
+         Element achatSAR = doc.select("td.font-weight-bold").get(0);
+         String achatDevise0 = achatSAR.text();
+         System.out.println("achat 0 : " + achatDevise0);
+         Element td1 = doc.select("td.font-weight-bold").get(1);
+         String venteDevise0 = td1.text();
+         System.out.println("vente 0 : " + venteDevise0);
+         Element td0 = doc.select("td.text-center").get(2);
+         String uniteDevise0 = td0.text();
+         System.out.println("vente0 : " + uniteDevise0);
+        // System.out.println("title4 : " + VenteDevise0);
+         
+         Element CNY = doc.select("td.text-uppercase").get(1);
+         String nomdevise5 = CNY.text();
+         System.out.println("title : " + nomdevise5);
+         Element achatCNY = doc.select("td.font-weight-bold").get(2);
+         String achatDevise5 = achatCNY.text();
+         System.out.println("unite 1 : " + achatDevise5);
+         Element td10 = doc.select("td.font-weight-bold").get(3);
+         String venteDevise5 = td10.text();
+         System.out.println("vente 1 : " + venteDevise5);
+         Element td11 = doc.select("td.text-center").get(7);
+         String uniteDevise5 = td11.text();
+         System.out.println("vente2 : " + uniteDevise5);
+         
+         Element GBP = doc.select("td.text-uppercase").get(2);
+         String nomdevise14 = GBP.text();
+         Element achatGBP = doc.select("td.font-weight-bold").get(4);
+         String achatDevise14 = achatGBP.text();
+        
+         Element td28 = doc.select("td.font-weight-bold").get(5);
+         String venteDevise14 = td28.text();
+         Element td29 = doc.select("td.text-center").get(12);
+         String uniteDevise14 = td29.text();
+         
+         Element DKK = doc.select("td.text-uppercase").get(3);
+         String nomdevise2 = DKK.text();
+         Element achatDKK = doc.select("td.font-weight-bold").get(6);
+         String achatDevise2 = achatDKK.text();
+         Element td4 = doc.select("td.font-weight-bold").get(7);
+         String venteDevise2 = td4.text();
+         Element td5 = doc.select("td.text-center").get(17);
+         String uniteDevise2 = td5.text();
 
-       Element USD = doc.select("td.text-uppercase").get(4);
-       String nomdevise4 = USD.text();
-       Element UniteUSD = doc.select("td.font-weight-bold").get(8);
-       String UniteDevise4 = UniteUSD.text();
-       Element td8 = doc.select("td.font-weight-bold").get(9);
-       String AchatDevise4 = td8.text();
-       Element td9 = doc.select("td.text-center").get(22);
-       String VenteDevise4 = td9.text();
-       
-       Element JPY = doc.select("td.text-uppercase").get(5);
-       String nomdevise6 = JPY.text();
-       Element UniteJPY = doc.select("td.font-weight-bold").get(10);
-       String UniteDevise6 = UniteJPY.text();
-       Element td12 = doc.select("td.font-weight-bold").get(11);
-       String AchatDevise6 = td12.text();
-       Element td13 = doc.select("td.text-center").get(27);
-       String VenteDevise6 = td13.text();
-       
-       Element EUR = doc.select("td.text-uppercase").get(6);
-       String nomdevise12 = EUR.text();
-       Element UniteEUR = doc.select("td.font-weight-bold").get(12);
-       String UniteDevise12 = UniteEUR.text();
-       Element td24 = doc.select("td.font-weight-bold").get(13);
-       String AchatDevise12 = td24.text();
-       Element td25 = doc.select("td.text-center").get(32);
-       String VenteDevise12 = td25.text();
- 
-    
-       Element CAD = doc.select("td.text-uppercase").get(7);
-       String nomdevise1 = CAD.text();
-       Element UniteCAD = doc.select("td.font-weight-bold").get(14);
-       String UniteDevise1 = UniteCAD.text();
-       Element td2 = doc.select("td.font-weight-bold").get(15);
-       String AchatDevise1 = td2.text();
-       Element td3 = doc.select("td.text-center").get(37);
-       String VenteDevise1 = td3.text();
+         Element USD = doc.select("td.text-uppercase").get(4);
+         String nomdevise4 = USD.text();
+         Element achatUSD = doc.select("td.font-weight-bold").get(8);
+         String achatDevise4 = achatUSD.text();
+         Element td8 = doc.select("td.font-weight-bold").get(9);
+         String venteDevise4 = td8.text();
+         Element td9 = doc.select("td.text-center").get(22);
+         String uniteDevise4 = td9.text();
+         
+         Element JPY = doc.select("td.text-uppercase").get(5);
+         String nomdevise6 = JPY.text();
+         Element achatJPY = doc.select("td.font-weight-bold").get(10);
+         String achatDevise6 = achatJPY.text();
+         Element td12 = doc.select("td.font-weight-bold").get(11);
+         String venteDevise6 = td12.text();
+         Element td13 = doc.select("td.text-center").get(27);
+         String uniteDevise6 = td13.text();
+         
+         Element EUR = doc.select("td.text-uppercase").get(6);
+         String nomdevise12 = EUR.text();
+         Element achatEUR = doc.select("td.font-weight-bold").get(12);
+         String achatDevise12 = achatEUR.text();
+         Element td24 = doc.select("td.font-weight-bold").get(13);
+         String venteDevise12 = td24.text();
+         Element td25 = doc.select("td.text-center").get(32);
+         String uniteDevise12 = td25.text();
+   
       
-     
-     
-     
-       Element ggg = doc.select("td.text-uppercase").get(8);
-       String nomdevise3 = ggg.text();
-       Element Uniteggg = doc.select("td.font-weight-bold").get(16);
-       String UniteDevise3 = Uniteggg.text();
-       Element td6 = doc.select("td.font-weight-bold").get(17);
-       String AchatDevise3 = td6.text();
-       Element td7 = doc.select("td.text-center").get(42);
-       String VenteDevise3 = td7.text();
-     
+         Element CAD = doc.select("td.text-uppercase").get(7);
+         String nomdevise1 = CAD.text();
+         Element achatCAD = doc.select("td.font-weight-bold").get(14);
+         String achatDevise1 = achatCAD.text();
+         Element td2 = doc.select("td.font-weight-bold").get(15);
+         String venteDevise1 = td2.text();
+         Element td3 = doc.select("td.text-center").get(37);
+         String uniteDevise1 = td3.text();
+        
        
-     
        
-     
-     
-       Element KWD = doc.select("td.text-uppercase").get(9);
-       String nomdevise7 = KWD.text();
-       Element UniteKWD = doc.select("td.font-weight-bold").get(18);
-       String UniteDevise7 = UniteKWD.text();
-       Element td14 = doc.select("td.font-weight-bold").get(19);
-       String AchatDevise7 = td14.text();
-       Element td15 = doc.select("td.text-center").get(47);
-       String VenteDevise7 = td15.text();
-     
-       Element NOK = doc.select("td.text-uppercase").get(10);
-       String nomdevise8 = NOK.text();
-       Element UniteNOK = doc.select("td.font-weight-bold").get(20);
-       String UniteDevise8 = UniteNOK.text();
-       Element td16 = doc.select("td.font-weight-bold").get(21);
-       String AchatDevise8 = td16.text();
-       Element td17 = doc.select("td.text-center").get(52);
-       String VenteDevise8 = td17.text();
-     
-       Element QAR = doc.select("td.text-uppercase").get(11);
-       String nomdevise9 = QAR.text();
-       Element UniteQAR = doc.select("td.font-weight-bold").get(22);
-       String UniteDevise9 = UniteQAR.text();
-       Element td18 = doc.select("td.font-weight-bold").get(23);
-       String AchatDevise9 = td18.text();
-       Element td19 = doc.select("td.text-center").get(57);
-       String VenteDevise9 = td19.text();
-     
-       Element SEK = doc.select("td.text-uppercase").get(12);
-       String nomdevise10 = SEK.text();
-       Element UniteSEK = doc.select("td.font-weight-bold").get(24);
-       String UniteDevise10 = UniteSEK.text();
-       Element td20 = doc.select("td.font-weight-bold").get(25);
-       String AchatDevise10 = td20.text();
-       Element td21 = doc.select("td.text-center").get(62);
-       String VenteDevise10 = td21.text();
-     
-       Element CHF = doc.select("td.text-uppercase").get(13);
-       String nomdevise11 = CHF.text();
-       Element UniteCHF = doc.select("td.font-weight-bold").get(26);
-       String UniteDevise11 = UniteCHF.text();
-       Element td22 = doc.select("td.font-weight-bold").get(27);
-       String AchatDevise11 = td22.text();
-       Element td23 = doc.select("td.text-center").get(67);
-       String VenteDevise11 = td23.text();
+       
+         Element ggg = doc.select("td.text-uppercase").get(8);
+         String nomdevise3 = ggg.text();
+         Element achatggg = doc.select("td.font-weight-bold").get(16);
+         String achatDevise3 = achatggg.text();
+         Element td6 = doc.select("td.font-weight-bold").get(17);
+         String venteDevise3 = td6.text();
+         Element td7 = doc.select("td.text-center").get(42);
+         String uniteDevise3 = td7.text();
+       
+         
+       
+         
+       
+       
+         Element KWD = doc.select("td.text-uppercase").get(9);
+         String nomdevise7 = KWD.text();
+         Element achatKWD = doc.select("td.font-weight-bold").get(18);
+         String achatDevise7 = achatKWD.text();
+         Element td14 = doc.select("td.font-weight-bold").get(19);
+         String venteDevise7 = td14.text();
+         Element td15 = doc.select("td.text-center").get(47);
+         String uniteDevise7 = td15.text();
+       
+         Element NOK = doc.select("td.text-uppercase").get(10);
+         String nomdevise8 = NOK.text();
+         Element achatNOK = doc.select("td.font-weight-bold").get(20);
+         String achatDevise8 = achatNOK.text();
+         Element td16 = doc.select("td.font-weight-bold").get(21);
+         String venteDevise8 = td16.text();
+         Element td17 = doc.select("td.text-center").get(52);
+         String uniteDevise8 = td17.text();
+       
+         Element QAR = doc.select("td.text-uppercase").get(11);
+         String nomdevise9 = QAR.text();
+         Element achatQAR = doc.select("td.font-weight-bold").get(22);
+         String achatDevise9 = achatQAR.text();
+         Element td18 = doc.select("td.font-weight-bold").get(23);
+         String venteDevise9 = td18.text();
+         Element td19 = doc.select("td.text-center").get(57);
+         String uniteDevise9 = td19.text();
+       
+         Element SEK = doc.select("td.text-uppercase").get(12);
+         String nomdevise10 = SEK.text();
+         Element achatSEK = doc.select("td.font-weight-bold").get(24);
+         String achatDevise10 = achatSEK.text();
+         Element td20 = doc.select("td.font-weight-bold").get(25);
+         String venteDevise10 = td20.text();
+         Element td21 = doc.select("td.text-center").get(62);
+         String uniteDevise10 = td21.text();
+       
+         Element CHF = doc.select("td.text-uppercase").get(13);
+         String nomdevise11 = CHF.text();
+         Element achatCHF = doc.select("td.font-weight-bold").get(26);
+         String achatDevise11 = achatCHF.text();
+         Element td22 = doc.select("td.font-weight-bold").get(27);
+         String venteDevise11 = td22.text();
+         Element td23 = doc.select("td.text-center").get(67);
+         String uniteDevise11 = td23.text();
 
-      
-     
-       Element BHD = doc.select("td.text-uppercase").get(14);
-       String nomdevise13 = BHD.text();
-       Element UniteBHD = doc.select("td.font-weight-bold").get(28);
-       String UniteDevise13 = UniteBHD.text();
-       System.out.println("unite 5 : " + UniteDevise13);
-       Element td26 = doc.select("td.font-weight-bold").get(29);
-       String AchatDevise13 = td26.text();
-       Element td27 = doc.select("td.text-center").get(72);
-       String VenteDevise13 = td27.text();
-     
-       Element CNYY= doc.select("td.text-uppercase").get(15);
-       String nomdevise16 = CNYY.text();
-       Element UniteCNYY = doc.select("td.font-weight-bold").get(30);
-       String UniteDevise16 = UniteBHD.text();
-       System.out.println("unite 5 : " + UniteDevise13);
-       Element td50 = doc.select("td.font-weight-bold").get(31);
-       String AchatDevise16 = td50.text();
-       Element td51 = doc.select("td.text-center").get(77);
-       String VenteDevise16 = td51.text();
-     
+        
        
+         Element BHD = doc.select("td.text-uppercase").get(14);
+         String nomdevise13 = BHD.text();
+         Element achatBHD = doc.select("td.font-weight-bold").get(28);
+         String achatDevise13 = achatBHD.text();
+         System.out.println("unite 5 : " + achatDevise13);
+         Element td26 = doc.select("td.font-weight-bold").get(29);
+         String venteDevise13 = td26.text();
+         Element td27 = doc.select("td.text-center").get(72);
+         String uniteDevise13 = td27.text();
        
-       Vente v = new Vente();
-       v.setData("bt", AchatDevise5,AchatDevise14, AchatDevise2,AchatDevise4,AchatDevise6,
-       		AchatDevise12,AchatDevise1,  AchatDevise3, 
-       		 AchatDevise7, AchatDevise8, AchatDevise9,AchatDevise10,
-       		AchatDevise11,  AchatDevise13, AchatDevise16, AchatDevise0);
-     //verfication 
-       List<Vente> verf = venteInterface.verification(v.getNomBanque());
+         Element CNYY= doc.select("td.text-uppercase").get(15);
+         String nomdevise16 = CNYY.text();
+         Element achatCNYY = doc.select("td.font-weight-bold").get(30);
+         String achatDevise16 = achatCNYY.text();
+         System.out.println("unite 5 : " + achatDevise13);
+         Element td50 = doc.select("td.font-weight-bold").get(31);
+         String venteDevise16 = td50.text();
+         Element td51 = doc.select("td.text-center").get(77);
+         String uniteDevise16 = td51.text();
        
-       if(verf.isEmpty()) {
-    	   //ajout
-    	   venteInterface.save(v);
-       }
-       else  {
-    	   //update
-    	   venteInterface.updateVente(verf.get(0), v);
-       }
+         
+         
+         Vente v = new Vente();
+         v.setData("bt", venteDevise5,venteDevise14, venteDevise2,venteDevise4,venteDevise6,
+      		   venteDevise12,venteDevise1,  venteDevise3, 
+      		   venteDevise7, venteDevise8, venteDevise9,venteDevise10,
+      		   venteDevise11,  venteDevise13, venteDevise16, venteDevise0);
+         System.out.println(v);
+       //verfication 
+         List<Vente> verf = venteInterface.verification(v.getNomBanque());
+         
+         if(verf.isEmpty()) {
+      	   //ajout
+      	   venteInterface.save(v);
+         }
+         else  {
+      	   //update
+      	   venteInterface.updateVente(verf.get(0), v);
+         }
+         
+         Achat achat = new Achat();
+         achat.setData("bt", achatDevise5,achatDevise14, achatDevise2,achatDevise4,achatDevise6,
+      		   achatDevise12,achatDevise1,  achatDevise3, 
+      		   achatDevise7, achatDevise8, achatDevise9,achatDevise10,
+      		   achatDevise11,  achatDevise13, achatDevise16, achatDevise0);
+         System.out.println(achat);
+       //verfication 
+         List<Achat> verfAchat = achatInterface.verification(achat.getNomBanque());
+         
+         if(verfAchat.isEmpty()) {
+      	   //ajout
+      	   achatInterface.save(achat);
+         }
+         else  {
+      	   //update
+      	   achatInterface.updateAchat(verfAchat.get(0), achat);
+         }
        return("ok");
       	}catch (Exception e) {
   			return("no"+e);
@@ -3561,190 +3816,210 @@ public class ScrapingController {
        
        
      
-     Element AED = doc.select("td.text-uppercase").get(0);
-     String nomdevise0 = AED.text();
-     System.out.println("title 0 : " + nomdevise0);
-       Element UniteSAR = doc.select("td.font-weight-bold").get(0);
-       String UniteDevise0 = UniteSAR.text();
-       System.out.println("unite 0 : " + UniteDevise0);
-       Element td1 = doc.select("td.font-weight-bold").get(1);
-       String AchatDevise0 = td1.text();
-       System.out.println("achat 0 : " + AchatDevise0);
-       Element td0 = doc.select("td.text-center").get(2);
-       String VenteDevise0 = td0.text();
-       System.out.println("vente0 : " + VenteDevise0);
-       
-       Element CNY = doc.select("td.text-uppercase").get(1);
-       String nomdevise5 = CNY.text();
-       System.out.println("title : " + nomdevise5);
-       Element UniteCNY = doc.select("td.font-weight-bold").get(2);
-       String UniteDevise5 = UniteCNY.text();
-       System.out.println("unite 1 : " + UniteDevise5);
-       Element td10 = doc.select("td.font-weight-bold").get(3);
-       String AchatDevise5 = td10.text();
-       System.out.println("achat 1 : " + AchatDevise5);
-       Element td11 = doc.select("td.text-center").get(7);
-       String VenteDevise5 = td11.text();
-       System.out.println("vente2 : " + VenteDevise5);
-       
-       Element GBP = doc.select("td.text-uppercase").get(2);
-       String nomdevise14 = GBP.text();
-       Element UniteGBP = doc.select("td.font-weight-bold").get(4);
-       String UniteDevise14 = UniteGBP.text();
-      
-       Element td28 = doc.select("td.font-weight-bold").get(5);
-       String AchatDevise14 = td28.text();
-       Element td29 = doc.select("td.text-center").get(12);
-       String VenteDevise14 = td29.text();
-       
-       Element DKK = doc.select("td.text-uppercase").get(3);
-       String nomdevise2 = DKK.text();
-       Element UniteDKK = doc.select("td.font-weight-bold").get(6);
-       String UniteDevise2 = UniteDKK.text();
-       Element td4 = doc.select("td.font-weight-bold").get(7);
-       String AchatDevise2 = td4.text();
-       Element td5 = doc.select("td.text-center").get(17);
-       String VenteDevise2 = td5.text();
+       Element AED = doc.select("td.text-uppercase").get(0);
+       String nomdevise0 = AED.text();
+       System.out.println("title 0 : " + nomdevise0);
+         Element achatSAR = doc.select("td.font-weight-bold").get(0);
+         String achatDevise0 = achatSAR.text();
+         System.out.println("achat 0 : " + achatDevise0);
+         Element td1 = doc.select("td.font-weight-bold").get(1);
+         String venteDevise0 = td1.text();
+         System.out.println("vente 0 : " + venteDevise0);
+         Element td0 = doc.select("td.text-center").get(2);
+         String uniteDevise0 = td0.text();
+         System.out.println("vente0 : " + uniteDevise0);
+        // System.out.println("title4 : " + VenteDevise0);
+         
+         Element CNY = doc.select("td.text-uppercase").get(1);
+         String nomdevise5 = CNY.text();
+         System.out.println("title : " + nomdevise5);
+         Element achatCNY = doc.select("td.font-weight-bold").get(2);
+         String achatDevise5 = achatCNY.text();
+         System.out.println("unite 1 : " + achatDevise5);
+         Element td10 = doc.select("td.font-weight-bold").get(3);
+         String venteDevise5 = td10.text();
+         System.out.println("vente 1 : " + venteDevise5);
+         Element td11 = doc.select("td.text-center").get(7);
+         String uniteDevise5 = td11.text();
+         System.out.println("vente2 : " + uniteDevise5);
+         
+         Element GBP = doc.select("td.text-uppercase").get(2);
+         String nomdevise14 = GBP.text();
+         Element achatGBP = doc.select("td.font-weight-bold").get(4);
+         String achatDevise14 = achatGBP.text();
+        
+         Element td28 = doc.select("td.font-weight-bold").get(5);
+         String venteDevise14 = td28.text();
+         Element td29 = doc.select("td.text-center").get(12);
+         String uniteDevise14 = td29.text();
+         
+         Element DKK = doc.select("td.text-uppercase").get(3);
+         String nomdevise2 = DKK.text();
+         Element achatDKK = doc.select("td.font-weight-bold").get(6);
+         String achatDevise2 = achatDKK.text();
+         Element td4 = doc.select("td.font-weight-bold").get(7);
+         String venteDevise2 = td4.text();
+         Element td5 = doc.select("td.text-center").get(17);
+         String uniteDevise2 = td5.text();
 
-       Element USD = doc.select("td.text-uppercase").get(4);
-       String nomdevise4 = USD.text();
-       Element UniteUSD = doc.select("td.font-weight-bold").get(8);
-       String UniteDevise4 = UniteUSD.text();
-       Element td8 = doc.select("td.font-weight-bold").get(9);
-       String AchatDevise4 = td8.text();
-       Element td9 = doc.select("td.text-center").get(22);
-       String VenteDevise4 = td9.text();
-       
-       Element JPY = doc.select("td.text-uppercase").get(5);
-       String nomdevise6 = JPY.text();
-       Element UniteJPY = doc.select("td.font-weight-bold").get(10);
-       String UniteDevise6 = UniteJPY.text();
-       Element td12 = doc.select("td.font-weight-bold").get(11);
-       String AchatDevise6 = td12.text();
-       Element td13 = doc.select("td.text-center").get(27);
-       String VenteDevise6 = td13.text();
-       
-       Element EUR = doc.select("td.text-uppercase").get(6);
-       String nomdevise12 = EUR.text();
-       Element UniteEUR = doc.select("td.font-weight-bold").get(12);
-       String UniteDevise12 = UniteEUR.text();
-       Element td24 = doc.select("td.font-weight-bold").get(13);
-       String AchatDevise12 = td24.text();
-       Element td25 = doc.select("td.text-center").get(32);
-       String VenteDevise12 = td25.text();
- 
-    
-       Element CAD = doc.select("td.text-uppercase").get(7);
-       String nomdevise1 = CAD.text();
-       Element UniteCAD = doc.select("td.font-weight-bold").get(14);
-       String UniteDevise1 = UniteCAD.text();
-       Element td2 = doc.select("td.font-weight-bold").get(15);
-       String AchatDevise1 = td2.text();
-       Element td3 = doc.select("td.text-center").get(37);
-       String VenteDevise1 = td3.text();
+         Element USD = doc.select("td.text-uppercase").get(4);
+         String nomdevise4 = USD.text();
+         Element achatUSD = doc.select("td.font-weight-bold").get(8);
+         String achatDevise4 = achatUSD.text();
+         Element td8 = doc.select("td.font-weight-bold").get(9);
+         String venteDevise4 = td8.text();
+         Element td9 = doc.select("td.text-center").get(22);
+         String uniteDevise4 = td9.text();
+         
+         Element JPY = doc.select("td.text-uppercase").get(5);
+         String nomdevise6 = JPY.text();
+         Element achatJPY = doc.select("td.font-weight-bold").get(10);
+         String achatDevise6 = achatJPY.text();
+         Element td12 = doc.select("td.font-weight-bold").get(11);
+         String venteDevise6 = td12.text();
+         Element td13 = doc.select("td.text-center").get(27);
+         String uniteDevise6 = td13.text();
+         
+         Element EUR = doc.select("td.text-uppercase").get(6);
+         String nomdevise12 = EUR.text();
+         Element achatEUR = doc.select("td.font-weight-bold").get(12);
+         String achatDevise12 = achatEUR.text();
+         Element td24 = doc.select("td.font-weight-bold").get(13);
+         String venteDevise12 = td24.text();
+         Element td25 = doc.select("td.text-center").get(32);
+         String uniteDevise12 = td25.text();
+   
       
-     
-     
-     
-       Element ggg = doc.select("td.text-uppercase").get(8);
-       String nomdevise3 = ggg.text();
-       Element Uniteggg = doc.select("td.font-weight-bold").get(16);
-       String UniteDevise3 = Uniteggg.text();
-       Element td6 = doc.select("td.font-weight-bold").get(17);
-       String AchatDevise3 = td6.text();
-       Element td7 = doc.select("td.text-center").get(42);
-       String VenteDevise3 = td7.text();
-     
+         Element CAD = doc.select("td.text-uppercase").get(7);
+         String nomdevise1 = CAD.text();
+         Element achatCAD = doc.select("td.font-weight-bold").get(14);
+         String achatDevise1 = achatCAD.text();
+         Element td2 = doc.select("td.font-weight-bold").get(15);
+         String venteDevise1 = td2.text();
+         Element td3 = doc.select("td.text-center").get(37);
+         String uniteDevise1 = td3.text();
+        
        
-     
        
-     
-     
-       Element KWD = doc.select("td.text-uppercase").get(9);
-       String nomdevise7 = KWD.text();
-       Element UniteKWD = doc.select("td.font-weight-bold").get(18);
-       String UniteDevise7 = UniteKWD.text();
-       Element td14 = doc.select("td.font-weight-bold").get(19);
-       String AchatDevise7 = td14.text();
-       Element td15 = doc.select("td.text-center").get(47);
-       String VenteDevise7 = td15.text();
-     
-       Element NOK = doc.select("td.text-uppercase").get(10);
-       String nomdevise8 = NOK.text();
-       Element UniteNOK = doc.select("td.font-weight-bold").get(20);
-       String UniteDevise8 = UniteNOK.text();
-       Element td16 = doc.select("td.font-weight-bold").get(21);
-       String AchatDevise8 = td16.text();
-       Element td17 = doc.select("td.text-center").get(52);
-       String VenteDevise8 = td17.text();
-     
-       Element QAR = doc.select("td.text-uppercase").get(11);
-       String nomdevise9 = QAR.text();
-       Element UniteQAR = doc.select("td.font-weight-bold").get(22);
-       String UniteDevise9 = UniteQAR.text();
-       Element td18 = doc.select("td.font-weight-bold").get(23);
-       String AchatDevise9 = td18.text();
-       Element td19 = doc.select("td.text-center").get(57);
-       String VenteDevise9 = td19.text();
-     
-       Element SEK = doc.select("td.text-uppercase").get(12);
-       String nomdevise10 = SEK.text();
-       Element UniteSEK = doc.select("td.font-weight-bold").get(24);
-       String UniteDevise10 = UniteSEK.text();
-       Element td20 = doc.select("td.font-weight-bold").get(25);
-       String AchatDevise10 = td20.text();
-       Element td21 = doc.select("td.text-center").get(62);
-       String VenteDevise10 = td21.text();
-     
-       Element CHF = doc.select("td.text-uppercase").get(13);
-       String nomdevise11 = CHF.text();
-       Element UniteCHF = doc.select("td.font-weight-bold").get(26);
-       String UniteDevise11 = UniteCHF.text();
-       Element td22 = doc.select("td.font-weight-bold").get(27);
-       String AchatDevise11 = td22.text();
-       Element td23 = doc.select("td.text-center").get(67);
-       String VenteDevise11 = td23.text();
+       
+         Element ggg = doc.select("td.text-uppercase").get(8);
+         String nomdevise3 = ggg.text();
+         Element achatggg = doc.select("td.font-weight-bold").get(16);
+         String achatDevise3 = achatggg.text();
+         Element td6 = doc.select("td.font-weight-bold").get(17);
+         String venteDevise3 = td6.text();
+         Element td7 = doc.select("td.text-center").get(42);
+         String uniteDevise3 = td7.text();
+       
+         
+       
+         
+       
+       
+         Element KWD = doc.select("td.text-uppercase").get(9);
+         String nomdevise7 = KWD.text();
+         Element achatKWD = doc.select("td.font-weight-bold").get(18);
+         String achatDevise7 = achatKWD.text();
+         Element td14 = doc.select("td.font-weight-bold").get(19);
+         String venteDevise7 = td14.text();
+         Element td15 = doc.select("td.text-center").get(47);
+         String uniteDevise7 = td15.text();
+       
+         Element NOK = doc.select("td.text-uppercase").get(10);
+         String nomdevise8 = NOK.text();
+         Element achatNOK = doc.select("td.font-weight-bold").get(20);
+         String achatDevise8 = achatNOK.text();
+         Element td16 = doc.select("td.font-weight-bold").get(21);
+         String venteDevise8 = td16.text();
+         Element td17 = doc.select("td.text-center").get(52);
+         String uniteDevise8 = td17.text();
+       
+         Element QAR = doc.select("td.text-uppercase").get(11);
+         String nomdevise9 = QAR.text();
+         Element achatQAR = doc.select("td.font-weight-bold").get(22);
+         String achatDevise9 = achatQAR.text();
+         Element td18 = doc.select("td.font-weight-bold").get(23);
+         String venteDevise9 = td18.text();
+         Element td19 = doc.select("td.text-center").get(57);
+         String uniteDevise9 = td19.text();
+       
+         Element SEK = doc.select("td.text-uppercase").get(12);
+         String nomdevise10 = SEK.text();
+         Element achatSEK = doc.select("td.font-weight-bold").get(24);
+         String achatDevise10 = achatSEK.text();
+         Element td20 = doc.select("td.font-weight-bold").get(25);
+         String venteDevise10 = td20.text();
+         Element td21 = doc.select("td.text-center").get(62);
+         String uniteDevise10 = td21.text();
+       
+         Element CHF = doc.select("td.text-uppercase").get(13);
+         String nomdevise11 = CHF.text();
+         Element achatCHF = doc.select("td.font-weight-bold").get(26);
+         String achatDevise11 = achatCHF.text();
+         Element td22 = doc.select("td.font-weight-bold").get(27);
+         String venteDevise11 = td22.text();
+         Element td23 = doc.select("td.text-center").get(67);
+         String uniteDevise11 = td23.text();
 
-      
-     
-       Element BHD = doc.select("td.text-uppercase").get(14);
-       String nomdevise13 = BHD.text();
-       Element UniteBHD = doc.select("td.font-weight-bold").get(28);
-       String UniteDevise13 = UniteBHD.text();
-       System.out.println("unite 5 : " + UniteDevise13);
-       Element td26 = doc.select("td.font-weight-bold").get(29);
-       String AchatDevise13 = td26.text();
-       Element td27 = doc.select("td.text-center").get(72);
-       String VenteDevise13 = td27.text();
-     
-       Element CNYY= doc.select("td.text-uppercase").get(15);
-       String nomdevise16 = CNYY.text();
-       Element UniteCNYY = doc.select("td.font-weight-bold").get(30);
-       String UniteDevise16 = UniteBHD.text();
-       System.out.println("unite 5 : " + UniteDevise13);
-       Element td50 = doc.select("td.font-weight-bold").get(31);
-       String AchatDevise16 = td50.text();
-       Element td51 = doc.select("td.text-center").get(77);
-       String VenteDevise16 = td51.text();
-     
+        
        
+         Element BHD = doc.select("td.text-uppercase").get(14);
+         String nomdevise13 = BHD.text();
+         Element achatBHD = doc.select("td.font-weight-bold").get(28);
+         String achatDevise13 = achatBHD.text();
+         System.out.println("unite 5 : " + achatDevise13);
+         Element td26 = doc.select("td.font-weight-bold").get(29);
+         String venteDevise13 = td26.text();
+         Element td27 = doc.select("td.text-center").get(72);
+         String uniteDevise13 = td27.text();
        
-       Vente v = new Vente();
-       v.setData("bna", AchatDevise5,AchatDevise14, AchatDevise2,AchatDevise4,AchatDevise6,
-       		AchatDevise12,AchatDevise1,  AchatDevise3, 
-       		 AchatDevise7, AchatDevise8, AchatDevise9,AchatDevise10,
-       		AchatDevise11,  AchatDevise13, AchatDevise16, AchatDevise0);
-     //verfication 
-       List<Vente> verf = venteInterface.verification(v.getNomBanque());
+         Element CNYY= doc.select("td.text-uppercase").get(15);
+         String nomdevise16 = CNYY.text();
+         Element achatCNYY = doc.select("td.font-weight-bold").get(30);
+         String achatDevise16 = achatCNYY.text();
+         System.out.println("unite 5 : " + achatDevise13);
+         Element td50 = doc.select("td.font-weight-bold").get(31);
+         String venteDevise16 = td50.text();
+         Element td51 = doc.select("td.text-center").get(77);
+         String uniteDevise16 = td51.text();
        
-       if(verf.isEmpty()) {
-    	   //ajout
-    	   venteInterface.save(v);
-       }
-       else  {
-    	   //update
-    	   venteInterface.updateVente(verf.get(0), v);
-       }
+         
+         
+         Vente v = new Vente();
+         v.setData("bna", venteDevise5,venteDevise14, venteDevise2,venteDevise4,venteDevise6,
+      		   venteDevise12,venteDevise1,  venteDevise3, 
+      		   venteDevise7, venteDevise8, venteDevise9,venteDevise10,
+      		   venteDevise11,  venteDevise13, venteDevise16, venteDevise0);
+         System.out.println(v);
+       //verfication 
+         List<Vente> verf = venteInterface.verification(v.getNomBanque());
+         
+         if(verf.isEmpty()) {
+      	   //ajout
+      	   venteInterface.save(v);
+         }
+         else  {
+      	   //update
+      	   venteInterface.updateVente(verf.get(0), v);
+         }
+         
+         Achat achat = new Achat();
+         achat.setData("bna", achatDevise5,achatDevise14, achatDevise2,achatDevise4,achatDevise6,
+      		   achatDevise12,achatDevise1,  achatDevise3, 
+      		   achatDevise7, achatDevise8, achatDevise9,achatDevise10,
+      		   achatDevise11,  achatDevise13, achatDevise16, achatDevise0);
+         System.out.println(achat);
+       //verfication 
+         List<Achat> verfAchat = achatInterface.verification(achat.getNomBanque());
+         
+         if(verfAchat.isEmpty()) {
+      	   //ajout
+      	   achatInterface.save(achat);
+         }
+         else  {
+      	   //update
+      	   achatInterface.updateAchat(verfAchat.get(0), achat);
+         }
        return("ok");
       	}catch (Exception e) {
   			return("no"+e);

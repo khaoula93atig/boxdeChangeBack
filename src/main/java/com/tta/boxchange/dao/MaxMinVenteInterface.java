@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.tta.boxchange.dto.MinMaxResult;
 import com.tta.boxchange.entities.MaxMinVente;
 import com.tta.boxchange.response.BasicResponse;
 
@@ -16,16 +17,16 @@ public interface MaxMinVenteInterface {
 	public float minJour(String devise);
 	
 	//min and max valeur de vente par semaine et devise (weekly)  
-		Float maxVenteSemaine(String devise);
-		Float minVenteSemaine(String devise);
+		MinMaxResult maxVenteSemaine(String devise);
+		MinMaxResult minVenteSemaine(String devise);
 		
 		//min and max valeur de vente par mois et devise (monthly)  
-		Float maxVenteMois(String devise);
-		Float minVenteMois(String devise);
+		MinMaxResult maxVenteMois(String devise);
+		MinMaxResult minVenteMois(String devise);
 		
 		//min and max valeur de vente par ans et devise (annual)  
-		Float maxVenteAns(String devise);
-		Float minVenteAns(String devise);
+		MinMaxResult maxVenteAns(String devise);
+		MinMaxResult minVenteAns(String devise);
 		
 
 }

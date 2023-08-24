@@ -10,8 +10,10 @@ import org.springframework.stereotype.Repository;
 
 import com.tta.boxchange.dao.MaxMinVenteInterface;
 import com.tta.boxchange.dao.VENTEInterface;
+import com.tta.boxchange.dto.MinMaxResult;
 import com.tta.boxchange.entities.MaxMinVente;
 import com.tta.boxchange.mappers.MaxMinVenteRowMapper;
+import com.tta.boxchange.mappers.MinMaxResultRowMapper;
 import com.tta.boxchange.mappers.VENTERowMapper;
 import com.tta.boxchange.response.BasicResponse;
 
@@ -346,56 +348,68 @@ public class MaxMinVenteRepository implements MaxMinVenteInterface {
 	}
 	
 	@Override
-	public Float maxVenteSemaine(String devise) {
+	public MinMaxResult maxVenteSemaine(String devise) {
 		devise = "max"+devise;
-		String req="SELECT max("+devise+") as max FROM public.max_min_vente	WHERE DATE_PART('week',min_maxdate) = DATE_PART('week',NOW());";
-		float max= jdbcTemplate.queryForObject(req, float.class);
+		String req="SELECT "+devise+" as valeur , min_maxdate as date FROM public.max_min_vente   \r\n"
+				+ "WHERE "+ devise+"=(select max("+devise+") FROM public.max_min_vente WHERE DATE_PART('week',min_maxdate) = DATE_PART('week',NOW()))\r\n"
+				+ "order by min_maxdate DESC limit 1;";
+		MinMaxResult max= jdbcTemplate.queryForObject(req, new MinMaxResultRowMapper());
 		return max;
 	}
 
 
 	@Override
-	public Float minVenteSemaine(String devise) {
+	public MinMaxResult minVenteSemaine(String devise) {
 		devise = "min"+devise;
-		String req="SELECT min("+devise+") as min FROM public.max_min_vente	WHERE DATE_PART('week',min_maxdate) = DATE_PART('week',NOW());";
-		float min= jdbcTemplate.queryForObject(req, Float.class);
+		String req="SELECT "+devise+" as valeur , min_maxdate as date FROM public.max_min_vente   \r\n"
+				+ "WHERE "+ devise+"=(select min("+devise+") FROM public.max_min_vente WHERE DATE_PART('week',min_maxdate) = DATE_PART('week',NOW()))\r\n"
+				+ "order by min_maxdate DESC limit 1;";
+		MinMaxResult min= jdbcTemplate.queryForObject(req, new MinMaxResultRowMapper());
 		return min;
 	}
 
 
 	@Override
-	public Float maxVenteMois(String devise) {
+	public MinMaxResult maxVenteMois(String devise) {
 		devise = "max"+devise;
-		String req="SELECT max("+devise+") as max FROM public.max_min_vente WHERE extract (Month from min_maxdate) = extract (Month from Now());";
-		float max= jdbcTemplate.queryForObject(req, float.class);
+		String req="SELECT "+devise+" as valeur , min_maxdate  as date FROM  public.max_min_vente   \r\n"
+				+ "WHERE "+ devise+"=(select max("+devise+") FROM public.max_min_vente WHERE extract (Month from min_maxdate) = extract (Month from Now()))\r\n"
+				+ "order by min_maxdate DESC limit 1;";
+		MinMaxResult max= jdbcTemplate.queryForObject(req, new MinMaxResultRowMapper());
 		return max;
 	}
 
 
 	@Override
-	public Float minVenteMois(String devise) {
+	public MinMaxResult minVenteMois(String devise) {
 		devise = "min"+devise;
-		String req="SELECT min("+devise+") as min FROM public.max_min_vente WHERE extract (Month from min_maxdate) = extract (Month from Now());";
-		String min= jdbcTemplate.queryForObject(req, String.class);
-		Float minValue = new Float(min);
+		String req="SELECT "+devise+" as valeur , min_maxdate as date FROM public.max_min_vente   \r\n"
+				+ "WHERE "+ devise+"=(select min("+devise+") FROM public.max_min_vente WHERE extract (Month from min_maxdate) = extract (Month from Now()))\r\n"
+				+ "order by min_maxdate DESC limit 1;";
+		//String min= jdbcTemplate.queryForObject(req, String.class);
+		MinMaxResult minValue = jdbcTemplate.queryForObject(req, new MinMaxResultRowMapper());
 		return minValue;
 	}
 
 
 	@Override
-	public Float maxVenteAns(String devise) {
+	public MinMaxResult maxVenteAns(String devise) {
 		devise = "max"+devise;
-		String req="SELECT max("+devise+") as max FROM public.max_min_vente	WHERE extract (year from min_maxdate) = extract (year from Now());";
-		float max= jdbcTemplate.queryForObject(req, float.class);
+		String req="SELECT "+devise+" as valeur , min_maxdate as date FROM public.max_min_vente   \r\n"
+				+ "WHERE "+ devise+"=(select max("+devise+") FROM public.max_min_vente WHERE extract (year from min_maxdate) = extract (year from Now()) )\r\n"
+				+ "order by min_maxdate DESC limit 1;";
+		MinMaxResult max= jdbcTemplate.queryForObject(req, new MinMaxResultRowMapper());
 		return max;
 	}
 
 
 	@Override
-	public Float minVenteAns(String devise) {
+	public MinMaxResult minVenteAns(String devise) {
 		devise = "min"+devise;
-		String req="SELECT min("+devise+") as min FROM public.max_min_vente	WHERE extract (year from min_maxdate) = extract (year from Now());";
-		float min= jdbcTemplate.queryForObject(req, float.class);
+		String req="SELECT "+devise+" as valeur , min_maxdate as date FROM public.max_min_vente   \r\n"
+				+ "WHERE "+ devise+"=(select min("+devise+") FROM public.max_min_vente WHERE extract (year from min_maxdate) = extract (year from Now()) )\r\n"
+				+ "order by min_maxdate DESC limit 1;";
+		MinMaxResult min= jdbcTemplate.queryForObject(req, new MinMaxResultRowMapper());
 		return min;
 	}
 

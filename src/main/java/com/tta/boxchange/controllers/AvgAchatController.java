@@ -13,30 +13,31 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tta.boxchange.entities.AVGVENTE;
 import com.tta.boxchange.entities.AverageVenteDevise;
+import com.tta.boxchange.entities.AvgAchat;
 import com.tta.boxchange.repositories.AVGVENTERepository;
+import com.tta.boxchange.repositories.AvgAchatRepository;
 import com.tta.boxchange.response.BasicResponse;
 
 @CrossOrigin("*")
-@RequestMapping("/avgVente")
+@RequestMapping("/avgAchat")
 @RestController
-public class AvgVenteController {
-	
+public class AvgAchatController {
 	@Autowired
-	AVGVENTERepository avgventeRepository;
+	AvgAchatRepository avgAchatRepository;
 	
 	@PostMapping("/save")
-	public BasicResponse save(@RequestBody AVGVENTE avgvente) {
-		return avgventeRepository.save(avgvente);
+	public BasicResponse save(@RequestBody AvgAchat avgAchat) {
+		return avgAchatRepository.save(avgAchat);
 	}
 	
 	@GetMapping("/getByDevise/{devise}")
 	public List<AverageVenteDevise> getByDevise(@PathVariable ("devise") String devise){
-		return avgventeRepository.averageBydevise(devise);
+		return avgAchatRepository.averageBydevise(devise);
 	}
 	
 	@GetMapping("/getAvgDaily")
-	public List<AVGVENTE> getAvgDaily(){
-		return avgventeRepository.verification();
+	public List<AvgAchat> getAvgDaily(){
+		return avgAchatRepository.verification();
 	}
 
 }

@@ -61,7 +61,7 @@ public class JwtUtils {
       
 		return Jwts.builder()
 				.setSubject(login)
-				.setExpiration(new Date(System.currentTimeMillis() +1000*120 ))
+				.setExpiration(new Date(System.currentTimeMillis() +1000*60*15 ))
 				.signWith(SignatureAlgorithm.HS512, jwtSecret )
 				.compact();
 	   

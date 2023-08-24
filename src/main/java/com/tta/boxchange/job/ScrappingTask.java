@@ -17,6 +17,7 @@ import com.tta.boxchange.dao.AMENInterface;
 import com.tta.boxchange.dao.ATBInterface;
 import com.tta.boxchange.dao.ATTInterface;
 import com.tta.boxchange.dao.AVGVENTEInterface;
+import com.tta.boxchange.dao.AvgAchatInterface;
 import com.tta.boxchange.dao.BHInterface;
 import com.tta.boxchange.dao.BIATInterface;
 import com.tta.boxchange.dao.BNAInterface;
@@ -25,11 +26,14 @@ import com.tta.boxchange.dao.BTInterface;
 import com.tta.boxchange.dao.BTKInterface;
 import com.tta.boxchange.dao.BTLInterface;
 import com.tta.boxchange.dao.MaxMinVenteInterface;
+import com.tta.boxchange.dao.MinMaxAchatInterface;
 import com.tta.boxchange.dao.STBInterface;
 import com.tta.boxchange.dao.UIBInterface;
 import com.tta.boxchange.dao.VENTEInterface;
 import com.tta.boxchange.entities.ATT;
 import com.tta.boxchange.entities.AVGVENTE;
+import com.tta.boxchange.entities.AvgAchat;
+import com.tta.boxchange.entities.MaxMinAchat;
 import com.tta.boxchange.entities.MaxMinVente;
 import com.tta.boxchange.entities.Vente;
 import com.tta.boxchange.services.ScrapingService;
@@ -47,7 +51,13 @@ public class ScrappingTask {
 	AVGVENTEInterface avgVenteInterface;
 	
 	@Autowired
+	AvgAchatInterface avgAchatInterface;
+	
+	@Autowired
 	MaxMinVenteInterface maxminInterface;
+	
+	@Autowired
+	MinMaxAchatInterface maxminAchatInterface;
 	
 	@Scheduled(cron = "0 0 0 * * *")
 	   public void viderVente() {
@@ -84,7 +94,7 @@ public class ScrappingTask {
 	
 		}
 		
-		//calcul avrage
+		//calcul average vente
 		AVGVENTE avg = new AVGVENTE();
 		List<AVGVENTE> avgList = avgVenteInterface.verification();
 		if(avgList.isEmpty()==true) {
@@ -94,7 +104,17 @@ public class ScrappingTask {
 			avgVenteInterface.update(avgList.get(0));
 		}
 		
-		//min max job
+		//calcul average achat
+				AvgAchat avgAchat = new AvgAchat();
+				List<AvgAchat> avgAchatList = avgAchatInterface.verification();
+				if(avgAchatList.isEmpty()==true) {
+					avgAchatInterface.save(avgAchat);
+				}
+				else {
+					avgAchatInterface.update(avgAchatList.get(0));
+				}
+		
+		//min max job vente 
 		MaxMinVente maxMin= new MaxMinVente();
 		List<MaxMinVente> maxList=maxminInterface.verif();
 		if(maxList.isEmpty()==true) {
@@ -103,6 +123,16 @@ public class ScrappingTask {
 		else {
 			maxminInterface.update(maxList.get(0));
 		}
+		
+		//min max job achat
+				MaxMinAchat maxMinAchat= new MaxMinAchat();
+				List<MaxMinAchat> maxListAchat=maxminAchatInterface.verif();
+				if(maxListAchat.isEmpty()==true) {
+					maxminAchatInterface.save(maxMinAchat);
+				}
+				else {
+					maxminAchatInterface.update(maxListAchat.get(0));
+				}
 		
 		System.err.print("end scrapping");
 	   }
