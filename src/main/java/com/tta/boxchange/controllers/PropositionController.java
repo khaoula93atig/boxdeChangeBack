@@ -95,11 +95,11 @@ public class PropositionController {
     		Proposition newPropostion = new Proposition();
     		Optional<User> u = userRepository.findById(proposition.getUser().getId());
     		if(u!=null) {
-    			proposition.setUser(new User(u.orElseThrow().getId()));
+    			proposition.setUser(new User(u.orElseThrow(IllegalStateException::new).getId()));
     		Optional<Enchere> enchere = enchereRepository.findById(proposition.getEnchere().getIdEnchere());
     		if(enchere!=null) {
-    			proposition.setEnchere(enchere.orElseThrow());
-    		System.out.println("ench selectionné = "+enchere.orElseThrow());
+    			proposition.setEnchere(enchere.orElseThrow(IllegalStateException::new));
+    		System.out.println("ench selectionné = "+enchere.orElseThrow(IllegalStateException::new));
     		System.out.println("add propos"+proposition);
     		System.out.println("ench : "+proposition.getEnchere().getIdEnchere()+"user = "+proposition.getUser().getId()+"taux "+proposition.getTaux_soumission());
 
@@ -107,7 +107,7 @@ public class PropositionController {
     		
     		Notification notification  = new Notification( );
     		notification.setChannel(proposition.getEnchere().getUser().getId().toString());
-    		notification.setSender( u.orElseThrow().getUsername());
+    		notification.setSender( u.orElseThrow(IllegalStateException::new).getUsername());
     		notification.setTitre(proposition.getEnchere().getReferenceEnchere());
     		notification.setContent(proposition.getEnchere().getDevise());
     		notification.setType("proposition");

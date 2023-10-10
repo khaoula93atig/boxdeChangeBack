@@ -96,7 +96,7 @@ public class VENTERepository implements VENTEInterface {
 			
 			Date dateDevise = new Date();
 			vente.setDatedevise(dateDevise);
-		
+		//this.modificationChar(vente);
 			jdbcTemplate.update(
 					"INSERT INTO public.vente(\r\n"
 					+ "	datedevise, deviseaed, devisebhd, devisecad, devisechf, devisecny,"
@@ -130,6 +130,7 @@ public class VENTERepository implements VENTEInterface {
 			System.out.println(toUpdate);
 			if (!toUpdate.isEmpty()) {
 				System.out.println("VENTE  update " + vente.toString());
+				//this.modificationChar(vente);
 				jdbcTemplate.update("UPDATE public.\"VENTE\"\r\n"
 						+ "	SET \"codeDevise\"=?, \"uniteDevise\"=?, achatdevise=?, ventedevise=?, datedevise=?\r\n"
 						+ "	WHERE \"VENTE\"=?;", vente.getDeviseSAR(),vente.getDeviseCAD(),vente.getDeviseDKK(),vente.getDeviseUSD(),vente.getDeviseGBP(),
@@ -231,6 +232,14 @@ public class VENTERepository implements VENTEInterface {
 		}catch (Exception e) {
 			return new BasicResponse("Erreur", HttpStatus.OK);
 		}
+	}
+
+	public Vente modificationChar(Vente vente){
+		if(vente.getDeviseCAD().matches("[+-]?\\d*(\\.\\d+)?")==false){
+			vente.setDeviseCAD("0");
+			System.out.println("test"+vente.getDeviseCAD().matches("[+-]?\\d*(\\.\\d+)?"));
+		}
+		return vente;
 	}
 
 

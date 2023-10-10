@@ -101,7 +101,7 @@ public class AVGVENTERepository implements AVGVENTEInterface {
 	//calcul de la moyenne de vente pour chaque devise
 	public float getMoyenneVente(String devise) {
 		String req="SELECT ROUND(avg("+devise+"::numeric), 3)\r\n"
-				+ "	FROM (select "+ devise+" from vente where deviseqar <> '0')as avg;";
+				+ "	FROM (select "+ devise+" from vente where "+devise+" <> '0' and "+devise+"<>'-')as avg;";
 		return jdbcTemplate.queryForObject(req,float.class);
 	}
 

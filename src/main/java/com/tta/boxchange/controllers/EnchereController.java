@@ -106,16 +106,16 @@ public class EnchereController {
 		  
 		  //add enchere
 		if(u!=null) {
-		enchere.setUser(new User(u.orElseThrow().getId()));
+		enchere.setUser(new User(u.orElseThrow(IllegalStateException::new).getId()));
 		enchere.setIdEnchere(UUID.randomUUID().toString().replace("-", ""));
-		enchere.setReferenceEnchere((u.orElseThrow().getUsername())+"-"+(enchereInterface.countEnchere(u.orElseThrow().getId())));
+		enchere.setReferenceEnchere((u.orElseThrow(IllegalStateException::new).getUsername())+"-"+(enchereInterface.countEnchere(u.orElseThrow(IllegalStateException::new).getId())));
 		System.out.println(enchere);
 		
 		//add notification pour chaque user de bank 
 		 for(User us : users) {
 		Notification notification  = new Notification( );
 		notification.setChannel(us.getId().toString());
-		notification.setSender( u.orElseThrow().getUsername());
+		notification.setSender( u.orElseThrow(IllegalStateException::new).getUsername());
 		notification.setTitre(enchere.getReferenceEnchere());
 		notification.setContent(enchere.getDevise());
 		notification.setType("enchere");
@@ -138,6 +138,7 @@ public class EnchereController {
 	
 	@GetMapping("/getbyUser/{id}")
 	public List<Enchere> getEncherByUser(@PathVariable("id") Long id){
+
 		return enchereInterface.getByUser(id);
 	}
 	
