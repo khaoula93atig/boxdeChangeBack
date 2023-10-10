@@ -96,7 +96,7 @@ public class VENTERepository implements VENTEInterface {
 			
 			Date dateDevise = new Date();
 			vente.setDatedevise(dateDevise);
-		//this.modificationChar(vente);
+		this.modificationChar(vente);
 			jdbcTemplate.update(
 					"INSERT INTO public.vente(\r\n"
 					+ "	datedevise, deviseaed, devisebhd, devisecad, devisechf, devisecny,"
@@ -130,7 +130,7 @@ public class VENTERepository implements VENTEInterface {
 			System.out.println(toUpdate);
 			if (!toUpdate.isEmpty()) {
 				System.out.println("VENTE  update " + vente.toString());
-				//this.modificationChar(vente);
+				this.modificationChar(vente);
 				jdbcTemplate.update("UPDATE public.\"VENTE\"\r\n"
 						+ "	SET \"codeDevise\"=?, \"uniteDevise\"=?, achatdevise=?, ventedevise=?, datedevise=?\r\n"
 						+ "	WHERE \"VENTE\"=?;", vente.getDeviseSAR(),vente.getDeviseCAD(),vente.getDeviseDKK(),vente.getDeviseUSD(),vente.getDeviseGBP(),
@@ -235,9 +235,55 @@ public class VENTERepository implements VENTEInterface {
 	}
 
 	public Vente modificationChar(Vente vente){
-		if(vente.getDeviseCAD().matches("[+-]?\\d*(\\.\\d+)?")==false){
+		System.out.println("test "+vente.getDeviseCAD().chars().allMatch( Character::isDigit ));
+		System.out.println("test "+vente.getDeviseEUR().chars().allMatch( Character::isDigit ));
+		if(vente.getDeviseAED().chars().allMatch( Character::isDigit )==false){
+			vente.setDeviseAED("0");
+		}
+		if(vente.getDeviseBHD().chars().allMatch( Character::isDigit )==false){
+			vente.setDeviseBHD("0");
+		}
+		if(vente.getDeviseCNY().chars().allMatch( Character::isDigit )==false){
+			vente.setDeviseCNY("0");
+		}
+		if(vente.getDeviseCHF().chars().allMatch( Character::isDigit )==false){
+			vente.setDeviseCHF("0");
+		}
+		if(vente.getDeviseDKK().chars().allMatch( Character::isDigit )==false){
+			vente.setDeviseDKK("0");
+		}
+		if(vente.getDeviseLYD().chars().allMatch( Character::isDigit )==false){
+			vente.setDeviseLYD("0");
+		}
+		if(vente.getDeviseEUR().chars().allMatch( Character::isDigit )==false){
+			vente.setDeviseEUR("0");
+		}
+		if(vente.getDeviseKWD().chars().allMatch( Character::isDigit )==false){
+			vente.setDeviseKWD("0");
+		}
+		if(vente.getDeviseGBP().chars().allMatch( Character::isDigit )==false){
+			vente.setDeviseGBP("0");
+		}
+		if(vente.getDeviseCAD().chars().allMatch( Character::isDigit )==false){
 			vente.setDeviseCAD("0");
-			System.out.println("test"+vente.getDeviseCAD().matches("[+-]?\\d*(\\.\\d+)?"));
+		}
+		if(vente.getDeviseJPY().chars().allMatch( Character::isDigit )==false){
+			vente.setDeviseJPY("0");
+		}
+		if(vente.getDeviseNOK().chars().allMatch( Character::isDigit )==false){
+			vente.setDeviseNOK("0");
+		}
+		if(vente.getDeviseQAR().chars().allMatch( Character::isDigit )==false){
+			vente.setDeviseQAR("0");
+		}
+		if(vente.getDeviseUSD().chars().allMatch( Character::isDigit )==false){
+			vente.setDeviseUSD("0");
+		}
+		if(vente.getDeviseSAR().chars().allMatch( Character::isDigit )==false){
+			vente.setDeviseSAR("0");
+		}
+		if(vente.getDeviseSEK().chars().allMatch( Character::isDigit )==false){
+			vente.setDeviseSEK("0");
 		}
 		return vente;
 	}

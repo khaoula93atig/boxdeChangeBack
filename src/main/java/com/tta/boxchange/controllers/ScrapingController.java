@@ -3991,12 +3991,7 @@ public class ScrapingController {
       		   venteDevise7, venteDevise8, venteDevise9,venteDevise10,
       		   venteDevise11,  venteDevise13, venteDevise16, venteDevise0);
          System.out.println(v);
-        System.out.println("test "+v.getDeviseCAD().chars().allMatch( Character::isDigit ));
-        System.out.println("test "+v.getDeviseEUR().chars().allMatch( Character::isDigit ));
-        if(v.getDeviseCAD().chars().allMatch( Character::isDigit )==false){
-            v.setDeviseCAD("0");
-            System.out.println("test"+v.getDeviseCAD().matches("[+-]?\\d*(\\.\\d+)?"));
-        }
+
        //verfication 
          List<Vente> verf = venteInterface.verification(v.getNomBanque());
          

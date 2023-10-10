@@ -3,6 +3,7 @@ package com.tta.boxchange.repositories;
 import java.util.Date;
 import java.util.List;
 
+import com.tta.boxchange.entities.Vente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -55,7 +56,7 @@ try {
 			
 			Date dateDevise = new Date();
 			achat.setDatedevise(dateDevise);
-		
+	this.modificationChar(achat);
 			jdbcTemplate.update(
 					"INSERT INTO public.achat(\r\n"
 					+ "	datedevise, deviseaed, devisebhd, devisecad, devisechf, devisecny,"
@@ -102,6 +103,7 @@ try {
 	@Override
 	public BasicResponse updateAchat(Achat ancienneAchat, Achat nouveauAchat) {
 		try {
+			this.modificationChar(nouveauAchat);
 			String req = "UPDATE public.achat\r\n"
 					+ "	SET deviseaed=?, devisebhd=?, devisecad=?, devisechf=?,"
 					+ " devisecny=?, devisedkk=?, deviseeur=?, devisegbp=?, devisejpy=?, "
@@ -154,6 +156,60 @@ try {
 		String min= jdbcTemplate.queryForObject(req, String.class);
 		Float minValue = new Float(min);
 		return minValue;
+	}
+
+	public Achat modificationChar(Achat achat){
+		System.out.println("test "+achat.getDeviseCAD().chars().allMatch( Character::isDigit ));
+		System.out.println("test "+achat.getDeviseEUR().chars().allMatch( Character::isDigit ));
+		if(achat.getDeviseAED().chars().allMatch( Character::isDigit )==false){
+			achat.setDeviseAED("0");
+		}
+		if(achat.getDeviseBHD().chars().allMatch( Character::isDigit )==false){
+			achat.setDeviseBHD("0");
+		}
+		if(achat.getDeviseCNY().chars().allMatch( Character::isDigit )==false){
+			achat.setDeviseCNY("0");
+		}
+		if(achat.getDeviseCHF().chars().allMatch( Character::isDigit )==false){
+			achat.setDeviseCHF("0");
+		}
+		if(achat.getDeviseDKK().chars().allMatch( Character::isDigit )==false){
+			achat.setDeviseDKK("0");
+		}
+		if(achat.getDeviseLYD().chars().allMatch( Character::isDigit )==false){
+			achat.setDeviseLYD("0");
+		}
+		if(achat.getDeviseEUR().chars().allMatch( Character::isDigit )==false){
+			achat.setDeviseEUR("0");
+		}
+		if(achat.getDeviseKWD().chars().allMatch( Character::isDigit )==false){
+			achat.setDeviseKWD("0");
+		}
+		if(achat.getDeviseGBP().chars().allMatch( Character::isDigit )==false){
+			achat.setDeviseGBP("0");
+		}
+		if(achat.getDeviseCAD().chars().allMatch( Character::isDigit )==false){
+			achat.setDeviseCAD("0");
+		}
+		if(achat.getDeviseJPY().chars().allMatch( Character::isDigit )==false){
+			achat.setDeviseJPY("0");
+		}
+		if(achat.getDeviseNOK().chars().allMatch( Character::isDigit )==false){
+			achat.setDeviseNOK("0");
+		}
+		if(achat.getDeviseQAR().chars().allMatch( Character::isDigit )==false){
+			achat.setDeviseQAR("0");
+		}
+		if(achat.getDeviseUSD().chars().allMatch( Character::isDigit )==false){
+			achat.setDeviseUSD("0");
+		}
+		if(achat.getDeviseSAR().chars().allMatch( Character::isDigit )==false){
+			achat.setDeviseSAR("0");
+		}
+		if(achat.getDeviseSEK().chars().allMatch( Character::isDigit )==false){
+			achat.setDeviseSEK("0");
+		}
+		return achat;
 	}
 
 }
