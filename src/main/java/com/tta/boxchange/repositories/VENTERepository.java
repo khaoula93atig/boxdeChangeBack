@@ -235,54 +235,54 @@ public class VENTERepository implements VENTEInterface {
 	}
 
 	public Vente modificationChar(Vente vente){
-		System.out.println("test "+vente.getDeviseCAD().chars().allMatch( Character::isDigit ));
-		System.out.println("test "+vente.getDeviseEUR().chars().allMatch( Character::isDigit ));
-		if(vente.getDeviseAED().chars().allMatch( Character::isDigit )==false){
+		System.out.println("testvente "+vente.getDeviseCAD().matches("[a-zA-Z]+"));
+		//System.out.println("test "+vente.getDeviseEUR().chars().allMatch( Character::isDigit ));
+		if(vente.getDeviseAED().matches("[a-zA-Z]+")){
 			vente.setDeviseAED("0");
 		}
-		if(vente.getDeviseBHD().chars().allMatch( Character::isDigit )==false){
+		if(vente.getDeviseBHD().matches("[a-zA-Z]+")){
 			vente.setDeviseBHD("0");
 		}
-		if(vente.getDeviseCNY().chars().allMatch( Character::isDigit )==false){
+		if(vente.getDeviseCNY().matches("[a-zA-Z]+")){
 			vente.setDeviseCNY("0");
 		}
-		if(vente.getDeviseCHF().chars().allMatch( Character::isDigit )==false){
+		if(vente.getDeviseCHF().matches("[a-zA-Z]+")){
 			vente.setDeviseCHF("0");
 		}
-		if(vente.getDeviseDKK().chars().allMatch( Character::isDigit )==false){
+		if(vente.getDeviseDKK().matches("[a-zA-Z]+")){
 			vente.setDeviseDKK("0");
 		}
-		if(vente.getDeviseLYD().chars().allMatch( Character::isDigit )==false){
+		if(vente.getDeviseLYD().matches("[a-zA-Z]+")){
 			vente.setDeviseLYD("0");
 		}
-		if(vente.getDeviseEUR().chars().allMatch( Character::isDigit )==false){
+		if(vente.getDeviseEUR().matches("[a-zA-Z]+")){
 			vente.setDeviseEUR("0");
 		}
-		if(vente.getDeviseKWD().chars().allMatch( Character::isDigit )==false){
+		if(vente.getDeviseKWD().matches("[a-zA-Z]+")){
 			vente.setDeviseKWD("0");
 		}
-		if(vente.getDeviseGBP().chars().allMatch( Character::isDigit )==false){
+		if(vente.getDeviseGBP().matches("[a-zA-Z]+")){
 			vente.setDeviseGBP("0");
 		}
-		if(vente.getDeviseCAD().chars().allMatch( Character::isDigit )==false){
+		if(vente.getDeviseCAD().matches("[a-zA-Z]+")){
 			vente.setDeviseCAD("0");
 		}
-		if(vente.getDeviseJPY().chars().allMatch( Character::isDigit )==false){
+		if(vente.getDeviseJPY().matches("[a-zA-Z]+")){
 			vente.setDeviseJPY("0");
 		}
-		if(vente.getDeviseNOK().chars().allMatch( Character::isDigit )==false){
+		if(vente.getDeviseNOK().matches("[a-zA-Z]+")){
 			vente.setDeviseNOK("0");
 		}
-		if(vente.getDeviseQAR().chars().allMatch( Character::isDigit )==false){
+		if(vente.getDeviseQAR().matches("[a-zA-Z]+")){
 			vente.setDeviseQAR("0");
 		}
-		if(vente.getDeviseUSD().chars().allMatch( Character::isDigit )==false){
+		if(vente.getDeviseUSD().matches("[a-zA-Z]+")){
 			vente.setDeviseUSD("0");
 		}
-		if(vente.getDeviseSAR().chars().allMatch( Character::isDigit )==false){
+		if(vente.getDeviseSAR().matches("[a-zA-Z]+")){
 			vente.setDeviseSAR("0");
 		}
-		if(vente.getDeviseSEK().chars().allMatch( Character::isDigit )==false){
+		if(vente.getDeviseSEK().matches("[a-zA-Z]+")){
 			vente.setDeviseSEK("0");
 		}
 		return vente;
